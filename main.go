@@ -1,12 +1,15 @@
 package main
 
 import (
-	"encoding/json"
-	"errors"
 	"html/template"
 	"log"
 	"net/http"
 )
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/index.html")
+	t.Execute(w, r)
+}
 
 func main() {
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
