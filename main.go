@@ -1,9 +1,12 @@
 package main
 
 import (
+	"Forum/database_sqlite"
 	"html/template"
 	"log"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -12,6 +15,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	database_sqlite.Database()
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.HandleFunc("/", Index)
