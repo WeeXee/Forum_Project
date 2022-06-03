@@ -12,16 +12,6 @@ type Login struct {
 	id       int
 	username string
 	password string
-	//I created a struct with a struct to select the rows in the table and add data.
-}
-
-type Post struct {
-	idPost      int
-	idUser      int
-	postTitle   string
-	postContent string
-	like        int
-	dislike     int
 }
 
 type CommentLike struct {
@@ -32,8 +22,9 @@ type CommentLike struct {
 	dislike        int
 }
 
-func Database() {
+func DatabaseLogin() {
 	DoesFileExist("sqlite-database.db")
+
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
 	if err != nil {
 		fmt.Println(err)
@@ -44,7 +35,7 @@ func Database() {
 			fmt.Println(err3)
 		}
 	}(sqliteDatabase) // Defer Closing the database
-	CreateTable(sqliteDatabase) // Create Database Tables*/
+	CreateTableLogin(sqliteDatabase) // Create Database Tables*/
 
 	log := Login{
 		username: "Juju",
@@ -106,7 +97,7 @@ func OsCreateFile() {
 	log.Println("sqlite-database.db created")
 }
 
-func CreateTable(db *sql.DB) {
+func CreateTableLogin(db *sql.DB) {
 	createLoginTableSQL := `CREATE TABLE IF NOT EXISTS login(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
 		"name" TEXT,
@@ -122,7 +113,7 @@ func CreateTable(db *sql.DB) {
 	log.Println("Admin table created")
 }
 
-// We are passing db reference connection from main to our method with other parameters
+// AddLogin We are passing db reference connection from main to our method with other parameters
 func AddLogin(db *sql.DB, name string, password string) {
 	log.Println("Inserting login record ...")
 	insertLoginSQL := `INSERT INTO login( name, password) VALUES (?, ?)`
