@@ -4,34 +4,32 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"text/template"
 )
 
-type structure struct {
-	username string
-	post     string
+type StructPost struct {
+	IDuser  int
+	post    string
+	title   string
+	like    int
+	dislike int
 }
 
 func Post(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Error(w, "404 PAGE NOT FOUND", http.StatusNotFound)
-		return
-	}
-
-	switch r.Method {
-	case "GET":
-		http.ServeFile(w, r, "template/index.html")
-	case "POST":
-		if err := r.ParseForm(); err != nil {
-			fmt.Fprintf(w, "ParseForm() err : %v", err)
-			return
-		}
-		fmt.Fprintf(w, "Post from website r.postfrom = %v\n", r.PostForm)
-		username := r.FormValue("Your Name")
-		post := r.FormValue("Your post")
-		fmt.Fprintf(w, "Name = %s\n", username)
-		fmt.Print(w, "Your post = %s\n", post)
+	newpost := StructPost{}
+	newpost.title = r.FormValue("Title")
+	//username := r.FormValue("Your Name")
+	newpost.post = r.FormValue("Containt")
+	switch {
+	case newpost == StructPost{}:
+		break
 	default:
-		fmt.Fprintf(w, "Only get and Post")
+		fmt.Println(newpost)
+	}
+	t, _ := template.ParseFiles("template/index.html")
+	err := t.Execute(w, newpost)
+	if err != nil {
+		fmt.Print("error")
 	}
 }
 
