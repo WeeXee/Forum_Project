@@ -8,17 +8,17 @@ import (
 )
 
 type StructPost struct {
-	IDuser  int
-	post    string
-	title   string
-	like    int
-	dislike int
+	MovieGender int
+	IDuser      int
+	post        string
+	title       string
+	like        int
+	dislike     int
 }
 
 func Post(w http.ResponseWriter, r *http.Request) {
 	newpost := StructPost{}
 	newpost.title = r.FormValue("Title")
-	//username := r.FormValue("Your Name")
 	newpost.post = r.FormValue("Containt")
 	switch {
 	case newpost == StructPost{}:
