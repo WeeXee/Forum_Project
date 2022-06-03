@@ -46,11 +46,8 @@ func post(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Post from website r.postfrom = %v\n", r.PostForm)
 		username := r.FormValue("Your Name")
 		post := r.FormValue("Your post")
-		address := r.FormValue("address")
 		fmt.Fprintf(w, "Name = %s\n", username)
 		fmt.Print(w, "Your post = %s\n", post)
-		fmt.Fprintf(w, "Address = %s\n", address)
-
 	default:
 		fmt.Fprintf(w, "Only get and Post")
 	}
