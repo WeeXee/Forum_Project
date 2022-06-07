@@ -17,6 +17,8 @@ type Post struct {
 	dislike     int
 }
 
+type postsArray = []Post
+
 func DatabasePost() {
 	DoesFileExist("sqlite-database.db")
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
@@ -58,19 +60,19 @@ func DatabasePost() {
 	AddPost(sqliteDatabase, post)
 
 	// DISPLAY INSERTED RECORDS
-	DisplayPost(sqliteDatabase)
+	GetPost()
 }
 
 func CreateTablePost(db *sql.DB) {
 	createPostTableSQL := `CREATE TABLE IF NOT EXISTS Post(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
-		"idUser"  TEXT,
+		"idUser"  INTEGER,
 		"movieGender" TEXT,
 		"postTitle"   TEXT,
 		"postContent" TEXT,
 		"postComment" TEXT,
-		"like"        TEXT,
-		"dislike"     TEXT		
+		"like"        INTEGER,
+		"dislike"     INTEGER		
 	  );` // SQL Statement for Create Table
 
 	log.Println("Create admin acess...")
@@ -85,8 +87,7 @@ func CreateTablePost(db *sql.DB) {
 func AddPost(db *sql.DB, post Post) {
 	log.Println("Inserting post record ...")
 	insertLoginSQL := `INSERT INTO Post( idUser, movieGender, postTitle, postContent, postComment, like, dislike) VALUES (?,?,?,?,?,?,?)`
-	statement, err := db.Prepare(insertLoginSQL) // Prepare statement.
-	// This is good to avoid SQL injections
+	statement, err := db.Prepare(insertLoginSQL)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -97,10 +98,11 @@ func AddPost(db *sql.DB, post Post) {
 	}
 }
 
-func DisplayPost(db *sql.DB) {
+func GetPost() []Post {
+	DoesFileExist("sqlite-database.db")
+	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
 
-	row, err := db.Query("SELECT * FROM Post ORDER BY idUser")
-
+	row, err := sqliteDatabase.Query("SELECT * FROM Post ORDER BY idUser")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -110,22 +112,14 @@ func DisplayPost(db *sql.DB) {
 			fmt.Println(err)
 		}
 	}(row)
-
+	postArray := postsArray{}
 	for row.Next() { // Iterate and fetch the records from result cursor
-		var idPost string
-		var idUser string
-		var movieGender string
-		var postTitle string
-		var postContent string
-		var postComment string
-		var like string
-		var dislike string
-		err := row.Scan(&idPost, &idUser, &movieGender, &postTitle, &postContent, &postComment, &like, &dislike)
+		post := Post{}
+		err := row.Scan(&post.idPost, &post.idUser, &post.movieGender, &post.postTitle, &post.postContent, &post.postComment, &post.like, &post.dislike)
 		if err != nil {
 			fmt.Println(err)
-			return
 		}
-		log.Println("wait...")
-		log.Println("idPost :", idPost, "idUser: ", idUser, "gender :", movieGender, " post title :", postTitle, "post content :", postContent, "comment:", postComment)
+		postArray = append(postArray, post)
 	}
+	return postArray
 }

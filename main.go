@@ -2,6 +2,7 @@ package main
 
 import (
 	"Forum/database_sqlite"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -15,7 +16,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database_sqlite.Database()
+	database_sqlite.DatabaseLogin()
+	database_sqlite.DatabasePost()
+	database_sqlite.DatabaseComment()
+	arrayComment := database_sqlite.GetComment()
+	fmt.Println(arrayComment)
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.HandleFunc("/", Index)
