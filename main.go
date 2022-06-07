@@ -3,9 +3,12 @@ package main
 import (
 	"Forum/functions"
 	"fmt"
+	"Forum/database_sqlite"
 	"html/template"
 	"log"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -43,6 +46,11 @@ func SF(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	database_sqlite.DatabaseLogin()
+	database_sqlite.DatabasePost()
+	database_sqlite.DatabaseComment()
+	arrayComment := database_sqlite.GetComment()
+	fmt.Println(arrayComment)
 	http.HandleFunc("/", functions.Post)
 	http.HandleFunc("/1", functions.Login)
 	fmt.Printf("Starting server got testing \n")
