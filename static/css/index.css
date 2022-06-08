@@ -1,28 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300&display=swap');
-@import "header.css";
-@import "footer.css";
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&display=swap');
 
 *{
     margin: 0;
     color: var(--color4);
+    text-shadow: none;
     font-family: 'Poppins', sans-serif;
 }
 
 body {
-    --color1: #000000;
-    --color2: #FF954F;
-    --color3: #8C15CD;
-    --color4: #F5F4F1;
+    --color1: #F5F4F1;
+    --color2: #EEECE5;
+    --color3: #5998BA;
+    --color4: #000000;
     --background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
-}
 
-body {
-    margin: 40px;
+    min-height: 80vh;
+    background-image: url("/static/FondC.png");
+    background-size: cover;
+    background-width: 100%;
+    background-repeat: no-repeat;
 }
 
 h1{
-    font-family: 'Creepster', cursive;
+    font-family: 'Italiana', serif;
     font-size: 4vmax;
 }
 
@@ -42,7 +43,6 @@ p{
     font-weight: bolder;
     font-size: 0.8vmax;
 }
-
 button {
     cursor: pointer;
     outline: 0;

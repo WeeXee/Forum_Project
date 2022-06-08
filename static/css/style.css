@@ -1,29 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Creepster&family=Cutive+Mono&family=Fleur+De+Leah&family=Fredericka+the+Great&family=Italiana&family=Ms+Madi&family=Poppins:wght@100&family=Rye&family=VT323&display=swap');
 
+/*the import content all font who is required for the forum
 
+Require for all the chat
 
-body {
-    margin: 40px;
-}
+font-family: 'Poppins', sans-serif;
+-----------------------------------------
 
-button {
-    cursor: pointer;
-    outline: 0;
-    color: #AAA;
-}
+H1 only
 
-.btn:focus {
-    outline: none;
-}
-
-.green {
-    color: green;
-}
-
-.red {
-    color: red;
-}
-
-header {
-    background: #ededed;
-}
+Require for Index / 404 / Login:
+font-family: 'Italiana', serif;
+-----------------------------------------
+Require for Action page:
+font-family: 'Bodoni Moda', serif;
+-----------------------------------------
+Require for horror:
+font-family: 'Creepster', cursive;
+-----------------------------------------
+Require for thriller and Biobic:
+font-family: 'Cutive Mono', monospace;
+-----------------------------------------
+Require for Romantic:
+font-family: 'Fleur De Leah', cursive;
+-----------------------------------------
+Require for Comedie:
+font-family: 'Fredericka the Great', cursive;
+-----------------------------------------
+Require for Fantastique:
+font-family: 'Ms Madi', cursive;
+-----------------------------------------
+Require for Western:
+font-family: 'Rye', cursive;
+-----------------------------------------
+Require for Sci-fi:
+font-family: 'VT323', monospace;*/
