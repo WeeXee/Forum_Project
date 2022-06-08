@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="../static/css/register.css" />
+</head>
+<body>
+
+<section>
+    <div class="left">
+        <h1>Cinénum</h1>
+        <h2>Account Registration</h2><br>
+        <ul>
+            <li>usernames must contain only letters or numbers</li>
+            <li>usernames must be longer than 4 characters but shorter than 51</li>
+            <li>passwords must contain a uppercase letter, lowercase letter, number, and special character</li>
+            <li>passwords must be greater than 6 characters but less than 60</li>
+        </ul><br>
+        <form action="/registerauth" method="POST">
+            <label for="username">Name:</label><br>
+            <div class="form__field">
+                <input type="text" id="username" name="username" class="form__input" pattern=".{4,}" required>
+                <span class="icon"></span>
+            </div>
+            <label for="password">Password:</label><br>
+            <div class="form__field">
+                <input type="password" id="password" name="password" class="form__input" pattern=".{6,}" required>
+                <span class="icon"></span>
+            </div>
+            <input class="form-submit-button" type="submit" value="Sign Up">
+            <input class="form-submit-button" type="submit" value="Sign In">
+        </form>
+    </div>
+    <div class="right"></div>
+</section>
+
+<br><br>
+{{if .}}
+{{.}}
+{{end}}
+
+</body>
+</html>

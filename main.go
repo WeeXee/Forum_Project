@@ -1,14 +1,16 @@
 package main
 
 import (
-	"Forum/functions"
-	"fmt"
-	"Forum/database_sqlite"
-	"html/template"
-	"log"
-	"net/http"
+	_ "github.com/go-sql-driver/mysql"
+	"unicode"
 
 	_ "github.com/mattn/go-sqlite3"
+
+	"Forum/database_sqlite"
+	"Forum/functions"
+	"fmt"
+	"html/template"
+	"net/http"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -57,7 +59,69 @@ func main() {
 	fmt.Println("Go to this adress: localhost:8080")
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
+
+	tpl, _ = template.ParseGlob("template/*.html")
+	var err error
+	if err != nil {
+		panic(err.Error())
 	}
+	http.HandleFunc("/register", registerHandler)
+	http.HandleFunc("/registerauth", registerAuthHandler)
+	http.ListenAndServe("localhost:8080", nil)
+}
+
+//*vanessa partie*//
+
+var tpl *template.Template
+
+// registerHandler serves form for registring new users
+func registerHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****registerHandler running*****")
+	tpl.ExecuteTemplate(w, "register.html", nil)
+}
+
+// creates new user
+func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*****registerAuthHandler running*****")
+	r.ParseForm()
+	//Create Username
+	username := r.FormValue("username")
+	var nameAlphaNumeric = true
+	for _, char := range username {
+		if unicode.IsLetter(char) == false && unicode.IsNumber(char) == false {
+			nameAlphaNumeric = false
+		}
+	}
+	var nameLength bool
+	if 5 <= len(username) && len(username) <= 30 {
+		nameLength = true
+	}
+	// Create password
+	password := r.FormValue("password")
+	fmt.Println("password:", password, "\npswdLength:", len(password))
+	var pswdLowercase, pswdUppercase, pswdNumber, pswdSpecial, pswdLength, pswdNoSpaces bool
+	pswdNoSpaces = true
+	for _, char := range password {
+		switch {
+		case unicode.IsLower(char):
+			pswdLowercase = true
+		case unicode.IsUpper(char):
+			pswdUppercase = true
+		case unicode.IsNumber(char):
+			pswdNumber = true
+		case unicode.IsPunct(char) || unicode.IsSymbol(char):
+			pswdSpecial = true
+		case unicode.IsSpace(int32(char)):
+			pswdNoSpaces = false
+		}
+	}
+	if 5 < len(password) && len(password) < 30 {
+		pswdLength = true
+	}
+	fmt.Println("pswdLowercase:", pswdLowercase, "\npswdUppercase:", pswdUppercase, "\npswdNumber:", pswdNumber, "\npswdSpecial:", pswdSpecial, "\npswdLength:", pswdLength, "\npswdNoSpaces:", pswdNoSpaces, "\nnameAlphaNumeric:", nameAlphaNumeric, "\nnameLength:", nameLength)
+	if !pswdLowercase || !pswdUppercase || !pswdNumber || !pswdSpecial || !pswdLength || !pswdNoSpaces || !nameAlphaNumeric || !nameLength {
+		tpl.ExecuteTemplate(w, "register.html", "please check username and password criteria")
+		return
+	}
+	fmt.Fprint(w, "congrats, your account has been successfully created")
 }
