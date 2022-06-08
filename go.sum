@@ -1,0 +1,6 @@
+github.com/go-sql-driver/mysql v1.6.0 h1:BCTh4TKNUYmOmMUcQ3IipzF5prigylS7XXjEkfCHuOE=
+github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/gosamples-dev/samples/sqlite-intro v0.0.0-20211109132223-9ea4be605619 h1:OCpMCd7Ok/7bFW0pZ1ncm4IA9/+R6jlYHyNdmao87WY=
+github.com/gosamples-dev/samples/sqlite-intro v0.0.0-20211109132223-9ea4be605619/go.mod h1:qS5mnZILfkM7qaz6eLcZEe82Zm58ZcRPHgMXNRMz4Fc=
+github.com/mattn/go-sqlite3 v1.14.13 h1:1tj15ngiFfcZzii7yd82foL+ks+ouQcj8j/TPq3fk1I=
+github.com/mattn/go-sqlite3 v1.14.13/go.mod h1:NyWgC/yNuGj7Q9rpYnZvas74GogHl5/Z4A/KQRfk6bU=
