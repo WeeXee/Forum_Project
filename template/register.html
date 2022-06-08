@@ -22,12 +22,12 @@
         <form action="/registerauth" method="POST">
             <label for="username">Name:</label><br>
             <div class="form__field">
-                <input type="text" id="username" name="username" class="form__input" pattern=".{4,}" required>
+                <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
                 <span class="icon"></span>
             </div>
             <label for="password">Password:</label><br>
             <div class="form__field">
-                <input type="password" id="password" name="password" class="form__input" pattern=".{6,}" required>
+                <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
                 <span class="icon"></span>
             </div>
             <input class="form-submit-button" type="submit" value="Sign Up">

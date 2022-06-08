@@ -93,7 +93,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	var nameLength bool
-	if 5 <= len(username) && len(username) <= 30 {
+	if 4 <= len(username) && len(username) <= 20 {
 		nameLength = true
 	}
 	// Create password
