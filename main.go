@@ -58,6 +58,7 @@ func main() {
 	fmt.Printf("Starting server got testing \n")
 	fmt.Println("Go to this adress: localhost:8080")
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
 
 	tpl, _ = template.ParseGlob("template/*.html")
@@ -123,5 +124,5 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 		tpl.ExecuteTemplate(w, "register.html", "please check username and password criteria")
 		return
 	}
-	fmt.Fprint(w, "congrats, your account has been successfully created")
+	tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
 }

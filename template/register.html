@@ -11,36 +11,39 @@
 
 <section>
     <div class="left">
-        <h1>Cinénum</h1>
-        <h2>Account Registration</h2><br>
-        <ul>
-            <li>usernames must contain only letters or numbers</li>
-            <li>usernames must be longer than 4 characters but shorter than 51</li>
-            <li>passwords must contain a uppercase letter, lowercase letter, number, and special character</li>
-            <li>passwords must be greater than 6 characters but less than 60</li>
-        </ul><br>
+        <h1>Cinenum</h1>
+        <h2>Account Registration</h2>
+        <br>
+        <p>Username :</p>
+        <li>must be longer than 4 characters but shorter than 20</li>
+        <li>must contain only letters or numbers</li>
+
+        <p>Password :</p>
+        <li>must be greater than 6 characters but less than 30</li>
+        <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
+        <br>
         <form action="/registerauth" method="POST">
-            <label for="username">Name:</label><br>
+            <br>
+            <label for="username">Username:</label><br>
             <div class="form__field">
                 <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
                 <span class="icon"></span>
-            </div>
+            </div><br>
             <label for="password">Password:</label><br>
             <div class="form__field">
                 <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
                 <span class="icon"></span>
             </div>
+            <br>
             <input class="form-submit-button" type="submit" value="Sign Up">
             <input class="form-submit-button" type="submit" value="Sign In">
+
         </form>
+        <p>{{if .}}
+            {{.}}
+            {{end}}</p>
     </div>
     <div class="right"></div>
 </section>
-
-<br><br>
-{{if .}}
-{{.}}
-{{end}}
-
 </body>
 </html>
