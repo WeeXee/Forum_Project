@@ -41,11 +41,11 @@ h3 {
 
 p, a, button {
     font-weight: bolder;
-    font-size: 0.8vmax;
+    font-size: 1.2vmax;
 }
 
 .navbar {
-    min-height: 70px;
+    min-height: 80px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -66,7 +66,7 @@ p, a, button {
     float: right;
     color: var(--color4);
     text-align: center;
-    padding: 14px 20px;
+    padding: 20px 60px;
     text-decoration: none;
 }
 
@@ -80,7 +80,7 @@ p, a, button {
     border: none;
     outline: none;
     color: var(--color4);
-    padding: 15px 20px;
+    padding: 20px 60px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
@@ -97,7 +97,7 @@ p, a, button {
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 4;
 }
 
 .dropdown-content a {
@@ -126,6 +126,41 @@ p, a, button {
 
 .left{
     flex: 45%;
+}
+
+.section1content{
+    padding: 15% 20%;
+}
+
+.section1content h1{
+    font-size: 9vmax;
+}
+.section1content h2{
+    width: 36vmax;
+    font-size: 2vmax;
+    font-weight: bolder;
+    transition: color 500ms ease, text-shadow 500ms ease;
+    color: var(--color1);
+    text-shadow: 0 0 10px white;
+    background-color: var(--color3);
+    text-align: center;
+}
+
+/*Section1button Left*/
+
+.section1button button{
+    padding: 1% 5%;
+    margin: 0 -10% 0 20%;
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+}
+
+.section1button button:hover {
+    background-color: var(--color2);
+    box-shadow:1px 1px 1px var(--color1) inset;
 }
 
 .right{
@@ -159,7 +194,6 @@ p, a, button {
     animation-name: float;
     animation-duration: 4s;
     animation-iteration-count: infinite;
-    border: 5px solid;
 }
 
 @keyframes float {
@@ -181,17 +215,6 @@ p, a, button {
     background-color: var(--color1);
     opacity: 70%;
 
-    /* Text styling */
-    line-height: 220px;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 6px;
-    color: #fff;
-    color: rgba(255,255,255,.5);
-    cursor: pointer;
-    transition: color 500ms ease, text-shadow 500ms ease;
 }
 .gon:hover {
     color: #fff;

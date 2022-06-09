@@ -11,41 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="stylesheet" href="../static/css/style.css" />
     <link rel="stylesheet" href="../static/css/index.css" />
-
     <script src="../static/button.js"></script>
     <script src="../static/popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<!--
-<header>
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <a href="" class="navbar-brand">Home</a>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav navbar-right text-center">
-                    <li class="active"><a href="#">Us</a></li>
-                    <li calass="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MoviesGender <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/comedy">Comedy</a></li>
-                            <li><a href="/docu">Documentary</a></li>
-                            <li><a href="/horror">Horror</a></li>
-                            <li><a href="/romantic">Romantic</a></li>
-                            <li><a href="/SF">SF</a></li>
-                            <li><a href="/drama">Drama</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header>-->
 <header class="header">
     <div class="navbar">
         <li style="float: left"><a href="" class="logo">Cineroom</a></li>
@@ -65,7 +35,6 @@
             </div>
         </div></li>
         <li><a href="#home">Login</a></li>
-        <li><a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a></li>
     </div>
 </header>
 <script>
@@ -74,7 +43,6 @@
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
-
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(e) {
         if (!e.target.matches('.dropbtn')) {
@@ -85,30 +53,21 @@
         }
     }
 </script>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-</script>
 
 <body>
     <section id="section1">
         <div class="left">
-            <div>
+            <div class="section1content">
                 <h1>Cinemum</h1>
-                <h2>Lorem ipsum dolor sit amet,</h2>
+                <h2>Let's Talk about movies</h2>
+                <br><br>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
-            <div>
-                <p>Last Subject</p>
+            <div class="section1button">
+                <button> &#128214; See last subject </button>
+                <button> &#9997; Create a post </button>
             </div>
-
         </div>
         <div class="right">
             <div class="imagefond1">
@@ -119,14 +78,13 @@
             </div>
         </div>
     </section>
-
-    <section id="section3">
-        <div class="top3"><h1>Cinemum</h1>
-            <h2>Lorem ipsum dolor sit amet,</h2>
+    <section id="section2">
+        <div class="top2"><h1>Cinemum</h1>
+            <h2>Let's Talk about movies</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse fuga harum ipsa laudantium libero minus saepe suscipit unde!</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
-        <div class="bottom3">
+        <div class="bottom2">
             <div class="1rstcolumn"></div>
             <div class="2ndcolumn"></div>
             <div class="3rdcolumn"></div>
