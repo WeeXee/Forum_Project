@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&display=swap');
 
 * {
     margin: 0;
@@ -9,11 +10,12 @@
 
 body {
     --color1: #F5F4F1;
-    --color2: #FFF4C3;
-    --color3: #EADB1E;
+    --color2: #DB8380;
+    --color3: #F4726D;
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
+
     min-height: 80vh;
     background-image: url("/static/index1.png");
     background-size: cover;
@@ -21,30 +23,27 @@ body {
     background-repeat: no-repeat;
 }
 
-
-h1{
-    font-family: 'Fredericka the Great', cursive;
+h1 {
+    font-family: 'Italiana', serif;
     font-size: 4vmax;
 }
 
-h2{
+h2 {
     font-weight: bolder;
     font-size: 1.5vmax;
     color: var(--color3);
 }
 
-h3{
+h3 {
     font-weight: bolder;
     font-size: 1vmax;
     color: var(--color2);
 }
 
-p, a, button{
+p, a, button {
     font-weight: bolder;
     font-size: 1.2vmax;
 }
-
-/*Navigation menu*/
 
 .navbar {
     min-height: 25px;
@@ -175,7 +174,7 @@ p, a, button{
 .human_smiley{
     position: relative;
     top: 20%;
-    left: 55vmax;
+    left: 53vmax;
     width: 36vmax;
     z-index: 2;
 }
@@ -216,6 +215,8 @@ p, a, button{
     opacity: 70%;
 }
 
+
+
 .octa {
     -webkit-clip-path: polygon(
             29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
@@ -230,4 +231,5 @@ p, a, button{
             29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
     );
 }
+
 

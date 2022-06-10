@@ -17,6 +17,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }
+func Action(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/action.html")
+	t.Execute(w, r)
+}
+
 func Comedy(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/comedy.html")
 	t.Execute(w, r)
@@ -55,6 +60,7 @@ func main() {
 	fmt.Println(arrayComment)
 	http.HandleFunc("/", functions.Post)
 	http.HandleFunc("/1", functions.Login)
+	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
 	http.HandleFunc("/docu", Docu)
 	http.HandleFunc("/drama", Drama)
