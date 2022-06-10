@@ -232,6 +232,7 @@ p, a, button {
 /*Box*/
 #section2 {
     box-sizing: border-box;
+    min-height: 800px;
 }
 
 /*Section 2 text*/
@@ -249,8 +250,7 @@ p, a, button {
 
     min-width: 300px;
     background-color: rgba(255,255,255, 0.6);
-    height: 300px; /* Should be removed. Only for demonstration */
-
+    height: 280px;
     float: left;
     text-align: center;
     border: 1px outset var(--color1);
@@ -260,7 +260,7 @@ p, a, button {
 
 }
 .column p{
-    height: 200px;
+    height: 180px;
 }
 .column img{
     width: 15%;
@@ -271,14 +271,139 @@ p, a, button {
     border-radius: 50%;
 }
 
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
     .column {
         width: 100%;
-        margin-left: 0;
     }
 }
 
+/**Section 3**/
+
+
+#section3, #section3::before, #section3::after {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.section3_text{
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+.hexbuttons {
+    padding: 5px 0 0 5px;
+    /*size of the box*/
+    width: 525px;
+    margin-left: 30vmax;
+
+}
+.hexr {
+    height: 100px;
+    margin-top: -20px;
+}
+.hexr:nth-child(even) {
+    width: 525px;
+    margin-left: 53px;
+
+}
+.hexr:nth-child(odd) {
+    width: 525px;
+}
+
+.hexagon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 0 5px -25px 0;
+    font-size: 36px;
+    position: relative;
+    width: 100px;
+    height:100px;
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    clip-path: polygon(48% 3%, 98% 23%, 98% 73%, 48% 98%, 3% 73%, 3% 23%);
+}
+.hexagon button {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    text-align: center;
+    content: attr(title);
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+}
+
+.Scifi{
+    background-color: #DBF9C8;
+    background-image: url("../sci-fi.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+}
+
+.Horror{
+    background-color: #FF954F;
+    background-image: url("../horreur.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+
+}
+
+.Biobic{
+    background-color: #97B3AB;
+    background-image: url("../biobic.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+
+}
+
+.Action{
+    background-color: #DB8380;
+    background-image: url("../action.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+}
+
+.Comedy{
+    background-color: #FFF4C3;
+    background-image: url("../comedie.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+
+}
+.Fantastic{
+    background-color: #DFBFFD;
+    background-image: url("../fantastique.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+
+}
+
+.Thriller{
+    background-color: #AEBCC6;
+    background-image: url("../thriller.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+
+
+}.Romantic{
+     background-color: #F2B3D1;
+     background-image: url("../romantique.png");
+     background-size: cover;
+     background-blend-mode: soft-light;
+
+ }
+
+.Western{
+    background-color: #BE8B65;
+    background-image: url("../western.png");
+    background-size: cover;
+    background-blend-mode: soft-light;
+}
 
 
 
