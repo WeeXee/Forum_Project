@@ -124,11 +124,14 @@ section{
 input {
     outline: 0;
 }
+
 input[type=text]:hover, input[type=password]:hover {
     background-color: var(--color1);
 }
-input[type=text]:active, input[type=password]:active {
-    background-color:var(--color3);
+
+input[type=text]:active,.form-submit-textarea:active, input[type=password]:active {
+    background-color:var(--color2);
+    border: 1px outset var(--color2);
     box-shadow:1px 1px 1px var(--color4) inset;
 }
 
@@ -150,29 +153,18 @@ input[type=text]:active, input[type=password]:active {
 }
 
 .form__input:valid {
-    font-size: 0.8vmax;
     border: 1px outset lightgreen;
-
     background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
     box-shadow:1px 1px 1px var(--color4) inset;
 }
 
 .form__input:invalid {
-    font-size: 0.8vmax;
     border: 1px outset indianred;
-
     background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
     box-shadow:1px 1px 1px var(--color4) inset;
 }
 
 /*Smiley*/
-
-/*.form__field .icon {
-    position: relative;
-    top: 50%;
-    left: 2%;
-    transform: translateY(-64%);
-};*/
 
 .form__input:valid + .icon::after {
     content: '😃';
@@ -192,6 +184,8 @@ input[type=text]:active, input[type=password]:active {
     color: var(--color4);
     box-shadow: var(--box-shadow);
     border: 1px outset var(--color1);
+    font-weight: bolder;
+
 }
 
 .form-submit-button:hover {

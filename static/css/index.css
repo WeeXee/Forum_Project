@@ -5,6 +5,7 @@
     color: var(--color4);
     text-shadow: none;
     font-family: 'Poppins', sans-serif;
+    text-decoration: none;
 }
 
 body {
@@ -51,7 +52,7 @@ p, a, button {
     top: 0;
     list-style: none;
     position: fixed;
-    background-color: #fff;
+    background-color: white;
     box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
     width: 100%;
     z-index: 5;
@@ -76,7 +77,7 @@ p, a, button {
     outline: none;
     color: var(--color4);
     padding: 20px 20px;
-    background-color: inherit;
+    background-color: white;
     font-family: inherit;
     margin: 0;
     font-weight: bolder;
@@ -89,7 +90,7 @@ p, a, button {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 4;
@@ -98,11 +99,12 @@ p, a, button {
 .dropdown-content a {
     font-size: 0.8vmax;
     float: none;
-    color: black;
+    color: var(--color4);
     padding: 10px 20px;
     text-decoration: none;
     display: block;
     text-align: left;
+    background-color: white;
 }
 
 .dropdown-content a:hover {
@@ -138,7 +140,7 @@ p, a, button {
     font-weight: bolder;
     transition: color 500ms ease, text-shadow 500ms ease;
     color: var(--color1);
-    text-shadow: 0 0 10px white;
+    text-shadow: 0 0 10px var(--color1);
     background-color: var(--color3);
     text-align: center;
 }
@@ -348,11 +350,11 @@ p, a, button {
 .hexr h1{
     font-size: 1.5vmax;
     color: var(--color1);
-    text-shadow: 0 0 5px black;
+    text-shadow: 0 0 5px var(--color4);
 }
 
 .hexr h1:hover{
-    text-shadow: 0 0 10px white;
+    text-shadow: 0 0 10px var(--color1);
 }
 
 .hexagon {
@@ -367,7 +369,6 @@ p, a, button {
     height:100px;
     -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    background-color: #8C15CD;
 }
 
 

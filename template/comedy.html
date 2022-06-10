@@ -2,31 +2,98 @@
 <html lang="en">
 
 <head>
-    <title>Forum</title>
+    <title>Comedy Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
     <link rel="stylesheet" href="../static/css/comedy.css" />
-    <script src="../static/button.js"></script>
-</head>
-<header>
-    <form method="POST" action="/">
-        <label>Enter your name<input type="text" name="Title"/>
-        <label>Enter your post<input type="text" name="Containt"/> 
-        <input type="submit">
 
-    </form>
-    <h2>This is your post</h2>
+    <script src="../static/button.js"></script>
+    <script src="../static/popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<header class="header">
+    <div class="navbar">
+        <li style="float: left"><a href="" class="logo">Cineroom</a></li>
+        <li><a href="#home">Login</a></li>
+        <li><a href="#Aboutus">Aboutus</a></li>
+        <li><div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Categorie
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="/action">Action</a>
+                <a href="/docu">Biobic</a>
+                <a href="/comedy">Comedy</a>
+                <a href="/fantasy">Fantasy</a>
+                <a href="/horror">Horror</a>
+                <a href="/romantic">Romantic</a>
+                <a href="/SF">Sci-Fi</a>
+                <a href="/drama">Thriller</a>
+                <a href="/docu">Western</a>
+            </div>
+        </div></li>
+        <li><a href="#">Home</a></li>
+    </div>
 </header>
 
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
 <body>
-    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-    <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-    <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-  
+<section id="section1">
+    <div class="left">
+        <div class="section1content">
+            <h1>Cineroom</h1>
+            <h2>Let's Talk about Comedy</h2>
+            <br><br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <div class="section1button">
+            <button><a> &#128214; See last subject </a></button>
+            <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
+        </div>
+        <div>
+            <div id="ex1" class="modal">
+                <form method="POST" action="/">
+                    <h1>Comedy</h1><br>
+                    <label><p>Chose your Subject :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
+                    <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
+                    <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
+                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="imagefond1">
+            <img class="left_emoji" src="../static/comedy/left_img.png">
+            <img class="human_smiley" src="../static/comedy/perso.png">
+            <img class="right_emoji" src="../static/comedy/right_img.png">
+            <div class="octa gon"></div>
+        </div>
+    </div>
+</section>
 </body>
 <footer>
-
 </footer>
-
 </html>
