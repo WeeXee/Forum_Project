@@ -58,6 +58,15 @@ func SF(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/SF.html")
 	t.Execute(w, r)
 }
+func Thriller(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/thriller.html")
+	t.Execute(w, r)
+}
+
+func Western(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/western.html")
+	t.Execute(w, r)
+}
 
 func main() {
 	database_sqlite.DatabaseLogin()
@@ -72,11 +81,13 @@ func main() {
 	http.HandleFunc("/biobic", Biobic)
 	http.HandleFunc("/fantasy", Fantasy)
 	http.HandleFunc("/horror", Horror)
+	http.HandleFunc("/romantic", Romantic)
+	http.HandleFunc("/SF", SF)
+	http.HandleFunc("/thriller", Thriller)
+	http.HandleFunc("/western", Western)
 
 	/*Page note done*/
 	http.HandleFunc("/drama", Drama)
-	http.HandleFunc("/romantic", Romantic)
-	http.HandleFunc("/SF", SF)
 	fmt.Printf("Starting server got testing \n")
 	fmt.Println("Go to this adress: localhost:8080")
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))

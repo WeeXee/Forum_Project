@@ -17,7 +17,7 @@ body {
     --box-shadow: 2px 2px 2px dimgrey;
 
     min-height: 80vh;
-    background-image: url("/static/index1.png");
+    background-image: url("/static/index/index.png");
     background-size: cover;
     background-width: 100%;
     background-repeat: no-repeat;
@@ -246,7 +246,7 @@ p, a, button {
 
 }
 
-.section2_text{
+.section_text{
     margin: 10vmax 0 5vmax 10vmax;
 }
 
@@ -293,147 +293,230 @@ p, a, button {
     }
 }
 
-/**Section 3**/
+/*Section 3*/
 
-
-#section3, #section3::before, #section3::after {
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    margin: 5% 0 10% 0;
+#section3 {
+    padding: 0;
+    width: 70%;
+    margin-left: 15%;
 }
 
-.section3_text{
-    text-align: center;
-    padding-bottom: 5%;
+#hexGrid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    list-style-type: none;
 }
 
-.hexbuttons {
-    /*size of the box*/
-    width: 525px;
-    margin-left: 30vmax;
-}
-.hexr {
-    height: 100px;
-    margin-top: 0px;
-}
-
-.hexr:nth-child(even) {
-    width: 600px;
-    margin-left: 53px;
-
-}
-.hexr:nth-child(odd) {
-    width: 600px;
-}
-
-.hexr h1{
-    font-size: 1.5vmax;
-    color: var(--color1);
-    text-shadow: 0 0 5px var(--color4);
-}
-
-.hexr h1:hover{
-    text-shadow: 0 0 10px var(--color1);
-}
-
-.hexagon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    float: left;
-    margin: 0 10px -25px 0;
-    font-size: 36px;
+.hex {
     position: relative;
-    width: 100px;
-    height:100px;
+}
+
+.hex::after{
+    content:'';
+    display:block;
+    padding-bottom: 86.602%;  /* =  100 / tan(60) * 1.5 */
+}
+.hexIn{
+    position: absolute;
+    width:96%;
+    padding-bottom: 110.851%; /* =  width / sin(60) */
+    margin: 2%;
+    overflow: hidden;
+    -webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+    -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+    transform: rotate3d(0,0,1,-60deg) skewY(30deg);
+    transition: all 0.5s;
+}
+.hexIn * {
+    position: absolute;
+    visibility: visible;
+}
+.hexLink {
+    display:block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+    -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+    transform: skewY(-30deg) rotate3d(0,0,1,60deg);
+}
+
+/*** HEX CONTENT **********************************************************************/
+
+.hex img {
+    left: -100%;
+    right: -100%;
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.hex h1, .hex p {
+    width: 100%;
+    padding: 5%;
+    box-sizing:border-box;
+    font-weight: 300;
+}
+
+.hex p{
+    opacity: 0;
+    font-size: 0.8vmax;
+}
+
+/*Lettre uppercase*/
+#demo1 {
+    text-align: center;
+    bottom: 40%;
+    padding-top:50%;
+    font-size: 2em;
+    z-index: 1;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px white;
+}
+
+
+#demo2 {
+    top: 50%;
+    text-align: center;
+    color: var(--color1);
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px var(--color4);
+
+}
+
+.img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-position: center center;
+    background-size: cover;
+    overflow: hidden;
     -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
-
-.hexagon a {
-    display: flex;
-    height: 110%;
-    width: 110%;
-    margin-left: -3px;
-    text-align: center;
-    content: attr(title);
-    align-items: center;
-    justify-content: center;
+.img:before, .img:after {
     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    z-index: 2;
-    text-decoration: none;
+    content: '';
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.img:before {
+    opacity: 80%;
+
+}
+/*background color hover*/
+.img:after {
+    background: linear-gradient(to top, var(--color4),transparent, var(--color4));
+}
+
+.hexLink:hover p, .hexLink:focus p{
+    opacity:1;
+}
+
+.action:hover{
+    color: #DB8380;
+}
+
+.biobic:hover{
+    color: #97B3AB;
+}
+
+.comedy:hover{
+    color: #FFF4C3;
+}
+.fantasy:hover{
+    color: #DFBFFD;
+}
+.horror:hover{
+    color: #FF954F;
+}
+.romantic:hover{
+    color: #F2B3D1;
+}
+.SF:hover{
+    color: #DBF9C8;
+}
+
+.thriller:hover{
+    color: #AEBCC6;
+}
+
+.western:hover{
+    color: #BE8B65;
 }
 
 
-.Scifi{
-    background-color: #DBF9C8;
-    background-image: url("../sci-fi.png");
-    background-size: cover;
-    background-blend-mode: overlay;
+.hexIn:hover .img:after{
+    opacity: 1;
 }
 
 
-.Horror{
-    background-color: #FF954F;
-    background-image: url("../horreur.png");
-    background-size: cover;
-    background-blend-mode: overlay;
-
+@media (min-width:1201px) {
+    #hexGrid{
+        padding-bottom: 4.4%
+    }
+    .hex {
+        width: 20%;
+    }
+    .hex:nth-child(9n+6){
+        margin-left:10%;
+    }
 }
 
-.Biobic{
-    background-color: #97B3AB;
-    background-image: url("../biobic.png");
-    background-size: cover;
-    background-blend-mode: overlay;
+@media (max-width: 1200px) and (min-width:901px) {
+    #hexGrid{
+        padding-bottom: 5.5%;
+        font-size: 13px;
+    }
+    .hex {
+        width: 25%;
+    }
+    .hex:nth-child(7n+5){
+        margin-left:12.5%;
+    }
 }
 
-.Action{
-    background-color: #DB8380;
-    background-image: url("../action.png");
-    background-size: cover;
-    background-blend-mode: overlay;
+@media (max-width: 900px) and (min-width:601px) {
+    #hexGrid{
+        padding-bottom: 7.4%;
+        font-size: 14px;
+    }
+    .hex {
+        width: 33.333%;
+    }
+    .hex:nth-child(5n+4){
+        margin-left:16.666%;
+    }
 }
 
-.Comedy{
-    background-color: #FFF4C3;
-    background-image: url("../comedie.png");
-    background-size: cover;
-    background-blend-mode: overlay;
-
-}
-.Fantastic{
-    background-color: #DFBFFD;
-    background-image: url("../fantastique.png");
-    background-size: cover;
-    background-blend-mode: overlay;
-
+@media (max-width: 600px) {
+    #hexGrid{
+        padding-bottom: 11.2%;
+        font-size: 12px;
+    }
+    .hex {
+        width: 50%;
+    }
+    .hex:nth-child(3n+3){
+        margin-left:25%;
+    }
 }
 
-.Thriller{
-    background-color: #AEBCC6;
-    background-image: url("../thriller.png");
-    background-size: cover;
-    background-blend-mode: overlay;
-
-
-}.Romantic{
-     background-color: #F2B3D1;
-     background-image: url("../romantique.png");
-     background-size: cover;
-     background-blend-mode: overlay;
-
- }
-
-.Western{
-    background-color: #BE8B65;
-    background-image: url("../western.png");
-    background-size: 100%;
-    background-blend-mode: overlay;
+@media (max-width: 400px) {
+    #hexGrid {
+        font-size: 8px;
+    }
 }
-
-
 
