@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Creepster&family=Cutive+Mono&family=Fleur+De+Leah&family=Fredericka+the+Great&family=Italiana&family=Ms+Madi&family=Poppins:wght@100&family=Rye&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&display=swap');
 
 * {
     margin: 0;
@@ -9,25 +9,23 @@
 }
 
 body {
-    --color1: #000000;
-    --color2: #FF954F;
-    --color3: #8C15CD;
-    --color4: #F5F4F1;
+    --color1: #F5F4F1;
+    --color2: #97B3AB;
+    --color3: #56766D;
+    --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
-    --box-shadow: 2px 2px 2px black;
+    --box-shadow: 2px 2px 2px dimgrey;
 
     min-height: 80vh;
-    background-image: url("/static/horror/index.png");
+    background-image: url("/static/index1.png");
     background-size: cover;
     background-width: 100%;
     background-repeat: no-repeat;
 }
 
 h1 {
-    font-family: 'Creepster', cursive;
+    font-family: 'Cutive Mono', monospace;
     font-size: 4vmax;
-    color: var(--color2);
-    text-shadow: 2px 2px 2px black;
 }
 
 h2 {
@@ -54,7 +52,7 @@ p, a, button {
     top: 0;
     list-style: none;
     position: fixed;
-    background-color: var(--color1);
+    background-color: white;
     box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
     width: 100%;
     z-index: 5;
@@ -79,21 +77,20 @@ p, a, button {
     outline: none;
     color: var(--color4);
     padding: 20px 20px;
-    background-color: var(--color1);
+    background-color: white;
     font-family: inherit;
     margin: 0;
     font-weight: bolder;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-    background-color: #2A2A2A;
-
+    background-color: var(--color1);
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2A2A2A;
+    background-color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 4;
@@ -107,7 +104,7 @@ p, a, button {
     text-decoration: none;
     display: block;
     text-align: left;
-    background-color: #2A2A2A;
+    background-color: white;
 }
 
 .dropdown-content a:hover {
@@ -143,7 +140,7 @@ p, a, button {
     font-weight: bolder;
     transition: color 500ms ease, text-shadow 500ms ease;
     color: var(--color1);
-    text-shadow: 0 0 5px var(--color4);
+    text-shadow: 0 0 10px var(--color1);
     background-color: var(--color3);
     text-align: center;
 }
@@ -153,16 +150,16 @@ p, a, button {
 .section1button button{
     padding: 1% 5%;
     margin: 0 -10% 0 20%;
-    background: linear-gradient(0deg, rgba(140,21,205,0.4) 0%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
     border-radius: 50px;
     color: var(--color4);
-    box-shadow: 0 0 5px black;
-    border: 1px outset var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
 }
 
 .section1button button:hover {
-    background: linear-gradient(0deg, rgba(140,21,205,0.1) 0%, rgba(0,0,0,1) 100%);
-    box-shadow:1px 1px 1px var(--color4) inset;
+    background-color: var(--color2);
+    box-shadow:1px 1px 1px var(--color1) inset;
 }
 
 .right{
@@ -176,18 +173,16 @@ p, a, button {
 
 .human_smiley{
     margin-top: -6vmax;
-    margin-left: 8vmax;
-    width: 36vmax;
+    margin-left: 6vmax;
+    width: 38vmax;
     z-index: 2;
 }
 .left_emoji{
-    margin-left: 10vmax;
-    margin-top: 15vmax;
-
-    width: 14vmax;
-
+    margin-left: 11vmax;
+    margin-top: 10vmax;
+    width: 11vmax;
     z-index: 3;
-    animation-name: float2;
+    animation-name: float_left;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
@@ -195,23 +190,23 @@ p, a, button {
     margin-left: 30vmax;
     margin-top: 2vmax;
 
-    width: 14vmax;
+    width: 10vmax;
     z-index: 1;
-    animation-name: float;
+    animation-name: float_right;
     animation-duration: 4s;
     animation-iteration-count: infinite;
 }
 
-@keyframes float {
+@keyframes float_right {
     0%   {margin-top: 2vmax;}
     50%  {margin-top: 3vmax;}
     100% {margin-top: 2vmax;}
 }
 
-@keyframes float2 {
-    0%   {margin-top: 13vmax;}
-    50%  {margin-top: 12vmax;}
-    100% {margin-top: 13vmax;}
+@keyframes float_left {
+    0%   {margin-top: 15vmax;}
+    50%  {margin-top: 14vmax;}
+    100% {margin-top: 15vmax;}
 }
 
 .gon {
@@ -238,81 +233,4 @@ p, a, button {
     );
 }
 
-/**Post for black***/
 
-.modal a.close-modal[class*="icon-"] {
-    width: 20px;
-    height: 20px;
-    color: var(--background);
-    text-align: center;
-    border: 2px solid #fff;
-    border-radius: 25px;
-    box-shadow: var(--box-shadow);
-}
-
-.modal input.name, .modal input.subject {
-    padding: 1% 5%;
-    outline: 0;
-}
-
-input[type=text]:active, input[type=text]:active,.form-submit-textarea:active {
-    outline: 0;
-    box-shadow:1px 1px 1px var(--color4) inset;
-    border: 2px outset var(--color2);
-}
-
-
-.modal input{
-    margin-bottom: 1vmax;
-}
-
-.modal .post {
-    outline: 0;
-    padding: 3%;
-    min-width: 25vmax;
-    min-height: 10vmax;
-    border-radius: 15px;
-}
-
-.modal{
-    margin-left: auto;
-    margin-bottom: auto;
-    background: linear-gradient(0deg, #2A2A2A 0%, var(--color1) 100%);
-}
-
-
-
-.modal p{
-    font-size: 0.8vmax;
-    margin-bottom: 2px;
-}
-
-.form-submit, .form-submit-textarea{
-    font-size: 0.8vmax;
-    font-weight: bolder;
-    margin-bottom: 1%;
-    padding: 3% 5%;
-    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, #2A2A2A 100%);
-    border-radius: 50px;
-    border: 1px outset var(--color4);
-    backdrop-filter: blur(10px);
-}
-
-/*bouton*/
-.form-submit-button {
-    font-size: 0.8vmax;
-    padding: 1% 5%;
-    margin: 3% 3.7% 3% 0%;
-    background: linear-gradient(0deg, rgba(140,21,205,0.1) 0%, rgba(0,0,0,1) 100%);
-    border-radius: 50px;
-    color: var(--color4);
-    box-shadow: var(--box-shadow);
-    border: 1px outset var(--color4);
-    font-weight: bolder;
-}
-
-
-input[type=submit]:active, input[type=reset]:active {
-    background: linear-gradient(0deg, rgba(140,21,205,0.4) 0%, rgba(0,0,0,1) 100%);
-    box-shadow:1px 1px 1px var(--color4) inset;
-}

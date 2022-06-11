@@ -22,23 +22,30 @@ func Action(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, r)
 }
 
+func Biobic(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/biobic.html")
+	t.Execute(w, r)
+}
+
 func Comedy(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/comedy.html")
 	t.Execute(w, r)
 }
 
-func Docu(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("template/docu.html")
-	t.Execute(w, r)
-}
-
-func Drama(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("template/drama.html")
+func Fantasy(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/fantasy.html")
 	t.Execute(w, r)
 }
 
 func Horror(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/horror.html")
+	t.Execute(w, r)
+}
+
+/**not done yet**/
+
+func Drama(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/drama.html")
 	t.Execute(w, r)
 }
 
@@ -62,9 +69,12 @@ func main() {
 	http.HandleFunc("/1", functions.Login)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
-	http.HandleFunc("/docu", Docu)
-	http.HandleFunc("/drama", Drama)
+	http.HandleFunc("/biobic", Biobic)
+	http.HandleFunc("/fantasy", Fantasy)
 	http.HandleFunc("/horror", Horror)
+
+	/*Page note done*/
+	http.HandleFunc("/drama", Drama)
 	http.HandleFunc("/romantic", Romantic)
 	http.HandleFunc("/SF", SF)
 	fmt.Printf("Starting server got testing \n")
