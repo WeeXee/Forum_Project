@@ -173,43 +173,46 @@ p, a, button{
 }
 
 .human_smiley{
-    position: relative;
-    top: 20%;
-    left: 55vmax;
-    width: 36vmax;
+    margin-top: -6vmax;
+    margin-left: 6vmax;
+    width: 34vmax;
     z-index: 2;
 }
 .left_emoji{
-    position: relative;
+    margin-left: 8vmax;
     width: 14vmax;
+
     z-index: 3;
-    animation-name: float2;
+    animation-name: float_left;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
 .right_emoji {
-    position: relative;
+    margin-left: 30vmax;
+    margin-top: 2vmax;
+
     width: 14vmax;
     z-index: 1;
-    animation-name: float;
+    animation-name: float_right;
     animation-duration: 4s;
     animation-iteration-count: infinite;
 }
 
-@keyframes float {
-    0%   {left:73vmax; top:11vmax;}
-    50%  {left:73vmax; top:10vmax;}
-    100% {left:73vmax; top:11vmax;}
+@keyframes float_right {
+    0%   {margin-top: 1vmax;}
+    50%  {margin-top: 2vmax;}
+    100% {margin-top: 1vmax;}
 }
 
-@keyframes float2 {
-    0%   {left:54vmax; top:24vmax;}
-    50%  {left:54vmax; top:25vmax;}
-    100% {left:54vmax; top:24vmax;}
+@keyframes float_left {
+    0%   {margin-top: 18vmax;}
+    50%  {margin-top: 17vmax;}
+    100% {margin-top: 18vmax;}
 }
 
 .gon {
-    margin: 16% 25%;
+    margin-left: 9vmax;
+    margin-top: 13vmax;
     width: 28vmax;
     height: 26vmax;
     background-color: var(--color1);

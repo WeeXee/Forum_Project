@@ -24,7 +24,7 @@ body {
 }
 
 h1 {
-    font-family: 'Italiana', serif;
+    font-family: 'Bodoni Moda', serif;
     font-size: 4vmax;
 }
 
@@ -172,22 +172,26 @@ p, a, button {
 }
 
 .human_smiley{
-    position: relative;
-    top: 20%;
-    left: 53vmax;
+    margin-top: -4vmax;
+    margin-left: 8vmax;
     width: 36vmax;
     z-index: 2;
 }
 .left_emoji{
-    position: relative;
+    margin-left: 10vmax;
+    margin-top: 10vmax;
+
     width: 14vmax;
+
     z-index: 3;
     animation-name: float2;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
 .right_emoji {
-    position: relative;
+    margin-left: 30vmax;
+    margin-top: 2vmax;
+
     width: 14vmax;
     z-index: 1;
     animation-name: float;
@@ -196,26 +200,25 @@ p, a, button {
 }
 
 @keyframes float {
-    0%   {left:73vmax; top:11vmax;}
-    50%  {left:73vmax; top:10vmax;}
-    100% {left:73vmax; top:11vmax;}
+    0%   {margin-top: 2vmax;}
+    50%  {margin-top: 3vmax;}
+    100% {margin-top: 2vmax;}
 }
 
 @keyframes float2 {
-    0%   {left:54vmax; top:24vmax;}
-    50%  {left:54vmax; top:25vmax;}
-    100% {left:54vmax; top:24vmax;}
+    0%   {margin-top: 10vmax;}
+    50%  {margin-top: 9vmax;}
+    100% {margin-top: 10vmax;}
 }
 
 .gon {
-    margin: 16% 25%;
+    margin-left: 9vmax;
+    margin-top: 13vmax;
     width: 28vmax;
     height: 26vmax;
     background-color: var(--color1);
     opacity: 70%;
 }
-
-
 
 .octa {
     -webkit-clip-path: polygon(
