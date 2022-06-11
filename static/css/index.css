@@ -25,24 +25,24 @@ body {
 
 h1 {
     font-family: 'Italiana', serif;
-    font-size: 4vmax;
+    font-size: 5vmin;
 }
 
 h2 {
     font-weight: bolder;
-    font-size: 1.5vmax;
+    font-size: 3vmin;
     color: var(--color3);
 }
 
 h3 {
     font-weight: bolder;
-    font-size: 1vmax;
+    font-size: 3vmin;
     color: var(--color2);
 }
 
 p, a, button {
     font-weight: bolder;
-    font-size: 1.2vmax;
+    font-size: 2vmin;
 }
 
 .navbar {
@@ -305,9 +305,9 @@ p, a, button {
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    margin: 0 auto;
     overflow: hidden;
     list-style-type: none;
+    margin-bottom: 5vmax;
 }
 
 .hex {
@@ -325,10 +325,6 @@ p, a, button {
     padding-bottom: 110.851%; /* =  width / sin(60) */
     margin: 2%;
     overflow: hidden;
-    -webkit-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-    -ms-transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-    transform: rotate3d(0,0,1,-60deg) skewY(30deg);
-    transition: all 0.5s;
 }
 .hexIn * {
     position: absolute;
@@ -341,9 +337,6 @@ p, a, button {
     text-align: center;
     color: #fff;
     overflow: hidden;
-    -webkit-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-    -ms-transform: skewY(-30deg) rotate3d(0,0,1,60deg);
-    transform: skewY(-30deg) rotate3d(0,0,1,60deg);
 }
 
 /*** HEX CONTENT **********************************************************************/
@@ -373,7 +366,7 @@ p, a, button {
     text-align: center;
     bottom: 40%;
     padding-top:50%;
-    font-size: 2em;
+    font-size: 5vmin;
     z-index: 1;
     font-weight: bolder;
     text-shadow: 1px 1px 2px white;
@@ -386,6 +379,7 @@ p, a, button {
     color: var(--color1);
     font-weight: bolder;
     text-shadow: 1px 1px 2px var(--color4);
+    font-size: 2vmin;
 
 }
 
