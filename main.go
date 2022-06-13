@@ -6,7 +6,6 @@ import (
 
 	_ "github.com/mattn/go-sqlite3"
 
-	"Forum/database_sqlite"
 	"Forum/functions"
 	"fmt"
 	"html/template"
@@ -14,6 +13,10 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	/*database_sqlite.DatabaseLogin()
+	database_sqlite.DatabasePost()
+	database_sqlite.DatabaseComment()
+	arrayComment := database_sqlite.GetComment()*/
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }
@@ -69,11 +72,7 @@ func Western(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database_sqlite.DatabaseLogin()
-	database_sqlite.DatabasePost()
-	database_sqlite.DatabaseComment()
-	arrayComment := database_sqlite.GetComment()
-	fmt.Println(arrayComment)
+
 	http.HandleFunc("/", functions.Post)
 	http.HandleFunc("/1", functions.Login)
 	http.HandleFunc("/action", Action)
