@@ -22,7 +22,7 @@ type CommentLike struct {
 	dislike        int
 }
 
-func DatabaseLogin() {
+func DatabaseLogin(log Login) {
 	DoesFileExist("sqlite-database.db")
 
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
@@ -37,20 +37,13 @@ func DatabaseLogin() {
 	}(sqliteDatabase) // Defer Closing the database
 	CreateTableLogin(sqliteDatabase) // Create Database Tables*/
 
-	log := Login{
-		username: "Juju",
-		password: "SLB",
-	}
 	// INSERT RECORDS
 	boolean := checkIfLoginExist(sqliteDatabase, log)
 	if boolean == true {
-		AddLogin(sqliteDatabase, "Juju", "SLB")
+		AddLogin(sqliteDatabase, log.username, log.password)
 	} else {
 
 	}
-
-	login := GetLogin(sqliteDatabase, 3)
-	fmt.Println(login)
 	// DISPLAY INSERTED RECORDS
 	DisplayLogin(sqliteDatabase)
 
