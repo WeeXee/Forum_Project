@@ -514,3 +514,176 @@ p, a, button {
     }
 }
 
+/*Section Pop-up*/
+
+#section4{
+    background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
+    max-height: 100%;
+    width: 100%;
+
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+
+    border-radius: 25px;
+    color: var(--color4);
+    box-shadow: 0 0 250px rgba(0,0,0,0.6);
+    border: 1px outset var(--color1);
+    backdrop-filter: blur(5px);
+    z-index: 5;
+
+}
+
+/*Left*/
+.left4{
+    width: 40%;
+    padding-top: 7%;
+    text-align: center;
+}
+
+/*Right*/
+.right4{
+    width: 70%;
+    background-image: url("/static/Capture.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 55px;
+    background-position-x: -40px;
+    border-radius: 0 25px 25px 0;
+    border-left: 1px solid var(--color1);
+
+}
+.right_forhover4 p{
+    color: var(--color3);
+    padding-left: 2%;
+}
+
+.texthover4 {
+    justify-content: center;
+    margin: 8% 6% 3% 5%;
+    position: relative;
+    padding: 5% 15%;
+    opacity: 0;
+    border-radius: 25px;
+    border: 1px outset var(--color1);
+}
+.texthover4:hover{
+    color: black;
+    background-color: rgba(245, 244, 241, 0.1);
+    backdrop-filter: blur(2.5px);
+    font-size: 0.8vmax;
+    font-weight: bolder;
+    opacity: 1;
+}
+
+
+/* helpers/alignment.css */
+
+.align {
+    display: grid;
+    place-items: center;
+}
+
+/* icon.css */
+
+.icon {
+    font-size: 1rem;
+}
+
+
+/*Username & password */
+input {
+    outline: 0;
+}
+
+input[type=text]:hover, input[type=password]:hover {
+    background-color: var(--color1);
+}
+
+input[type=text]:active,.form-submit-textarea:active, input[type=password]:active {
+    background-color:var(--color2);
+    border: 1px outset var(--color2);
+    box-shadow:1px 1px 1px var(--color4) inset;
+}
+
+/*.form__field {
+    position: relative;
+}*/
+
+.form__input {
+
+    font-size: 0.8vmax;
+    margin-bottom: 1%;
+    padding: 1px 3%;
+
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.6) 100%);
+    box-shadow: 0 0 250px rgba(0,0,0,0.6);
+
+    border-radius: 50px;
+    border: 1px outset var(--color1);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.form__input:valid {
+    border: 1px outset lightgreen;
+    background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
+    box-shadow:1px 1px 1px var(--color4) inset;
+}
+
+.form__input:invalid {
+    border: 1px outset indianred;
+    background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
+    box-shadow:1px 1px 1px var(--color4) inset;
+}
+
+/*Smiley*/
+
+.form__input:valid + .icon::after {
+    content: '😃';
+}
+.form__input:invalid + .icon::after {
+    content: '😳';
+}
+
+/*submit button*/
+
+.form-submit-button {
+    padding: 1% 5%;
+    margin: 3% 3.7% 3% 0%;
+
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.2) 100%);
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    font-weight: bolder;
+
+}
+
+.form-submit-button:hover {
+    background: linear-gradient(0deg, rgba(245,244,241,0.6) 0%, rgba(245,244,241,1) 100%);
+}
+
+/*input submit*/
+input[type=submit]:hover, input[type=reset]:hover {
+    background-color: var(--color1);
+}
+input[type=submit]:active, input[type=reset]:active {
+    background-color:var(--color3);
+    box-shadow:1px 1px 1px var(--color4) inset;
+}
+
+#ex1{
+    background-color: transparent;
+    width: 40vmax;
+    height: 400px;
+    margin-top: 8vmax;
+    margin-left: -40vmax;
+    border-radius: 25px;
+}
+

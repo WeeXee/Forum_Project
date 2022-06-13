@@ -10,8 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/style.css" />
     <link rel="stylesheet" href="../static/css/index.css" />
+
+
     <script src="../static/button.js"></script>
     <script src="../static/popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,7 +21,7 @@
 <header class="header">
     <div class="navbar">
         <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
-        <li><a href="/register">Login</a></li>
+        <li><a href="#ex1" rel="modal:open">Login</a></li>
         <li><a href="/Aboutus">Aboutus</a></li>
         <li><div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">Categorie
@@ -201,5 +202,47 @@
             </ul>
         </div>
     </section>
+    <section id="ex1" class="modal">
+    <section id="section4">
+        <div class="left4">
+            <h1>Cinenum</h1>
+            <h2>Account Registration</h2>
+            <br>
+            <form action="/registerauth" method="POST">
+                <br>
+                <label for="username">Username:</label><br>
+                <div class="form__field">
+                    <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
+                    <span class="icon"></span>
+                </div><br>
+                <label for="password">Password:</label><br>
+                <div class="form__field">
+                    <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
+                    <span class="icon"></span>
+                </div>
+                <br>
+                <input class="form-submit-button" type="submit" value="Sign Up">
+                <input class="form-submit-button" type="submit" value="Sign In">
+
+            </form>
+        </div>
+        <div class="right4">
+            <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
+            <div class="texthover4">
+                <h2>For Sign In</h2>
+                <p>Username :</p>
+                <li>must be longer than 4 characters but shorter than 20</li>
+                <li>must contain only letters or numbers</li>
+
+                <p>Password :</p>
+                <li>must be greater than 6 characters but less than 30</li>
+                <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
+                <br>
+            </div>
+        </div>
+    </section>
+    </section>
+
+
 </body>
 </html>
