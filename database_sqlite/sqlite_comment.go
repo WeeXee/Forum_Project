@@ -18,7 +18,7 @@ type Comment struct {
 
 type CommentArray = []Comment
 
-func DatabaseComment() {
+func DatabaseComment(comment Comment) {
 	DoesFileExist("sqlite-database.db")
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
 	if err != nil {
@@ -31,15 +31,6 @@ func DatabaseComment() {
 		}
 	}(sqliteDatabase) // Defer Closing the database
 	CreateTableComment(sqliteDatabase) // Create Database Tables*/
-
-	comment := Comment{
-		idUser:  1,
-		idPost:  1,
-		comment: "accord ave vows!",
-		like:    10,
-		dislike: 0,
-		answer:  "blob || blab || blubber",
-	}
 	// INSERT RECORDS
 
 	AddComment(sqliteDatabase, comment)
