@@ -17,23 +17,35 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }
+func Action(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/action.html")
+	t.Execute(w, r)
+}
+
+func Biobic(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/biobic.html")
+	t.Execute(w, r)
+}
+
 func Comedy(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/comedy.html")
 	t.Execute(w, r)
 }
 
-func Docu(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("template/docu.html")
-	t.Execute(w, r)
-}
-
-func Drama(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("template/drama.html")
+func Fantasy(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/fantasy.html")
 	t.Execute(w, r)
 }
 
 func Horror(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/horror.html")
+	t.Execute(w, r)
+}
+
+/**not done yet**/
+
+func Drama(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/drama.html")
 	t.Execute(w, r)
 }
 
@@ -46,6 +58,15 @@ func SF(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/SF.html")
 	t.Execute(w, r)
 }
+func Thriller(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/thriller.html")
+	t.Execute(w, r)
+}
+
+func Western(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/western.html")
+	t.Execute(w, r)
+}
 
 func main() {
 	database_sqlite.DatabaseLogin()
@@ -55,12 +76,18 @@ func main() {
 	fmt.Println(arrayComment)
 	http.HandleFunc("/", functions.Post)
 	http.HandleFunc("/1", functions.Login)
+	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
-	http.HandleFunc("/docu", Docu)
-	http.HandleFunc("/drama", Drama)
+	http.HandleFunc("/biobic", Biobic)
+	http.HandleFunc("/fantasy", Fantasy)
 	http.HandleFunc("/horror", Horror)
 	http.HandleFunc("/romantic", Romantic)
 	http.HandleFunc("/SF", SF)
+	http.HandleFunc("/thriller", Thriller)
+	http.HandleFunc("/western", Western)
+
+	/*Page note done*/
+	http.HandleFunc("/drama", Drama)
 	fmt.Printf("Starting server got testing \n")
 	fmt.Println("Go to this adress: localhost:8080")
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))

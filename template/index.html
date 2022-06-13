@@ -6,57 +6,246 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="" />
-    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/index.css" />
 
+
     <script src="../static/button.js"></script>
+    <script src="../static/popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
-<header>
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <a href="" class="navbar-brand">Home</a>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav navbar-right text-center">
-                    <li class="active"><a href="#">Us</a></li>
-                    <li calass="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MoviesGender <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/template/comedy.html">Comedy</a></li>
-                            <li><a href="/template/docu.html">Documentary</a></li>
-                            <li><a href="/template/horror.html">Horror</a></li>
-                            <li><a href="/template/romantic.html">Romantic</a></li>
-                            <li><a href="/template/SF.html">SF</a></li>
-                            <li><a href="/template/drama.html">Drama</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Sign in ?</a></li>
-                </ul>
+<header class="header">
+    <div class="navbar">
+        <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
+        <!--
+        <li><a href="#ex1" rel="modal:open">Login</a></li>-->
+        <li><a href="/register">Login</a></li>
+        <li><a href="/Aboutus">Aboutus</a></li>
+        <li><div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Categorie
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="/action">Action</a>
+                <a href="/biobic">Biobic</a>
+                <a href="/comedy">Comedy</a>
+                <a href="/fantasy">Fantasy</a>
+                <a href="/horror">Horror</a>
+                <a href="/romantic">Romantic</a>
+                <a href="/SF">Sci-Fi</a>
+                <a href="/thriller">Thriller</a>
+                <a href="/western">Western</a>
             </div>
-        </div>
+        </div></li>
+        <li><a href="/">Home</a></li>
     </div>
 </header>
 
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
 <body>
+    <section id="section1">
+        <div class="left">
+            <div class="section1content">
+                <h1>Cinemum</h1>
+                <h2>Let's Talk about movies</h2>
+                <br><br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+            <div class="section1button">
+                <button><a> &#128214; See last subject </a></button>
+                <button><a href="#section3"> &#9997; Create a post </a></button>
+            </div>
+        </div>
+        <div class="right">
+            <div class="imagefond1">
+                <img class="left_emoji" src="../static/index/Untitled3.png">
+                <img class="human_smiley" src="../static/index/perso8.png">
+                <img class="right_emoji" src="../static/index/Untitled18.png">
+                <div class="octa gon"></div>
+            </div>
+        </div>
+    </section>
+    <section id="section2">
+        <div class="section_text" >
+            <h1>3 Column Responsive Layout</h1>
+            <h2>3 Column Responsive Layout</h2>
+            <br>
+        </div>
+        <div class="section2_column">
+            <div class="column">
+                <h1>1</h1>
+                <h3>1st Content Area</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ratione architecto necessitatibus cum praesentium dolor totam voluptatibus recusandae?</p>
+            </div>
+            <div class="column">
+                <h1>2</h1>
+                <h3>2nd Content Area</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ratione architecto necessitatibus cum praesentium dolor totam voluptatibus recusandae? Illo quod nemo ratione itaque dolores laudantium error vero laborum blanditiis nostrum.</p>
+            </div>
+            <div class="column">
+                <h1>3</h1>
+                <h3>3rd Content Area</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ratione architecto necessitatibus cum praesentium dolor totam voluptatibus recusandae? Illo quod nemo ratione itaque dolores laudantium error vero laborum blanditiis nostrum.</p>
+            </div>
+        </div>
+    </section>
+    <section id="section3">
+        <div class="section_text">
+            <h1>Category</h1>
+            <h2>Choice your movie genre</h2>
+            <br>
+        </div>
+        <div class="grid3">
+            <ul id="hexGrid">
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/action">
+                            <div class='img' style='background-image:url("../static/index/action.png");'></div>
+                            <h1 class="action" id="demo1">Action</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
 
-    <form method="POST" action="/">
-        <label>Enter your name<input type="text" name="Title"/>
-        <label>Enter your post<input type="text" name="Containt"/> 
-        <input type="submit">
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/comedy">
+                            <div class='img' style='background-image: url("../static/index/comedie.png");'></div>
+                            <h1 class="comedy" id="demo1">Comedy</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/fantasy">
+                            <div class='img' style='background-image: url("../static/index/fantastique.png");'></div>
+                            <h1 class="fantasy" id="demo1">Fantasy</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/romantic">
+                            <div class='img' style='background-image: url("../static/index/romantique.png");'></div>
+                            <h1 class="romantic" id="demo1">Romantic</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
 
-    </form>
-    <h2>This is your post</h2>
-    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-    <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-    <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-  
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/thriller">
+                            <div class='img' style='background-image: url("../static/index/thriller.png");'></div>
+                            <h1 class="thriller" id="demo1">Thriller</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/biobic">
+                            <div class='img' style='background-image: url("../static/index/biobic.png");'></div>
+                            <h1 class="biobic" id="demo1">Biobic</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/horror">
+                            <div class='img' style='background-image: url("../static/index/horreur.png");'></div>
+                            <h1 class="horror" id="demo1">Horror</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/SF">
+                            <div class='img' style=' background-image: url("../static/index/sci-fi.png");'></div>
+                            <h1 class="SF" id="demo1">Sci-Fi</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="hex">
+                    <div class="hexIn">
+                        <a class="hexLink" href="/western">
+                            <div class='img' style='background-image: url("../static/index/western.png");'></div>
+                            <h1 class="western" id="demo1">Western</h1>
+                            <p id="demo2">Click here for join</p>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+<!--
+    <section id="ex1" class="modal">
+    <section id="section4">
+        <div class="left4">
+            <h1>Cinenum</h1>
+            <h2>Account Registration</h2>
+            <br>
+            <form action="/registerauth" method="POST">
+                <br>
+                <label for="username">Username:</label><br>
+                <div class="form__field">
+                    <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
+                    <span class="icon"></span>
+                </div><br>
+                <label for="password">Password:</label><br>
+                <div class="form__field">
+                    <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
+                    <span class="icon"></span>
+                </div>
+                <br>
+                <input class="form-submit-button" type="submit" value="Sign Up">
+                <input class="form-submit-button" type="submit" value="Sign In">
+
+            </form>
+        </div>
+        <div class="right4">
+            <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
+            <div class="texthover4">
+                <h2>For Sign In</h2>
+                <p>Username :</p>
+                <li>must be longer than 4 characters but shorter than 20</li>
+                <li>must contain only letters or numbers</li>
+
+                <p>Password :</p>
+                <li>must be greater than 6 characters but less than 30</li>
+                <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
+                <br>
+            </div>
+        </div>
+    </section>
+    </section>
+-->
+
 </body>
-<footer>
-
-</footer>
-
 </html>
