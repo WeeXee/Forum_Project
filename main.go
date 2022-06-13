@@ -1,8 +1,9 @@
 package main
 
 import (
-	_ "github.com/go-sql-driver/mysql"
 	"unicode"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	_ "github.com/mattn/go-sqlite3"
 
@@ -17,6 +18,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	database_sqlite.DatabasePost()
 	database_sqlite.DatabaseComment()
 	arrayComment := database_sqlite.GetComment()*/
+	functions.Post(w, r)
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }
@@ -71,9 +73,15 @@ func Western(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, r)
 }
 
+func Error(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/404.html")
+	t.Execute(w, r)
+}
+
 func main() {
 
-	http.HandleFunc("/", functions.Post)
+	http.HandleFunc("/", Index)
+	http.HandleFunc("/404", Error)
 	http.HandleFunc("/1", functions.Login)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
