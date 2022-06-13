@@ -10,6 +10,7 @@ import (
 	"Forum/functions"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -18,8 +19,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	database_sqlite.DatabasePost()
 	database_sqlite.DatabaseComment()
 	arrayComment := database_sqlite.GetComment()*/
-	t, _ := template.ParseFiles("template/index.html")
-	t.Execute(w, r)
+	functions.Post(w, r)
 }
 func Action(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/action.html")
@@ -72,10 +72,15 @@ func Western(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, r)
 }
 
-func main() {
+func Error(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/404.html")
+	t.Execute(w, r)
+}
 
-	http.HandleFunc("/", functions.Post)
+func main() {
+	http.HandleFunc("/", Index)
 	http.HandleFunc("/1", functions.Login)
+	http.HandleFunc("/404", Error)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
 	http.HandleFunc("/biobic", Biobic)
@@ -87,17 +92,25 @@ func main() {
 	http.HandleFunc("/western", Western)
 
 	/*Page note done*/
+
 	http.HandleFunc("/drama", Drama)
-	fmt.Printf("Starting server got testing \n")
-	fmt.Println("Go to this adress: localhost:8080")
+	fmt.Printf("||=================================================||\n")
+	fmt.Printf("||=======    Starting server got testing    =======||\n")
+	fmt.Printf("||=======                                   =======||\n")
+	fmt.Printf("||======= Go to this adress: localhost:8080 =======||\n")
+	fmt.Printf("||=================================================||\n")
+
+	/*--------Folders source--------*/
+
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
 
+	/*--------error--------*/
+
 	tpl, _ = template.ParseGlob("template/*.html")
-	var err error
-	if err != nil {
-		panic(err.Error())
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
 	}
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/registerauth", registerAuthHandler)
