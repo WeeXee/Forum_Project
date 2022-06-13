@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Creepster&family=Cutive+Mono&family=Fleur+De+Leah&family=Fredericka+the+Great&family=Italiana&family=Ms+Madi&family=Poppins:wght@100&family=Rye&family=VT323&display=swap');
-@import "header.css";
-@import "footer.css";
 
 
 /*the import content all font who is required for the forum
@@ -39,52 +37,78 @@ font-family: 'Rye', cursive;
 Require for Sci-fi:
 font-family: 'VT323', monospace;*/
 
-header {
-    background: #ededed;
-}
-
 .modal a.close-modal[class*="icon-"] {
-    top: -10px;
-    right: -10px;
     width: 20px;
     height: 20px;
-    color: #fff;
-    line-height: 1.25;
+    color: var(--background);
     text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    background: #900;
     border: 2px solid #fff;
-    -webkit-border-radius: 26px;
-    -moz-border-radius: 26px;
-    -o-border-radius: 26px;
-    -ms-border-radius: 26px;
-    -moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-.modal input {
-    position: relative;
-    margin-top: auto;
-    margin-left: auto;
-    text-align: center;
-}
-
-.modal input.name {
+.modal input.name, .modal input.subject {
     padding: 1% 5%;
-    margin-bottom: 10%;
-    position: relative;
+    outline: 0;
 }
 
-.modal textarea.post {
-    min-height: 5vmax;
-    padding: 15% 5%;
+input[type=text]:active, input[type=text]:active,.form-submit-textarea:active {
+    outline: 0;
+    box-shadow:1px 1px 1px var(--color4) inset;
+    border: 2px outset var(--color2);
+}
+
+
+.modal input{
+    margin-bottom: 1vmax;
+}
+
+.modal .post {
+    outline: 0;
+    padding: 3%;
+    min-width: 25vmax;
+    min-height: 10vmax;
+    border-radius: 15px;
+}
+
+.modal{
+    margin-left: auto;
+    margin-bottom: auto;
+    background: linear-gradient(0deg, rgba(245,244,241,0.85) 0%, var(--color1) 100%);
+}
+
+.modal p{
+    font-size: 0.8vmax;
+    margin-bottom: 2px;
+}
+
+.form-submit, .form-submit-textarea{
+    font-size: 0.8vmax;
+    font-weight: bolder;
     margin-bottom: 1%;
-    position: relative;
+    padding: 3% 5%;
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.6) 100%);
+    box-shadow: var(--box-shadow);
+    border-radius: 50px;
+    border: 1px outset var(--color1);
+    backdrop-filter: blur(10px);
 }
 
-form {
-    position: relative;
-    text-align: center;
+/*bouton*/
+.form-submit-button {
+    font-size: 0.8vmax;
+    padding: 1% 5%;
+    margin: 3% 3.7% 3% 0%;
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.2) 100%);
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    font-weight: bolder;
+}
+
+
+input[type=submit]:active, input[type=reset]:active {
+    background: linear-gradient(0deg, var(--color2) 0%, rgba(245,244,241,1) 100%);
+    box-shadow:1px 1px 1px var(--color4) inset;
 }

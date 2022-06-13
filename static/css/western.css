@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     color: var(--color4);
@@ -9,42 +8,40 @@
 
 body {
     --color1: #F5F4F1;
-    --color2: #FFF4C3;
-    --color3: #EADB1E;
+    --color2: #BE8B65;
+    --color3: #CE7E6E;
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
+
     min-height: 80vh;
-    background-image: url("/static/comedy/index.png");
+    background-image: url("/static/western/index.png");
     background-size: cover;
     background-width: 100%;
     background-repeat: no-repeat;
 }
 
-
-h1{
-    font-family: 'Fredericka the Great', cursive;
-    font-size: 4vmax;
+h1 {
+    font-family: 'Rye', cursive;
+    font-weight: normal;
 }
 
-h2{
+h2 {
     font-weight: bolder;
     font-size: 1.5vmax;
     color: var(--color3);
 }
 
-h3{
+h3 {
     font-weight: bolder;
     font-size: 1vmax;
     color: var(--color2);
 }
 
-p, a, button{
+p, a, button {
     font-weight: bolder;
     font-size: 1.2vmax;
 }
-
-/*Navigation menu*/
 
 .navbar {
     min-height: 25px;
@@ -173,17 +170,17 @@ p, a, button{
 }
 
 .human_smiley{
-    margin-top: -6vmax;
-    margin-left: 6vmax;
-    width: 34vmax;
+    margin-top: -4vmax;
+    margin-left: 8vmax;
+    width: 35vmax;
     z-index: 2;
 }
 .left_emoji{
-    margin-left: 8vmax;
-    width: 14vmax;
+    margin-left: 13vmax;
+    width: 12vmax;
 
     z-index: 3;
-    animation-name: float_left;
+    animation-name: float2;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
@@ -199,15 +196,14 @@ p, a, button{
 }
 
 @keyframes float_right {
-    0%   {margin-top: 1vmax;}
-    50%  {margin-top: 2vmax;}
-    100% {margin-top: 1vmax;}
+    0%   {margin-top: 2vmax;}
+    50%  {margin-top: 3vmax;}
+    100% {margin-top: 2vmax;}
 }
-
-@keyframes float_left {
-    0%   {margin-top: 18vmax;}
-    50%  {margin-top: 17vmax;}
-    100% {margin-top: 18vmax;}
+@keyframes float2 {
+    0%   {margin-top: 14vmax;}
+    50%  {margin-top: 13vmax;}
+    100% {margin-top: 14vmax;}
 }
 
 .gon {
@@ -233,4 +229,3 @@ p, a, button{
             29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
     );
 }
-
