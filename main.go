@@ -13,10 +13,6 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	/*database_sqlite.DatabaseLogin()
-	database_sqlite.DatabasePost()
-	database_sqlite.DatabaseComment()
-	arrayComment := database_sqlite.GetComment()*/
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }

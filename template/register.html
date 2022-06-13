@@ -11,14 +11,19 @@
 
 </head>
 <body>
-
+<script src="/static/register.js"></script>
 <section id="section4">
     <div class="left4">
         <h1>Cinenum</h1>
         <h2>Account Registration</h2>
         <br>
-        <form action="/registerauth" method="POST">
+        <form action="/registerauth" method="POST" name ="register">
             <br>
+            <label for="username">mail:</label><br>
+            <div class="form__field">
+                <input type="text" id="mail" name="mail" class="form__input" >
+                <span class="icon"></span>
+            </div><br>
             <label for="username">Username:</label><br>
             <div class="form__field">
                 <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
@@ -30,8 +35,8 @@
                 <span class="icon"></span>
             </div>
             <br>
-            <input class="form-submit-button" type="submit" value="Sign Up">
-            <input class="form-submit-button" type="submit" value="Sign In">
+            <input class="form-submit-button" type="submit" value="Sign Up" onclick="ValidateEmail(document.register.mail)">
+            <input class="form-submit-button" type="submit" value="Sign In" onclick="ValidateEmail(document.register.mail)">
 
         </form>
         <p>{{if .}}
