@@ -1,18 +1,25 @@
 package main
 
 import (
+	"Forum/database_sqlite"
 	"github.com/dgrijalva/jwt-go"
 	_ "github.com/go-sql-driver/mysql"
 	"time"
 	"unicode"
 
-	"Forum/functions"
 	"fmt"
 	_ "github.com/dgrijalva/jwt-go"
 	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"net/http"
 )
+
+type StructPost struct {
+	MovieGender int
+	IDuser      int
+	post        string
+	title       string
+}
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/index.html")
@@ -70,9 +77,7 @@ func Western(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
-	http.HandleFunc("/", functions.Post)
-	http.HandleFunc("/1", functions.Login)
+	http.HandleFunc("/", Post)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
 	http.HandleFunc("/biobic", Biobic)
@@ -82,13 +87,19 @@ func main() {
 	http.HandleFunc("/SF", SF)
 	http.HandleFunc("/thriller", Thriller)
 	http.HandleFunc("/western", Western)
+
 	http.HandleFunc("/login", log)
 	http.HandleFunc("/loginauth", Signin)
+	http.HandleFunc("/welcome", Welcome)
+
+	http.HandleFunc("/register", registerHandler)
+	http.HandleFunc("/registerauth", registerAuthHandler)
 
 	/*Page note done*/
 	http.HandleFunc("/drama", Drama)
 	fmt.Printf("Starting server got testing \n")
 	fmt.Println("Go to this adress: localhost:8080")
+
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
@@ -111,8 +122,9 @@ var users = map[string]string{
 
 // Create a struct to read the username and password from the request body
 type Credentials struct {
-	Password string `json:"password"`
+	Mail     string `json:"mail"`
 	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 // Create a struct that will be encoded to a JWT.
@@ -127,28 +139,27 @@ type Claims struct {
 var tpl *template.Template
 
 func log(w http.ResponseWriter, r *http.Request) {
-
 	tpl.ExecuteTemplate(w, "login.html", nil)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****loginHandler running*****")
-	var creds Credentials
+	var creds database_sqlite.Login
 
+	creds.Mail = r.FormValue("mail")
 	creds.Password = r.FormValue("password")
 	creds.Username = r.FormValue("username")
 
-	fmt.Println(r.Body)
+	database_sqlite.DatabaseLogin(creds)
 	/*// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
 		// If the structure of the body is wrong, return an HTTP error
 		fmt.Println("error 1")
 		w.WriteHeader(http.StatusBadRequest)
-	}*/
+	}*/ // Get the expected password from our in memory map
 
-	// Get the expected password from our in memory map
-	expectedPassword, ok := users[creds.Username]
+	expectedPassword, ok := database_sqlite.CheckLogin(creds)
 
 	// If a password exists for the given user
 	// AND, if it is the same as the password we received, the we can move ahead
@@ -204,24 +215,27 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("*****registerAuthHandler running*****")
 	r.ParseForm()
+
+	var user database_sqlite.Login
 	//Create Username
-	username := r.FormValue("username")
+	user.Mail = r.FormValue("mail")
+	user.Username = r.FormValue("username")
 	var nameAlphaNumeric = true
-	for _, char := range username {
+	for _, char := range user.Username {
 		if unicode.IsLetter(char) == false && unicode.IsNumber(char) == false {
 			nameAlphaNumeric = false
 		}
 	}
 	var nameLength bool
-	if 4 <= len(username) && len(username) <= 20 {
+	if 4 <= len(user.Username) && len(user.Username) <= 20 {
 		nameLength = true
 	}
-	// Create password
-	password := r.FormValue("password")
-	fmt.Println("password:", password, "\npswdLength:", len(password))
+	// Create user.Password
+	user.Password = r.FormValue("password")
+	fmt.Println("user.Password:", user.Password, "\npswdLength:", len(user.Password))
 	var pswdLowercase, pswdUppercase, pswdNumber, pswdSpecial, pswdLength, pswdNoSpaces bool
 	pswdNoSpaces = true
-	for _, char := range password {
+	for _, char := range user.Password {
 		switch {
 		case unicode.IsLower(char):
 			pswdLowercase = true
@@ -235,27 +249,77 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 			pswdNoSpaces = false
 		}
 	}
-	if 5 < len(password) && len(password) < 30 {
+	if 5 < len(user.Password) && len(user.Password) < 30 {
 		pswdLength = true
 	}
 	fmt.Println("pswdLowercase:", pswdLowercase, "\npswdUppercase:", pswdUppercase, "\npswdNumber:", pswdNumber, "\npswdSpecial:", pswdSpecial, "\npswdLength:", pswdLength, "\npswdNoSpaces:", pswdNoSpaces, "\nnameAlphaNumeric:", nameAlphaNumeric, "\nnameLength:", nameLength)
 	if !pswdLowercase || !pswdUppercase || !pswdNumber || !pswdSpecial || !pswdLength || !pswdNoSpaces || !nameAlphaNumeric || !nameLength {
 		tpl.ExecuteTemplate(w, "register.html", "please check username and password criteria")
 		return
+	} else {
+		added := database_sqlite.DatabaseLogin(user)
+		if added {
+			tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
+		} else {
+			tpl.ExecuteTemplate(w, "register.html", "we meet a problem, retry please")
+		}
 	}
-
-	tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
-
 }
 
-type StructPost struct {
-	MovieGender int
-	IDuser      int
-	post        string
-	title       string
+type logIndex struct {
+	Username string
 }
 
 func Post(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	if c != nil {
+		tknStr := c.Value
+
+		// Initialize a new instance of `Claims`
+		claims := &Claims{}
+
+		// Parse the JWT string and store the result in `claims`.
+		// Note that we are passing the key in this method as well. This method will return an error
+		// if the token is invalid (if it has expired according to the expiry time we set on sign in),
+		// or if the signature does not match
+		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		if !tkn.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		login.Username = claims.Username
+	}
+	newpost := StructPost{}
+	newpost.title = r.FormValue("Title")
+	newpost.post = r.FormValue("Containt")
+	switch {
+	case newpost == StructPost{}:
+		break
+	default:
+		fmt.Println(newpost)
+	}
+
+	t, _ := template.ParseFiles("template/index.html")
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
+}
+
+func Welcome(w http.ResponseWriter, r *http.Request) {
 	// We can obtain the session token from the requests cookies, which come with every request
 	c, err := r.Cookie("token")
 	if err != nil {
@@ -297,20 +361,5 @@ func Post(w http.ResponseWriter, r *http.Request) {
 
 	// Finally, return the welcome message to the user, along with their
 	// username given in the token
-	w.Write([]byte(fmt.Sprintf("Welcome %s!", claims.Username)))
-	newpost := StructPost{}
-	newpost.title = r.FormValue("Title")
-	newpost.post = r.FormValue("Containt")
-	switch {
-	case newpost == StructPost{}:
-		break
-	default:
-		fmt.Println(newpost)
-	}
-
-	t, _ := template.ParseFiles("template/index.html")
-	err1 := t.Execute(w, c.Value)
-	if err1 != nil {
-		fmt.Print("error")
-	}
+	//w.Write([]byte(fmt.Sprintf("Welcome %s!", claims.Username)))
 }

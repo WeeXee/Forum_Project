@@ -23,7 +23,7 @@ type CommentLike struct {
 	Dislike        int
 }
 
-func DatabaseLogin(log Login) {
+func DatabaseLogin(log Login) bool {
 	DoesFileExist("sqlite-database.db")
 
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
@@ -42,11 +42,10 @@ func DatabaseLogin(log Login) {
 	boolean := checkIfLoginExist(sqliteDatabase, log)
 	if boolean == true {
 		AddLogin(sqliteDatabase, log)
-	} else {
-
+		return true
 	}
 	// DISPLAY INSERTED RECORDS
-
+	return false
 }
 
 func GetLogin(db *sql.DB, log Login) Login {
@@ -94,7 +93,7 @@ func CreateTableLogin(db *sql.DB) {
 	createLoginTableSQL := `CREATE TABLE IF NOT EXISTS login(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
     	"Mail" TEXT,
-		"name" TEXT,
+		"Name" TEXT,
 		"Password" TEXT		
 	  );` // SQL Statement for Create Table
 
@@ -110,7 +109,7 @@ func CreateTableLogin(db *sql.DB) {
 // AddLogin We are passing db reference connection from main to our method with other parameters
 func AddLogin(db *sql.DB, login Login) {
 	log.Println("Inserting login record ...")
-	insertLoginSQL := `INSERT INTO login( Mail, name, Password) VALUES (?,?, ?)`
+	insertLoginSQL := `INSERT INTO login( Mail, Name, Password) VALUES (?,?, ?)`
 	statement, err := db.Prepare(insertLoginSQL) // Prepare statement.
 	// This is good to avoid SQL injections
 	if err != nil {
@@ -122,31 +121,6 @@ func AddLogin(db *sql.DB, login Login) {
 		log.Fatalln(err.Error())
 	}
 }
-
-/*
-func DisplayLogin(db *sql.DB) {
-	row, err := db.Query("SELECT * FROM login ORDER BY Mail")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func(row *sql.Rows) {
-		err := row.Close()
-		if err != nil {
-			fmt.Println(err)
-		}
-	}(row)
-	for row.Next() { // Iterate and fetch the records from result cursor
-		var idLogin int
-		var name string
-		var Password string
-		err := row.Scan(&idLogin, &name, &Password)
-		if err != nil {
-			return
-		}
-		log.Println("Id :", idLogin, "login: ", name, " ", Password)
-	}
-}
-*/
 
 func checkIfLoginExist(db *sql.DB, login Login) bool {
 	loginFree := true
@@ -168,4 +142,36 @@ func checkIfLoginExist(db *sql.DB, login Login) bool {
 		}
 	}
 	return loginFree
+}
+
+func CheckLogin(login Login) (string, bool) {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db) // Defer Closing the database
+
+	row, _ := db.Query("SELECT * FROM login ORDER BY Mail")
+	defer func(row *sql.Rows) {
+		err := row.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}(row)
+	for row.Next() { // Iterate and fetch the records from result cursor
+		var idLogin int
+		var mail string
+		var name string
+		var password string
+		_ = row.Scan(&idLogin, &mail, &name, &password)
+		if mail == login.Mail && name == login.Username {
+			return password, true
+		}
+	}
+	return "", false
 }
