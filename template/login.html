@@ -17,7 +17,7 @@
         <h1>Cinenum</h1>
         <h2>Account Registration</h2>
         <br>
-        <form action="/registerauth" method="POST" name ="register">
+        <form action="/loginauth" method="POST" name ="login">
             <br>
             <label for="username">mail:</label><br>
             <div class="form__field">
@@ -26,17 +26,17 @@
             </div><br>
             <label for="username">Username:</label><br>
             <div class="form__field">
-                <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
+                <input type="text" id="username" name="username" class="form__input" >
                 <span class="icon"></span>
             </div><br>
             <label for="password">Password:</label><br>
             <div class="form__field">
-                <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
+                <input type="password" id="password" name="password" class="form__input">
                 <span class="icon"></span>
             </div>
             <br>
-            <input class="form-submit-button" type="submit" value="Sign Up" onclick="ValidateEmail(document.register.mail)">
-            <input class="form-submit-button" type="submit" value="Sign In" onclick="ValidateEmail(document.register.mail)">
+            <input class="form-submit-button" type="submit" value="Log In" onclick="ValidateEmail(document.register.mail)">
+            <a href="/">turn back</a>
 
         </form>
         <p>{{if .}}

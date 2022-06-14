@@ -17,161 +17,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<header class="header">
-    <div class="navbar">
-        <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
-        <li><a href="/register">Login</a></li>
-        <li><a href="/Aboutus">Aboutus</a></li>
-        <li>
-            <div class="dropdown">
-                <button class="dropbtn" onclick="myFunction()">Categorie
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content" id="myDropdown">
-                    <a href="/action">Action</a>
-                    <a href="/biobic">Biobic</a>
-                    <a href="/comedy">Comedy</a>
-                    <a href="/fantasy">Fantasy</a>
-                    <a href="/horror">Horror</a>
-                    <a href="/romantic">Romantic</a>
-                    <a href="/SF">Sci-Fi</a>
-                    <a href="/thriller">Thriller</a>
-                    <a href="/western">Western</a>
-                </div>
-            </div>
-        </li>
-        <li><a href="/">Home</a></li>
-    </div>
-</header>
-
-<script>
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function (e) {
-        if (!e.target.matches('.dropbtn')) {
-            var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
-            }
-        }
-    }
-</script>
-
 <body>
-<section id="section1">
-    <div class="left">
-        <div class="section1content">
-            <h1>Cineroom</h1>
-            <h2>Let's Talk about Action</h2>
-            <br><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-        <div class="section1button">
-            <button onclick="window.history.go(-1)"><a > &#128214; Return Back </a></button>
-            <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
-        </div>
-        <div>
-            <div id="ex1" class="modal">
-                <form method="POST" action="/">
-                    <h1>Action</h1><br>
-                    <label><p>Chose your Subject : </p><input class="subject form-submit" type="text"
-                                                              name="Subject"/><br></label>
-                    <label><p>Enter your name : </p><input class="name form-submit" type="text"
-                                                           name="Name"/><br></label>
-                    <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text"
-                                                              name="aire texte" rows="4"
-                                                              cols="50"></textarea><br></label>
-                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
-                </form>
+    <section id="section1">
+        <div class="left">
+            <div class="section1content">
+                <h1>Cineroom</h1>
+                <h2>Let's Talk about Action</h2>
+                <br><br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
-        </div>
-    </div>
-    <div class="right">
-        <div class="imagefond1">
-            <img class="left_emoji" src="../static/action/left_img.png">
-            <img class="human_smiley" src="../static/action/perso.png">
-            <img class="right_emoji" src="../static/action/right_img.png">
-            <div class="octa gon"></div>
-        </div>
-    </div>
-</section>
-<br><br>
-<section class="post_conv">
-    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-    <!-- Subject -->
-    <div class="Post_User_box">
-        <div class="Post_USer">
-            <div class="Title_Post_User"><label><h1>Cailloux surcote ?</h1></button></label></div>
-            <div class="Post_User_Name_Reply_area">
-                <div class="Post_User_Name"><label><h3>Username_GeradBouchard</h3></label></div>
+            <div class="section1button">
+                <button><a> &#128214; See last subject </a></button>
+                <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
             </div>
-
-            <div class="Post_User_Commentary"><label><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium culpa dolorem, esse nam nobis odit voluptate voluptatem. Ad assumenda ea ex harum hic
-                maiores molestiae officia optio recusandae! Illo, iure?
-                <p></p><br></label>
-            </div>
-            <div class="Post_User_Comment_Like">
-                <div class="Post_User_NumComment"><label>
-                    <button><label for="post-2" class="read-more-trigger" >Comment</label>
-                        &#128172; 3</button>
-                </label></div>
-                <div class="Post_User_NumLike">
-                    <label style="float: right;">
-                        <button>&#128077; 4</button>
-                        <button>&#x1F44E; 3</button>
-                    </label>
+            <div>
+                <div id="ex1" class="modal">
+                    <form method="POST" action="/">
+                        <h1>Action</h1><br>
+                        <label><p>Chose your Subject :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
+                        <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
+                        <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
+                        <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
+                    </form>
                 </div>
             </div>
-            <!-- Comment -->
-            <div class="Comment_Other_List">
-                <div>
-                    <input type="checkbox" class="read-more-state" id="post-2"/>
-                    <ul class="read-more-wrap">
-                        <div class="read-more-target">
-                            <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
-                                <hr size="2">
-                                <div class="Post_User_NumLike">
-                                    <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
-                                <hr size="2">
-                                <div class="Post_User_NumLike">
-                                    <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-            <!-- Leaves commentary -->
-            <form method="POST" action="/">
-                <div class="Post_User_Reply"><label>
-                    <label><p>Add commentary : <br><br></p><textarea maxlength="500" minlength="2" class="post form-submit-textarea_commentary" id="text" name="aire texte"
-                                                                     rows="4" cols="50"></textarea><br></label>
-                    <input class="form-submit-button" style="float:right;" type="submit"/><input style="float:right;" class="form-submit-button" type="reset"/>
-                </label></div>
-            </form>
         </div>
-    </div>
-</section>
+        <div class="right">
+            <div class="imagefond1">
+                <img class="left_emoji" src="../static/action/left_img.png">
+                <img class="human_smiley" src="../static/action/perso.png">
+                <img class="right_emoji" src="../static/action/right_img.png">
+                <div class="octa gon"></div>
+            </div>
+        </div>
+    </section>
 </body>
 <footer>
 </footer>
