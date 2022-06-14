@@ -342,6 +342,11 @@ func main() {
 	http.HandleFunc("/thriller", Thriller)
 	http.HandleFunc("/western", Western)
 
+	http.HandleFunc("/getform", getFormHandler)
+	http.HandleFunc("/processget", processGetHandler)
+	http.HandleFunc("/postform", postFormHandler)
+	http.HandleFunc("/processpost", processPostHandler)
+
 	http.HandleFunc("/login", log)
 	http.HandleFunc("/loginauth", Signin)
 
@@ -503,4 +508,52 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 			tpl.ExecuteTemplate(w, "register.html", "we meet a problem, retry please")
 		}
 	}
+}
+
+/************************************************/
+
+type Sub struct {
+	TitleTextPost_User string
+	Username           string
+	TextPost_User      string
+	TextComment_User   string
+}
+
+func getFormHandler(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "getform.html", nil)
+}
+
+func processGetHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("processGetHandler running")
+
+	var s Sub
+	s.TitleTextPost_User = r.FormValue("titletexttost_User")
+	s.Username = r.FormValue("username")
+	s.TextPost_User = r.FormValue("textproject")
+	s.TextComment_User = r.FormValue("textcomment")
+
+	tpl.ExecuteTemplate(w, "action.html", s)
+}
+
+func postFormHandler(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "postform.html", nil)
+}
+
+func processPostHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("processPostHandler running")
+
+	var s Sub
+	s.TitleTextPost_User = r.FormValue("titletexttost_User")
+	s.Username = r.FormValue("username")
+	s.TextPost_User = r.FormValue("textproject")
+	s.TextComment_User = r.FormValue("textcomment")
+
+	var err error
+	if err != nil {
+		fmt.Printf("error parsing float64")
+		fmt.Println("error 3")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	tpl.ExecuteTemplate(w, "action.html", s)
 }
