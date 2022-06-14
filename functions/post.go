@@ -25,7 +25,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	}
 	t, _ := template.ParseFiles("template/index.html")
 	err := t.Execute(w, newpost)
-	if err != nil {
+	if !(err != nil) {
 		fmt.Print("error")
 	}
 }

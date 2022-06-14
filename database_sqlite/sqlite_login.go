@@ -9,18 +9,18 @@ import (
 )
 
 type Login struct {
-	id       int
-	mail     string
-	username string
-	password string
+	Id       int
+	Mail     string
+	Username string
+	Password string
 }
 
 type CommentLike struct {
-	idPost         int
-	idUser         int
-	commentContent string
-	like           int
-	dislike        int
+	IdPost         int
+	IdUser         int
+	CommentContent string
+	Like           int
+	Dislike        int
 }
 
 func DatabaseLogin(log Login) {
@@ -56,11 +56,11 @@ func GetLogin(db *sql.DB, log Login) Login {
 	}
 	for rows.Next() {
 		var tempLogin Login
-		err2 := rows.Scan(&tempLogin.id, &tempLogin.mail, &tempLogin.username, &tempLogin.password)
+		err2 := rows.Scan(&tempLogin.Id, &tempLogin.Mail, &tempLogin.Username, &tempLogin.Password)
 		if err2 != nil {
 			fmt.Println(err2)
 		}
-		if tempLogin.mail == log.mail && tempLogin.password == log.password {
+		if tempLogin.Mail == log.Mail && tempLogin.Password == log.Password {
 			return tempLogin
 		}
 	}
@@ -93,9 +93,9 @@ func OsCreateFile() {
 func CreateTableLogin(db *sql.DB) {
 	createLoginTableSQL := `CREATE TABLE IF NOT EXISTS login(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
-    	"mail" TEXT,
+    	"Mail" TEXT,
 		"name" TEXT,
-		"password" TEXT		
+		"Password" TEXT		
 	  );` // SQL Statement for Create Table
 
 	log.Println("Create admin acess...")
@@ -110,14 +110,14 @@ func CreateTableLogin(db *sql.DB) {
 // AddLogin We are passing db reference connection from main to our method with other parameters
 func AddLogin(db *sql.DB, login Login) {
 	log.Println("Inserting login record ...")
-	insertLoginSQL := `INSERT INTO login( mail, name, password) VALUES (?,?, ?)`
+	insertLoginSQL := `INSERT INTO login( Mail, name, Password) VALUES (?,?, ?)`
 	statement, err := db.Prepare(insertLoginSQL) // Prepare statement.
 	// This is good to avoid SQL injections
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 
-	_, err = statement.Exec(login.mail, login.username, login.password)
+	_, err = statement.Exec(login.Mail, login.Username, login.Password)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -125,7 +125,7 @@ func AddLogin(db *sql.DB, login Login) {
 
 /*
 func DisplayLogin(db *sql.DB) {
-	row, err := db.Query("SELECT * FROM login ORDER BY mail")
+	row, err := db.Query("SELECT * FROM login ORDER BY Mail")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -138,19 +138,19 @@ func DisplayLogin(db *sql.DB) {
 	for row.Next() { // Iterate and fetch the records from result cursor
 		var idLogin int
 		var name string
-		var password string
-		err := row.Scan(&idLogin, &name, &password)
+		var Password string
+		err := row.Scan(&idLogin, &name, &Password)
 		if err != nil {
 			return
 		}
-		log.Println("id :", idLogin, "login: ", name, " ", password)
+		log.Println("Id :", idLogin, "login: ", name, " ", Password)
 	}
 }
 */
 
 func checkIfLoginExist(db *sql.DB, login Login) bool {
 	loginFree := true
-	row, _ := db.Query("SELECT * FROM login ORDER BY mail")
+	row, _ := db.Query("SELECT * FROM login ORDER BY Mail")
 	defer func(row *sql.Rows) {
 		err := row.Close()
 		if err != nil {
@@ -163,7 +163,7 @@ func checkIfLoginExist(db *sql.DB, login Login) bool {
 		var name string
 		var password string
 		_ = row.Scan(&idLogin, &mail, &name, &password)
-		if mail == login.mail {
+		if mail == login.Mail {
 			loginFree = false
 		}
 	}
