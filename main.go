@@ -77,6 +77,11 @@ func Error(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, r)
 }
 
+func Aboutus(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/aboutus.html")
+	t.Execute(w, r)
+}
+
 func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/1", functions.Login)
@@ -90,6 +95,7 @@ func main() {
 	http.HandleFunc("/SF", SF)
 	http.HandleFunc("/thriller", Thriller)
 	http.HandleFunc("/western", Western)
+	http.HandleFunc("/aboutus", Aboutus)
 
 	/*Page note done*/
 

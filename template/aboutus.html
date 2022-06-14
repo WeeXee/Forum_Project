@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/biobic.css" />
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="../static/button.js"></script>
+    <script src="../static/popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<header class="header">
+    <div class="navbar">
+        <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
+        <li><a href="/register">Login</a></li>
+        <li><a href="/Aboutus">Aboutus</a></li>
+        <li>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">Categorie
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="/action">Action</a>
+                    <a href="/biobic">Biobic</a>
+                    <a href="/comedy">Comedy</a>
+                    <a href="/fantasy">Fantasy</a>
+                    <a href="/horror">Horror</a>
+                    <a href="/romantic">Romantic</a>
+                    <a href="/SF">Sci-Fi</a>
+                    <a href="/thriller">Thriller</a>
+                    <a href="/western">Western</a>
+                </div>
+            </div>
+        </li>
+        <li><a href="/">Home</a></li>
+    </div>
+</header>
+
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+<body>
+    <section id="section1">
+        <div class="left">
+            <div class="section1content">
+                <h1>Cineroom</h1>
+                <h2>Let's Talk About Us</h2>
+                <br><br>
+                <p>Here you can find all the informations about our project and us. This forum is dedicated to the exchange of opinions between our users. </p>
+                <p>By going to each of the sections they will be able to exchange on various themes of the cinema. Our goal is to create a space of thoughts in the benevolence and the freedom of expression. If you want to ask us something you can write us
+                    a message !</p>
+            </div>
+            <div class="section1button">
+                <button><a href="#ex1" rel="modal:open"> &#9997; Send us a message </a></button>
+            </div>
+            <div>
+                <div id="ex1" class="modal">
+                    <form method="POST" action="/">
+                        <h1>Contact Us</h1><br>
+                        <label><p>Title :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
+                        <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
+                        <label><p>Enter your message : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
+                        <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="imagefond1">
+                <img class="left_emoji" src="../static/index/Untitled3.png">
+                <img class="human_smiley" src="../static/index/perso8.png">
+                <img class="right_emoji" src="../static/index/Untitled18.png">
+                <div class="octa gon"></div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<br>
+<br>
+<br>
+<br>
+
+<footer class="foot">
+    <!-- Section: Social media -->
+    <section class="social">
+        <!-- Facebook -->
+        <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/" role="button"><i class="fa fa-facebook"></i
+            ></a>
+        <!-- Twitter -->
+        <a target="_blank" href="https://twitter.com/ynovtoulouse" role="button"><i class="fa fa-twitter"></i
+            ></a>
+        <!-- Google -->
+        <a target="_blank" href="https://www.ynov.com/campus/toulouse/" role="button"><i class="fa fa-google"></i
+            ></a>
+        <!-- Instagram -->
+        <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr" role="button"><i class="fa fa-instagram"></i
+            ></a>
+        <!-- Linkedin -->
+        <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/" role="button"><i class="fa fa-linkedin"></i
+            ></a>
+        <!-- Github -->
+        <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum" role="button"><i class="fa fa-github"></i
+            ></a>
+    </section>
+    <!-- Section: Social media -->
+
+
+
+    <!-- Section: Form -->
+    <section class="">
+        <form action="">
+            <!--Grid column-->
+            <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="form5Example2" class="form-control" />
+                    <label class="form-label" for="form5Example2">Email address</label>
+                </div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-auto">
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary mb-4">
+                Subscribe
+              </button>
+            </div>
+            <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </form>
+    </section>
+    <!-- Section: Form -->
+
+
+    <!-- Section: Text -->
+    <section class="mb-4">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam sequi voluptate quas.
+        </p>
+    </section>
+    <!-- Section: Text -->
+
+    </div>
+    <!-- Grid container -->
+
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.8136479684104!2d1.4296971512812366!3d43.610421563111224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebdbb42d83293%3A0x6e448c24640106bd!2sToulouse%20Ynov%20Campus!5e0!3m2!1sfr!2sfr!4v1655216058651!5m2!1sfr!2sfr"
+        width="2000" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://www.ynov.com/campus/toulouse/">Ynov</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</html>
