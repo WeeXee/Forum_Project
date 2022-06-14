@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/dgrijalva/jwt-go"
 	"unicode"
 
 	"Forum/database_sqlite"
@@ -34,6 +35,27 @@ type Sub struct {
 	Username           string
 	TextPost_User      string
 	TextComment_User   string
+}
+
+var jwtKey = []byte("my_secret_key")
+
+var users = map[string]string{
+	"user1": "password1",
+	"user2": "password2",
+}
+
+// Create a struct to read the username and password from the request body
+type Credentials struct {
+	Mail     string `json:"mail"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+// Create a struct that will be encoded to a JWT.
+// We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
+type Claims struct {
+	Username string `json:"username"`
+	jwt.StandardClaims
 }
 
 func cookies(c *http.Cookie, login logIndex) logIndex {
@@ -111,13 +133,6 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 	if err1 != nil {
 		fmt.Print("error")
 	}
-}
-
-type Sub struct {
-	TitleTextPost_User string
-	Username           string
-	TextPost_User      string
-	TextComment_User   string
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -380,34 +395,10 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	http.HandleFunc("/register", registerHandler)
-	http.HandleFunc("/registerauth", registerAuthHandler)
+
 	http.ListenAndServe("localhost:8080", nil)
 
 }
-
-var jwtKey = []byte("my_secret_key")
-
-var users = map[string]string{
-	"user1": "password1",
-	"user2": "password2",
-}
-
-// Create a struct to read the username and password from the request body
-type Credentials struct {
-	Mail     string `json:"mail"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-// Create a struct that will be encoded to a JWT.
-// We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
-type Claims struct {
-	Username string `json:"username"`
-	jwt.StandardClaims
-}
-
-//*vanessa partie*//
 
 var tpl *template.Template
 
@@ -591,7 +582,7 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	if err != nil {
-		log.Fatal("error parsing float64")
+		fmt.Printf("error parsing float64")
 	}
 	tpl.ExecuteTemplate(w, "action.html", s)
 }
