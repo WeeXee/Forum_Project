@@ -583,6 +583,9 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 	var err error
 	if err != nil {
 		fmt.Printf("error parsing float64")
+		fmt.Println("error 3")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	tpl.ExecuteTemplate(w, "action.html", s)
 }
