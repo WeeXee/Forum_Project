@@ -10,8 +10,8 @@
 
 body {
     --color1: #F5F4F1;
-    --color2: #DB8380;
-    --color3: #F4726D;
+    --color2: #97B3AB;
+    --color3: #56766D;
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
@@ -197,16 +197,16 @@ p, a, button {
     animation-iteration-count: infinite;
 }
 
-@keyframes float {
-    0%   {margin-top: 2vmax;}
-    50%  {margin-top: 3vmax;}
-    100% {margin-top: 2vmax;}
+@keyframes float_right {
+    0%   {margin-top: 1vmax;}
+    50%  {margin-top: 2vmax;}
+    100% {margin-top: 1vmax;}
 }
 
-@keyframes float2 {
-    0%   {margin-top: 10vmax;}
-    50%  {margin-top: 9vmax;}
-    100% {margin-top: 10vmax;}
+@keyframes float_left {
+    0%   {margin-top: 15vmax;}
+    50%  {margin-top: 14vmax;}
+    100% {margin-top: 15vmax;}
 }
 
 .gon {

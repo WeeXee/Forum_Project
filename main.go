@@ -14,8 +14,6 @@ import (
 	"net/http"
 )
 
-/*TEST*/
-
 type Sub struct {
 	TitleTextPost_User string
 	Username           string
@@ -24,13 +22,10 @@ type Sub struct {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	/*database_sqlite.DatabaseLogin()
-	database_sqlite.DatabasePost()
-	database_sqlite.DatabaseComment()
-	arrayComment := database_sqlite.GetComment()*/
 	t, _ := template.ParseFiles("template/index.html")
 	t.Execute(w, r)
 }
+
 func Action(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/action.html")
 	t.Execute(w, r)
@@ -194,21 +189,6 @@ func processGetHandler(w http.ResponseWriter, r *http.Request) {
 	s.TextPost_User = r.FormValue("textproject")
 	s.TextComment_User = r.FormValue("textcomment")
 
-	/*
-		var ss Commentary
-		ss.Username = r.FormValue("username")
-		ss.TextComment_User = r.FormValue("textcomment") */
-
-	// cannot use r.FormValue("numberName") (type string) as type int in assignment
-	// s.Num = r.FormValue("numberName")
-
-	/*
-		// invalid syntax cannot parse float64
-		s.Num, err = strconv.Atoi(r.FormValue("myFltName"))
-		fmt.Println("error:", err)
-	*/
-	// func ParseFloat(s string, bitSize int) (float64, error)
-
 	tpl.ExecuteTemplate(w, "action.html", s)
 }
 
@@ -225,19 +205,7 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 	s.TextPost_User = r.FormValue("textproject")
 	s.TextComment_User = r.FormValue("textcomment")
 
-	/*
-		var ss Commentary
-		ss.Username = r.FormValue("username")
-		ss.TextComment_User = r.FormValue("textcomment")*/
-
-	// cannot use r.FormValue("numberName") (type string) as type int in assignment
-	// s.Num = r.FormValue("numberName")
-	// ASCII to int
-	// func Atoi(s string) (int, error)
-
 	var err error
-	// func ParseFloat(s string, bitSize int) (float64, error)
-	//s.MyFloat, err = strconv.ParseFloat(r.FormValue("myFltName"), 64)
 	if err != nil {
 		log.Fatal("error parsing float64")
 	}
