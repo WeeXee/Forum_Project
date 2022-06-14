@@ -15,7 +15,6 @@ body {
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
-
     min-height: 80vh;
     background-image: url("/static/action/index.png");
     background-size: cover;
@@ -180,9 +179,7 @@ p, a, button {
 .left_emoji{
     margin-left: 10vmax;
     margin-top: 10vmax;
-
     width: 14vmax;
-
     z-index: 3;
     animation-name: float2;
     animation-duration: 3s;
