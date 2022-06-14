@@ -19,6 +19,7 @@ body {
     background-image: url("/static/biobic/index.png");
     background-size: cover;
     background-width: 100%;
+
     background-repeat: no-repeat;
 }
 
