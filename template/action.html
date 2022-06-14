@@ -76,6 +76,18 @@
         </div>
         <div>
             <div id="ex1" class="modal">
+                <form method="GET" action="/processget">
+                    <h1>Action</h1><br>
+                    <label><p>Chose your Subject : </p>
+                        <input class="subject form-submit" type="text" id="user_Post1" name="titletexttost_User"/><br></label>
+                    <label><p>Enter your name : </p>
+                        <input class="name form-submit" type="text" id="user_Post2" name="username" name="Name"/><br></label>
+                    <label><p>Enter your post : </p>
+                        <textarea type="text" style="width: 50%;" id="user_Post3" class="post form-submit-textarea" id="text" name="textproject" rows="4" cols="50"></textarea><br></label>
+                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
+                </form>
+
+                <!--
                 <form method="POST" action="/">
                     <h1>Action</h1><br>
                     <label><p>Chose your Subject : </p><input class="subject form-submit" type="text"
@@ -86,7 +98,7 @@
                                                               name="aire texte" rows="4"
                                                               cols="50"></textarea><br></label>
                     <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>
@@ -105,15 +117,11 @@
     <!-- Subject -->
     <div class="Post_User_box">
         <div class="Post_USer">
-            <div class="Title_Post_User"><label><h1>Cailloux surcote ?</h1></button></label></div>
+            <div class="Title_Post_User"><label><h1>{{.TitleTextPost_User}}</h1></button></label></div>
             <div class="Post_User_Name_Reply_area">
-                <div class="Post_User_Name"><label><h3>Username_GeradBouchard</h3></label></div>
+                <div class="Post_User_Name"><label><h3>{{.Username}}</h3></label></div>
             </div>
-
-            <div class="Post_User_Commentary"><label><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium culpa dolorem, esse nam nobis odit voluptate voluptatem. Ad assumenda ea ex harum hic
-                maiores molestiae officia optio recusandae! Illo, iure?
-                <p></p><br></label>
+            <div class="Post_User_Commentary"><label><p>{{.TextPost_User}}</p><br></label>
             </div>
             <div class="Post_User_Comment_Like">
                 <div class="Post_User_NumComment"><label>
@@ -134,9 +142,8 @@
                     <ul class="read-more-wrap">
                         <div class="read-more-target">
                             <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
+                                <label><h3>{{.Username}}</h3></label>
+                                <p>{{.TextComment_User}}</p>
                                 <hr size="2">
                                 <div class="Post_User_NumLike">
                                     <label style="float: right;">
@@ -146,9 +153,8 @@
                                 </div>
                             </div>
                             <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
+                                <label><h3>{{.Username}}</h3></label>
+                                <p>{{.TextComment_User}}</p>
                                 <hr size="2">
                                 <div class="Post_User_NumLike">
                                     <label style="float: right;">
@@ -162,12 +168,15 @@
                 </div>
             </div>
             <!-- Leaves commentary -->
-            <form method="POST" action="/">
+
+            <form method="GET" action="/processget">
                 <div class="Post_User_Reply"><label>
-                    <label><p>Add commentary : <br><br></p><textarea maxlength="500" minlength="2" class="post form-submit-textarea_commentary" id="text" name="aire texte"
+                    <label for="textcomment"><p>Add commentary : <br><br></p><textarea maxlength="500" minlength="2" class="post form-submit-textarea_commentary" type="text" id="textcomment" name="aire texte textcomment"
                                                                      rows="4" cols="50"></textarea><br></label>
-                    <input class="form-submit-button" style="float:right;" type="submit"/><input style="float:right;" class="form-submit-button" type="reset"/>
-                </label></div>
+                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
+                </label>
+                </div>
+
             </form>
         </div>
     </div>

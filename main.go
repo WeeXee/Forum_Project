@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"unicode"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,6 +13,15 @@ import (
 	"html/template"
 	"net/http"
 )
+
+/*TEST*/
+
+type Sub struct {
+	TitleTextPost_User string
+	Username           string
+	TextPost_User      string
+	TextComment_User   string
+}
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	/*database_sqlite.DatabaseLogin()
@@ -86,6 +96,14 @@ func main() {
 	http.HandleFunc("/thriller", Thriller)
 	http.HandleFunc("/western", Western)
 
+	/*form*/
+	/***************************************************/
+
+	http.HandleFunc("/getform", getFormHandler)
+	http.HandleFunc("/processget", processGetHandler)
+	http.HandleFunc("/postform", postFormHandler)
+	http.HandleFunc("/processpost", processPostHandler)
+
 	/*Page note done*/
 	http.HandleFunc("/drama", Drama)
 	fmt.Printf("Starting server got testing \n")
@@ -102,6 +120,7 @@ func main() {
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/registerauth", registerAuthHandler)
 	http.ListenAndServe("localhost:8080", nil)
+
 }
 
 //*vanessa partie*//
@@ -158,4 +177,69 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
+}
+
+/******************formulaire**********************/
+
+func getFormHandler(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "getform.html", nil)
+}
+
+func processGetHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("processGetHandler running")
+
+	var s Sub
+	s.TitleTextPost_User = r.FormValue("titletexttost_User")
+	s.Username = r.FormValue("username")
+	s.TextPost_User = r.FormValue("textproject")
+	s.TextComment_User = r.FormValue("textcomment")
+
+	/*
+		var ss Commentary
+		ss.Username = r.FormValue("username")
+		ss.TextComment_User = r.FormValue("textcomment") */
+
+	// cannot use r.FormValue("numberName") (type string) as type int in assignment
+	// s.Num = r.FormValue("numberName")
+
+	/*
+		// invalid syntax cannot parse float64
+		s.Num, err = strconv.Atoi(r.FormValue("myFltName"))
+		fmt.Println("error:", err)
+	*/
+	// func ParseFloat(s string, bitSize int) (float64, error)
+
+	tpl.ExecuteTemplate(w, "action.html", s)
+}
+
+func postFormHandler(w http.ResponseWriter, r *http.Request) {
+	tpl.ExecuteTemplate(w, "postform.html", nil)
+}
+
+func processPostHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("processPostHandler running")
+
+	var s Sub
+	s.TitleTextPost_User = r.FormValue("titletexttost_User")
+	s.Username = r.FormValue("username")
+	s.TextPost_User = r.FormValue("textproject")
+	s.TextComment_User = r.FormValue("textcomment")
+
+	/*
+		var ss Commentary
+		ss.Username = r.FormValue("username")
+		ss.TextComment_User = r.FormValue("textcomment")*/
+
+	// cannot use r.FormValue("numberName") (type string) as type int in assignment
+	// s.Num = r.FormValue("numberName")
+	// ASCII to int
+	// func Atoi(s string) (int, error)
+
+	var err error
+	// func ParseFloat(s string, bitSize int) (float64, error)
+	//s.MyFloat, err = strconv.ParseFloat(r.FormValue("myFltName"), 64)
+	if err != nil {
+		log.Fatal("error parsing float64")
+	}
+	tpl.ExecuteTemplate(w, "action.html", s)
 }
