@@ -7,14 +7,11 @@ import (
 	"time"
 	"unicode"
 
-	_ "github.com/go-sql-driver/mysql"
-
 	_ "github.com/mattn/go-sqlite3"
 
-	"Forum/functions"
+	_ "Forum/functions"
 	"fmt"
 	_ "github.com/dgrijalva/jwt-go"
-	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"net/http"
 )
@@ -114,15 +111,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	newpost := StructPost{}
-	newpost.title = r.FormValue("Title")
-	newpost.post = r.FormValue("Containt")
-	switch {
-	case newpost == StructPost{}:
-		break
-	default:
-		fmt.Println(newpost)
-	}
 	if login.Username != "vous" {
 		NavBarLogged(w, r)
 	} else {
@@ -399,10 +387,12 @@ type Claims struct {
 var tpl *template.Template
 
 func log(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	tpl.ExecuteTemplate(w, "login.html", nil)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	fmt.Println("*****loginHandler running*****")
 	var creds database_sqlite.Login
 
@@ -451,12 +441,14 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 // registerHandler serves form for registring new users
 func registerHandler(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	fmt.Println("*****registerHandler running*****")
 	tpl.ExecuteTemplate(w, "register.html", nil)
 }
 
 // creates new user
 func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	fmt.Println("*****registerAuthHandler running*****")
 	r.ParseForm()
 
@@ -503,6 +495,37 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		added := database_sqlite.DatabaseLogin(user)
 		if added {
+			var creds Credentials
+			creds.Mail = r.FormValue("mail")
+			creds.Password = r.FormValue("password")
+			creds.Username = r.FormValue("username")
+
+			expirationTime := time.Now().Add(60 * time.Minute)
+			claims := &Claims{
+				Username: creds.Username,
+				StandardClaims: jwt.StandardClaims{
+					ExpiresAt: expirationTime.Unix(),
+				},
+			}
+
+			token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+			// Create the JWT string
+			tokenString, err := token.SignedString(jwtKey)
+			if err != nil {
+				fmt.Println("error 3")
+				// If there is an error in creating the JWT return an internal server error
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			// Finally, we set the client cookie for "token" as the JWT we just generated
+			// we also set an expiry time which is the same as the token itself
+			http.SetCookie(w, &http.Cookie{
+				Name:    "token",
+				Value:   tokenString,
+				Expires: expirationTime,
+			})
+
 			tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
 		} else {
 			tpl.ExecuteTemplate(w, "register.html", "we meet a problem, retry please")
