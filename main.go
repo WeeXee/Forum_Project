@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/dgrijalva/jwt-go"
 	"unicode"
 
 	"Forum/database_sqlite"
@@ -29,12 +30,13 @@ type logIndex struct {
 	Username string
 }
 
+/*
 type Sub struct {
 	TitleTextPost_User string
 	Username           string
 	TextPost_User      string
 	TextComment_User   string
-}
+}*/
 
 func cookies(c *http.Cookie, login logIndex) logIndex {
 	if c != nil {
@@ -375,14 +377,15 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
 
+	http.HandleFunc("/register", registerHandler)
+	http.HandleFunc("/registerauth", registerAuthHandler)
+	http.ListenAndServe("localhost:8080", nil)
+
 	tpl, _ = template.ParseGlob("template/*.html")
 	var err error
 	if err != nil {
 		panic(err.Error())
 	}
-	http.HandleFunc("/register", registerHandler)
-	http.HandleFunc("/registerauth", registerAuthHandler)
-	http.ListenAndServe("localhost:8080", nil)
 
 }
 
@@ -591,7 +594,9 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	if err != nil {
-		log.Fatal("error parsing float64")
+		fmt.Println("error 3")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	tpl.ExecuteTemplate(w, "action.html", s)
 }
