@@ -399,12 +399,11 @@ type Claims struct {
 var tpl *template.Template
 
 func log(w http.ResponseWriter, r *http.Request) {
-	NavBar(w, r)
 	tpl.ExecuteTemplate(w, "login.html", nil)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	NavBar(w, r)
+
 	fmt.Println("*****loginHandler running*****")
 	var creds database_sqlite.Login
 
@@ -453,14 +452,14 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 // registerHandler serves form for registring new users
 func registerHandler(w http.ResponseWriter, r *http.Request) {
-	NavBar(w, r)
+
 	fmt.Println("*****registerHandler running*****")
 	tpl.ExecuteTemplate(w, "register.html", nil)
 }
 
 // creates new user
 func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
-	NavBar(w, r)
+
 	fmt.Println("*****registerAuthHandler running*****")
 	r.ParseForm()
 
