@@ -355,12 +355,12 @@ func main() {
 
 	/*formulaire Vanessa*/
 	/***************************************************/
-
-	http.HandleFunc("/getform", getFormHandler)
-	http.HandleFunc("/processget", processGetHandler)
-	http.HandleFunc("/postform", postFormHandler)
-	http.HandleFunc("/processpost", processPostHandler)
-
+	/*
+		http.HandleFunc("/getform", getFormHandler)
+		http.HandleFunc("/processget", processGetHandler)
+		http.HandleFunc("/postform", postFormHandler)
+		http.HandleFunc("/processpost", processPostHandler)
+	*/
 	http.HandleFunc("/login", log)
 	http.HandleFunc("/loginauth", Signin)
 
@@ -377,8 +377,10 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/static/css/", http.StripPrefix("/static/css/", http.FileServer(http.Dir("./static/css"))))
 
-	http.HandleFunc("/register", registerHandler)
-	http.HandleFunc("/registerauth", registerAuthHandler)
+	/*
+		http.HandleFunc("/register", registerHandler)
+		http.HandleFunc("/registerauth", registerAuthHandler)*/
+
 	http.ListenAndServe("localhost:8080", nil)
 
 	tpl, _ = template.ParseGlob("template/*.html")
@@ -562,7 +564,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 /******************formulaire**********************/
-
+/*
 func getFormHandler(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "getform.html", nil)
 }
@@ -600,3 +602,4 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl.ExecuteTemplate(w, "action.html", s)
 }
+*/
