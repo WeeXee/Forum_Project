@@ -73,6 +73,8 @@ p {
 
 /*Right*/
 .right4{
+    position: relative;
+    margin-bottom: 0;
     width: 60%;
     background-image: url("/static/Capture.png");
     background-repeat: no-repeat;
@@ -80,7 +82,6 @@ p {
     background-position-y: -55px;
     border-radius: 0 25px 25px 0;
     border-left: 1px solid var(--color1);
-
 }
 .right_forhover4 p{
     color: var(--color3);

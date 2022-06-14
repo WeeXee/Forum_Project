@@ -15,11 +15,11 @@ body {
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
-
     min-height: 80vh;
     background-image: url("/static/action/index.png");
     background-size: cover;
     background-width: 100%;
+
     background-repeat: no-repeat;
 }
 
@@ -180,9 +180,7 @@ p, a, button {
 .left_emoji{
     margin-left: 10vmax;
     margin-top: 10vmax;
-
     width: 14vmax;
-
     z-index: 3;
     animation-name: float2;
     animation-duration: 3s;
@@ -235,4 +233,164 @@ p, a, button {
     );
 }
 
+/*post commentary*/
+
+.post_conv {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "Post_USer";
+}
+
+.Post_USer {
+    display: grid;
+    width: 60vmax;
+    margin-left: 8%;
+    padding: 2% 5% 0 2%;
+    grid-template-columns: 100%;
+    grid-template-rows: 0.5fr 10vmin 1fr 5vmin;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "Title_Post_User"
+    "Post_User_Name_Reply_area"
+    "Post_User_Commentary"
+    "Post_User_Comment_Like";
+    grid-area: Post_USer;
+    border-radius: 25px;
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+}
+
+.Title_Post_User {
+    grid-area: Title_Post_User;
+}
+.Title_Post_User h1{
+    font-size: 2.5vmax;
+}
+
+.Post_User_Name_Reply_area {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "Post_User_Name";
+    grid-area: Post_User_Name_Reply_area;
+}
+
+.Post_User_Name { grid-area: Post_User_Name; }
+
+.Post_User_Reply button{
+    padding: 1% 5%;
+    color: var(--color1);
+    font-weight: bolder;
+    background-color: var(--color2);
+    border-radius: 50px;
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color3);
+}
+
+.Post_User_Commentary { grid-area: Post_User_Commentary; }
+
+.Post_User_Comment_Like {  display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "Post_User_NumComment Post_User_NumLike";
+    grid-area: Post_User_Comment_Like;
+
+}
+
+.Post_User_NumComment { grid-area: Post_User_NumComment;
+}
+
+.Post_User_NumComment button{
+    padding: 1% 5%;
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.Post_User_NumLike {
+    grid-area: Post_User_NumLike;
+    cursor: pointer;
+
+
+}
+
+.Post_User_NumLike button{
+    text-decoration: none;
+    border:none;
+    background-color: transparent;
+
+}
+
+.Post_User_NumComment button:hover, .form-submit-button:hover {
+    background-color: var(--color2);
+
+}
+
+/******Reveal comment*******/
+.Comment_Other_List p{
+    padding: 0 0 2% 0;
+    font-size: smaller;
+
+}
+
+
+.read-more-state {
+    display: none;
+}
+
+.read-more-target {
+    opacity: 0;
+    max-height: 0;
+    font-size: 0;
+    transition: .35s ease-in-out;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+    opacity: 1;
+    font-size: inherit;
+    max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+    content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+    content: 'Show less';
+}
+
+
+.read-more-trigger {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 .5em;
+    font-size: .9em;
+    line-height: 2;
+    border-radius: .25em;
+
+
+}
+/*take out the resize*/
+
+.Post_User_box{
+    margin-bottom: 4%;
+}
 
