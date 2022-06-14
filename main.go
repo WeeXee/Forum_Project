@@ -1,18 +1,117 @@
 package main
 
 import (
-	"log"
 	"unicode"
 
+	"Forum/database_sqlite"
 	_ "github.com/go-sql-driver/mysql"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 
-	"Forum/functions"
+	_ "Forum/functions"
 	"fmt"
+
+	_ "github.com/dgrijalva/jwt-go"
+
 	"html/template"
 	"net/http"
 )
+
+type StructPost struct {
+	MovieGender int
+	IDuser      int
+	post        string
+	title       string
+}
+
+type logIndex struct {
+	Username string
+}
+
+type Sub struct {
+	TitleTextPost_User string
+	Username           string
+	TextPost_User      string
+	TextComment_User   string
+}
+
+func cookies(c *http.Cookie, login logIndex) logIndex {
+	if c != nil {
+		tknStr := c.Value
+
+		claims := &Claims{}
+
+		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				fmt.Println(http.StatusUnauthorized)
+				return login
+			}
+			fmt.Println(http.StatusBadRequest)
+			return login
+		}
+		if !tkn.Valid {
+			fmt.Println(http.StatusUnauthorized)
+			return login
+		}
+		login.Username = claims.Username
+	}
+	return login
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &http.Cookie{
+		Name:     "token",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+	})
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+	NavBar(w, r)
+
+	t, _ := template.ParseFiles("template/index.html")
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
+}
+
+func NavBarLogged(w http.ResponseWriter, r *http.Request) {
+	logout := r.FormValue("logout")
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	if logout == "1" {
+		fmt.Println("logout = 1")
+		Logout(w, r)
+		NavBar(w, r)
+	} else {
+		login = cookies(c, login)
+		t, _ := template.ParseFiles("template/navbar_logged.html")
+		err1 := t.Execute(w, nil)
+		if err1 != nil {
+			fmt.Print("error")
+		}
+	}
+
+}
+
+func NavBar(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("template/navbar.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("error")
+	}
+}
 
 type Sub struct {
 	TitleTextPost_User string
@@ -22,65 +121,226 @@ type Sub struct {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/index.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Action(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/action.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Biobic(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("template/biobic.html")
-	t.Execute(w, r)
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
+	t, _ := template.ParseFiles("template/biopic.html")
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/comedy.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Fantasy(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/fantasy.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Horror(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
 	t, _ := template.ParseFiles("template/horror.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 /**not done yet**/
 
 func Drama(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/drama.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Romantic(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/romantic.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func SF(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
 	t, _ := template.ParseFiles("template/SF.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 func Thriller(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/thriller.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func Western(w http.ResponseWriter, r *http.Request) {
+	login := logIndex{
+		Username: "vous",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "vous" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
 	t, _ := template.ParseFiles("template/western.html")
-	t.Execute(w, r)
+	err1 := t.Execute(w, login)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func main() {
-
-	http.HandleFunc("/", functions.Post)
-	http.HandleFunc("/1", functions.Login)
+	http.HandleFunc("/", Index)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
 	http.HandleFunc("/biobic", Biobic)
@@ -91,13 +351,21 @@ func main() {
 	http.HandleFunc("/thriller", Thriller)
 	http.HandleFunc("/western", Western)
 
-	/*form*/
+	/*formulaire Vanessa*/
 	/***************************************************/
 
 	http.HandleFunc("/getform", getFormHandler)
 	http.HandleFunc("/processget", processGetHandler)
 	http.HandleFunc("/postform", postFormHandler)
 	http.HandleFunc("/processpost", processPostHandler)
+
+	http.HandleFunc("/login", log)
+	http.HandleFunc("/loginauth", Signin)
+
+	http.HandleFunc("/logout", Logout)
+
+	http.HandleFunc("/register", registerHandler)
+	http.HandleFunc("/registerauth", registerAuthHandler)
 
 	/*Page note done*/
 	http.HandleFunc("/drama", Drama)
@@ -118,38 +386,117 @@ func main() {
 
 }
 
+var jwtKey = []byte("my_secret_key")
+
+var users = map[string]string{
+	"user1": "password1",
+	"user2": "password2",
+}
+
+// Create a struct to read the username and password from the request body
+type Credentials struct {
+	Mail     string `json:"mail"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+// Create a struct that will be encoded to a JWT.
+// We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
+type Claims struct {
+	Username string `json:"username"`
+	jwt.StandardClaims
+}
+
 //*vanessa partie*//
 
 var tpl *template.Template
 
+func log(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
+	tpl.ExecuteTemplate(w, "login.html", nil)
+}
+
+func Signin(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
+	fmt.Println("*****loginHandler running*****")
+	var creds database_sqlite.Login
+
+	creds.Mail = r.FormValue("mail")
+	creds.Password = r.FormValue("password")
+	creds.Username = r.FormValue("username")
+
+	database_sqlite.DatabaseLogin(creds)
+	expectedPassword, ok := database_sqlite.CheckLogin(creds)
+
+	if !ok || expectedPassword != creds.Password {
+		fmt.Println("error 2")
+		w.WriteHeader(http.StatusUnauthorized)
+	} else {
+		fmt.Println("succeed")
+	}
+
+	expirationTime := time.Now().Add(60 * time.Minute)
+	claims := &Claims{
+		Username: creds.Username,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	// Create the JWT string
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		fmt.Println("error 3")
+		// If there is an error in creating the JWT return an internal server error
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// Finally, we set the client cookie for "token" as the JWT we just generated
+	// we also set an expiry time which is the same as the token itself
+	http.SetCookie(w, &http.Cookie{
+		Name:    "token",
+		Value:   tokenString,
+		Expires: expirationTime,
+	})
+
+	tpl.ExecuteTemplate(w, "login.html", nil)
+}
+
 // registerHandler serves form for registring new users
 func registerHandler(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	fmt.Println("*****registerHandler running*****")
 	tpl.ExecuteTemplate(w, "register.html", nil)
 }
 
 // creates new user
 func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
+	NavBar(w, r)
 	fmt.Println("*****registerAuthHandler running*****")
 	r.ParseForm()
+
+	var user database_sqlite.Login
 	//Create Username
-	username := r.FormValue("username")
+	user.Mail = r.FormValue("mail")
+	user.Username = r.FormValue("username")
 	var nameAlphaNumeric = true
-	for _, char := range username {
+	for _, char := range user.Username {
 		if unicode.IsLetter(char) == false && unicode.IsNumber(char) == false {
 			nameAlphaNumeric = false
 		}
 	}
 	var nameLength bool
-	if 4 <= len(username) && len(username) <= 20 {
+	if 4 <= len(user.Username) && len(user.Username) <= 20 {
 		nameLength = true
 	}
-	// Create password
-	password := r.FormValue("password")
-	fmt.Println("password:", password, "\npswdLength:", len(password))
+	// Create user.Password
+	user.Password = r.FormValue("password")
+	fmt.Println("user.Password:", user.Password, "\npswdLength:", len(user.Password))
 	var pswdLowercase, pswdUppercase, pswdNumber, pswdSpecial, pswdLength, pswdNoSpaces bool
 	pswdNoSpaces = true
-	for _, char := range password {
+	for _, char := range user.Password {
 		switch {
 		case unicode.IsLower(char):
 			pswdLowercase = true
@@ -163,15 +510,52 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 			pswdNoSpaces = false
 		}
 	}
-	if 5 < len(password) && len(password) < 30 {
+	if 5 < len(user.Password) && len(user.Password) < 30 {
 		pswdLength = true
 	}
 	fmt.Println("pswdLowercase:", pswdLowercase, "\npswdUppercase:", pswdUppercase, "\npswdNumber:", pswdNumber, "\npswdSpecial:", pswdSpecial, "\npswdLength:", pswdLength, "\npswdNoSpaces:", pswdNoSpaces, "\nnameAlphaNumeric:", nameAlphaNumeric, "\nnameLength:", nameLength)
 	if !pswdLowercase || !pswdUppercase || !pswdNumber || !pswdSpecial || !pswdLength || !pswdNoSpaces || !nameAlphaNumeric || !nameLength {
 		tpl.ExecuteTemplate(w, "register.html", "please check username and password criteria")
 		return
+	} else {
+		added := database_sqlite.DatabaseLogin(user)
+		if added {
+			var creds Credentials
+			creds.Mail = r.FormValue("mail")
+			creds.Password = r.FormValue("password")
+			creds.Username = r.FormValue("username")
+
+			expirationTime := time.Now().Add(60 * time.Minute)
+			claims := &Claims{
+				Username: creds.Username,
+				StandardClaims: jwt.StandardClaims{
+					ExpiresAt: expirationTime.Unix(),
+				},
+			}
+
+			token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+			// Create the JWT string
+			tokenString, err := token.SignedString(jwtKey)
+			if err != nil {
+				fmt.Println("error 3")
+				// If there is an error in creating the JWT return an internal server error
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			// Finally, we set the client cookie for "token" as the JWT we just generated
+			// we also set an expiry time which is the same as the token itself
+			http.SetCookie(w, &http.Cookie{
+				Name:    "token",
+				Value:   tokenString,
+				Expires: expirationTime,
+			})
+
+			tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
+		} else {
+			tpl.ExecuteTemplate(w, "register.html", "we meet a problem, retry please")
+		}
 	}
-	tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
 }
 
 /******************formulaire**********************/
