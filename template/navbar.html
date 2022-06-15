@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
-  <link rel="stylesheet" href="../static/css/index.css" />
+  <link rel="stylesheet" href="../static/css/navbar.css" />
 
 
   <script src="../static/button.js"></script>
@@ -21,11 +21,9 @@
 <header class="header">
   <div class="navbar">
     <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
-    <!--
-    <li><a href="#ex1" rel="modal:open">Login</a></li>-->
 
-    <li><a className="log" href="/login">Log in</a></li>
-    <li><a className="log" href="/register">Sign Up</a></li>
+    <li><a className="log" href="/login"> <span>&#128513;</span> Log in</a></li>
+    <li><a className="log" href="/register"> <span>&#128214;</span> Sign Up</a></li>
     <li><a href="/Aboutus">Aboutus</a></li>
     <li><div class="dropdown">
       <button class="dropbtn" onclick="myFunction()">Categorie
@@ -61,8 +59,4 @@
     }
   }
 </script>
-
-<body>
-
-</body>
 </html>
