@@ -36,7 +36,7 @@ func DatabaseLogin(log Login) bool {
 			fmt.Println(err3)
 		}
 	}(sqliteDatabase) // Defer Closing the database
-	CreateTableLogin(sqliteDatabase) // Create Database Tables*/
+	// Create Database Tables*/
 
 	// INSERT RECORDS
 	boolean := checkIfLoginExist(sqliteDatabase, log)
@@ -48,7 +48,12 @@ func DatabaseLogin(log Login) bool {
 	return false
 }
 
-func GetLogin(db *sql.DB, log Login) Login {
+func GetLogin(mail string) Login {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	// Defer Closing the database
 	rows, err := db.Query("select * from login")
 	if err != nil {
 		fmt.Println(err)
@@ -59,10 +64,18 @@ func GetLogin(db *sql.DB, log Login) Login {
 		if err2 != nil {
 			fmt.Println(err2)
 		}
-		if tempLogin.Mail == log.Mail && tempLogin.Password == log.Password {
+		if tempLogin.Mail == mail {
 			return tempLogin
 		}
 	}
+
+	func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
+
 	return Login{}
 }
 
@@ -89,7 +102,17 @@ func OsCreateFile() {
 	log.Println("sqlite-database.db created")
 }
 
-func CreateTableLogin(db *sql.DB) {
+func CreateTableLogin() {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
 	createLoginTableSQL := `CREATE TABLE IF NOT EXISTS login(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
     	"Mail" TEXT,
@@ -108,6 +131,16 @@ func CreateTableLogin(db *sql.DB) {
 
 // AddLogin We are passing db reference connection from main to our method with other parameters
 func AddLogin(db *sql.DB, login Login) {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
 	log.Println("Inserting login record ...")
 	insertLoginSQL := `INSERT INTO login( Mail, Name, Password) VALUES (?,?, ?)`
 	statement, err := db.Prepare(insertLoginSQL) // Prepare statement.
@@ -126,7 +159,7 @@ func checkIfLoginExist(db *sql.DB, login Login) bool {
 	loginFree := true
 	row, _ := db.Query("SELECT * FROM login ORDER BY Mail")
 	defer func(row *sql.Rows) {
-		err := row.Close()
+		err := db.Close()
 		if err != nil {
 			fmt.Println(err)
 		}

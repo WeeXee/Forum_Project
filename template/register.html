@@ -4,56 +4,62 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="../static/css/style.css" />
-    <link rel="stylesheet" href="../static/css/register.css" />
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/register.css"/>
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 
 </head>
 <body>
-<script src="/static/register.js"></script>
-<section id="section4">
-    <div class="left4">
-        <h1>Cinenum</h1>
-        <h2>Account Registration</h2>
-        <p>{{if .}}
-            {{.}}
-            {{end}}</p>
-        <form action="/registerauth" method="POST" name ="register">
-            <label for="username">mail:</label>
-            <div class="form__field">
-                <input type="text" id="mail" name="mail" class="form__input" >
-                <span class="icon"></span>
-            </div>
-            <label for="username">Username:</label>
-            <div class="form__field">
-                <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
-                <span class="icon"></span>
-            </div>
-            <label for="password">Password:</label>
-            <div class="form__field">
-                <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
-                <span class="icon"></span>
-            </div>
-
-            <input class="form-submit-button" type="submit" value="Sign Up" onclick="ValidateEmail(document.register.mail)">
-            <a class="form-submit-button" href="/">return back</a>
-        </form>
-    </div>
-    <div class="right4">
-        <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
-        <div class="texthover4">
-            <h2>For Sign In</h2>
-            <p>Username :</p>
-            <li>must be longer than 4 characters but shorter than 20</li>
-            <li>must contain only letters or numbers</li>
-
-            <p>Password :</p>
-            <li>must be greater than 6 characters but less than 30</li>
-            <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
+    <script src="/static/register.js"></script>
+    <section id="section4">
+        <div class="left4">
+            <h1>Cinenum</h1>
+            <h2>Account Registration</h2>
             <br>
+            <form action="/registerauth" method="POST" name="register">
+                <br>
+                <label for="username">mail:</label><br>
+                <div class="form__field">
+                    <input type="text" id="mail" name="mail" class="form__input">
+                    <span class="icon"></span>
+                </div>
+                <br>
+                <label for="username">Username:</label><br>
+                <div class="form__field">
+                    <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
+                    <span class="icon"></span>
+                </div>
+                <br>
+                <label for="password">Password:</label><br>
+                <div class="form__field">
+                    <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
+                    <span class="icon"></span>
+                </div>
+                <br>
+                <input class="form-submit-button" type="submit" value="Sign Up"
+                       onclick="ValidateEmail(document.register.mail)">
+                <a href="/">turn back</a>
+
+            </form>
+            <p>{{if .}}
+                {{.}}
+                {{end}}</p>
         </div>
-    </div>
-</section>
+        <div class="right4">
+            <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
+            <div class="texthover4">
+                <h2>For Sign In</h2>
+                <p>Username :</p>
+                <li>must be longer than 4 characters but shorter than 20</li>
+                <li>must contain only letters or numbers</li>
+
+                <p>Password :</p>
+                <li>must be greater than 6 characters but less than 30</li>
+                <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
+                <br>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

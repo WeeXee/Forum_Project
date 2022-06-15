@@ -10,35 +10,38 @@
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 
 </head>
-<body>
+<body class = register>
 <script src="/static/register.js"></script>
 <section id="section4">
     <div class="left4">
         <h1>Cinenum</h1>
         <h2>Log in</h2>
-        <p>{{if .}}
-        {{.}}
-        {{end}}</p>
-               <form action="/loginauth" method="POST" name ="login">
-
-            <label for="username">mail:</label>
+        <br>
+        <form action="/loginauth" method="POST" name ="login">
+            <br>
+            <label for="username">mail:</label><br>
             <div class="form__field">
                 <input type="text" id="mail" name="mail" class="form__input" >
                 <span class="icon"></span>
-            </div>
-            <label for="username">Username:</label>
+            </div><br>
+            <label for="username">Username:</label><br>
             <div class="form__field">
                 <input type="text" id="username" name="username" class="form__input" >
                 <span class="icon"></span>
-            </div>
-            <label for="password">Password:</label>
+            </div><br>
+            <label for="password">Password:</label><br>
             <div class="form__field">
                 <input type="password" id="password" name="password" class="form__input">
                 <span class="icon"></span>
             </div>
+            <br>
             <input class="form-submit-button" type="submit" value="Log In" onclick="ValidateEmail(document.register.mail)">
-            <a class="form-submit-button" href="/">return back</a>
+            <a href="/">turn back</a>
+
         </form>
+        <p>{{if .}}
+            {{.}}
+            {{end}}</p>
     </div>
     <div class="right4">
         <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
