@@ -455,6 +455,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("*****registerHandler running*****")
 	tpl.ExecuteTemplate(w, "register.html", nil)
+
 }
 
 // creates new user
@@ -536,6 +537,9 @@ func processGetHandler(w http.ResponseWriter, r *http.Request) {
 	s.TextComment_User = r.FormValue("textcomment")
 
 	tpl.ExecuteTemplate(w, "action.html", s)
+	/**tessssssssssssssssssssssssssssssssssssssssssssssssssst*/
+	tpl.ExecuteTemplate(w, "biobic.html", s)
+
 }
 
 func postFormHandler(w http.ResponseWriter, r *http.Request) {
@@ -559,4 +563,7 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tpl.ExecuteTemplate(w, "action.html", s)
+	/*test*/
+	tpl.ExecuteTemplate(w, "biobic.html", s)
+
 }
