@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
     <link rel="stylesheet" href="../static/css/style.css"/>
     <link rel="stylesheet" href="../static/css/comedy.css"/>
+    <link rel="stylesheet" href="../static/css/action.css"/>
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 
 
@@ -31,25 +32,6 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
-        <div class="section1button">
-            <button><a> &#128214; See last subject </a></button>
-            <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
-        </div>
-        <div>
-            <div id="ex1" class="modal">
-                <form method="POST" action="/">
-                    <h1>Comedy</h1><br>
-                    <label><p>Chose your Subject : </p><input class="subject form-submit" type="text"
-                                                              name="Subject"/><br></label>
-                    <label><p>Enter your name : </p><input class="name form-submit" type="text"
-                                                           name="Name"/><br></label>
-                    <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text"
-                                                              name="aire texte" rows="4"
-                                                              cols="50"></textarea><br></label>
-                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
-                </form>
-            </div>
-        </div>
     </div>
     <div class="right">
         <div class="imagefond1">
@@ -63,51 +45,61 @@
 <section>
     <div class="container">
         {{range .PostArray}}
-        <div class="box">
-            <div class="content">
-                <h2 class="glitch">{{.PostTitle}}
-                </h2>
-                <h2 class="glitch">{{.IdPost}}
-                </h2>
-                <h3 class="glitch">{{.MailUser}}
-                </h3>
-                <p class="glitch">{{.PostContent}}
-                </p>
-            </div>
-            <div>
-                {{range .PostComment}}
-                <div class="Comment_Other_List">
-                    <div>
-                        <input type="checkbox" class="read-more-state" id="post-2"/>
-                        <ul class="read-more-wrap">
-                            <div class="read-more-target">
-                                <div class="Post_User_Name"><br>
-                                    <label><h3>{{.}}{{.IdUser}}</h3></label>
-                                    <p>{{.}}{{.Comment}}</p>
-                                    <hr size="2">
-                                    <div class="Post_User_NumLike">
-                                        <label style="float: right;">
-                                            <button>&#128077; 10</button>
-                                            <button>&#x1F44E; 10</button>
-                                        </label>
+        <div class="Post_User_box">
+            <div class="Post_USer">
+                <div class="Title_Post_User"><label><h1>{{.PostTitle}}</h1></button></label></div>
+                <div class="Post_User_Name_Reply_area">
+                    <div class="Post_User_Name"><label><h3>{{.MailUser}}</h3></label></div>
+                </div>
+                <div class="Post_User_Commentary"><label><p>{{.PostContent}}</p><br></label>
+                </div>
+                <div class="Post_User_Comment_Like">
+                    <div class="Post_User_NumComment"><label>
+                        <button><label for="post-2" class="read-more-trigger">Comment</label>
+                            &#128172; {{.NumberComment}}
+                        </button>
+                    </label></div>
+                    <div class="Post_User_NumLike">
+                        <label style="float: right;">
+                            <button>&#128077; 4</button>
+                            <button>&#x1F44E; 3</button>
+                        </label>
+                    </div>
+                    <div class="Comment_Other_List">
+                        <div>
+                            <input type="checkbox" class="read-more-state" id="post-2"/>
+                            <ul class="read-more-wrap">
+                                {{range .CommentArray}}
+                                <div class="read-more-target">
+                                    <div class="Post_User_Name"><br>
+                                        <label><h3>{{.IdUser}}</h3></label>
+                                        <p>{{.Comment}}</p>
+                                        <hr size="2">
+                                        <div class="Post_User_NumLike">
+                                            <label style="float: right;">
+                                                <button>&#128077; 4</button>
+                                                <button>&#x1F44E; 3</button>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </ul>
+                                {{end}}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                {{end}}
+
+                <form action="/comedy" method="GET">
+                    <label for="textcomment">
+                        <p>Add commentary :</label><br><br>
+                    <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                           class="post form-submit-textarea_commentary"><br>
+                    <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost">
+                </form>
             </div>
         </div>
-        <form action="/comedy" method="GET">
-            <label for="textcomment">
-                <p>Add commentary : </label><br><br>
-            <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment" class="post form-submit-textarea_commentary"><br>
-            <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost">
-        </form>
         {{end}}
     </div>
-
 </section>
 </body>
 <footer>
