@@ -111,7 +111,6 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostLogged(w http.ResponseWriter, r *http.Request) {
-
 	login := logIndex{
 		Username: "/",
 	}
@@ -179,11 +178,6 @@ func Action(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-type GenderPage struct {
-	LogCookies logIndex
-	PostArray  database_sqlite.PostsArray
-}
-
 func Biobic(w http.ResponseWriter, r *http.Request) {
 	var postArray = database_sqlite.GetPost()
 	var arrayPosts database_sqlite.PostsArray
@@ -217,34 +211,46 @@ func Biobic(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Comedy(w http.ResponseWriter, r *http.Request) {
+type arrayPosts struct {
+	database_sqlite.Post
+	CommentArray database_sqlite.CommentArray
+}
+type GenderPage struct {
+	LogCookies logIndex
+	PostArray  []arrayPosts
+}
+
+func CommentArray(movieGender string) []arrayPosts {
 	commentArray := database_sqlite.GetComment()
 	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
+	var arrayPost database_sqlite.PostsArray
+
+	var tb = []arrayPosts{}
 
 	for _, v := range postArray {
 		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
+			if val == movieGender {
+				arrayPost = append(arrayPost, v)
 			}
 		}
 	}
 
-	for _, v := range commentArray {
-		for _, val := range arrayPosts {
-			if v.IdPost == val.IdPost && v.Comment != "" {
-				fmt.Println("v.IdPost = " + string(v.IdPost))
-				fmt.Println("val.IdPost = " + string(val.IdPost))
-				val.PostComment = append(val.PostComment, v)
-				fmt.Println(val.PostComment)
+	for _, val := range arrayPost {
+		a := arrayPosts{}
+		a.Post = val
+		for _, v := range commentArray {
+			if v.IdPost == val.IdPost && v.Comment != "" && v.IdUser != "" {
+				a.CommentArray = append(a.CommentArray, v)
 			}
 		}
-	}
-	for _, val := range arrayPosts {
-		fmt.Println(val.IdPost)
-		fmt.Println(val.PostComment)
+		tb = append(tb, a)
 	}
 
+	fmt.Println(tb)
+	return tb
+}
+
+func Comedy(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
 		Username: "/",
 	}
@@ -257,11 +263,13 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 		NavBar(w, r)
 	}
 
+	arrayPosts := CommentArray("comedy")
+	fmt.Println(arrayPosts)
+
 	var s database_sqlite.Comment
 	s.IdUser = login.Username
 	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
 	s.Comment = r.FormValue("comment")
-
 	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
 		database_sqlite.AddComment(s)
 	}
@@ -275,16 +283,8 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 }
 
 func Fantasy(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("fantasy")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",
@@ -306,16 +306,8 @@ func Fantasy(w http.ResponseWriter, r *http.Request) {
 }
 
 func Horror(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("horror")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",
@@ -339,16 +331,8 @@ func Horror(w http.ResponseWriter, r *http.Request) {
 /**not done yet**/
 
 func Drama(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("drama")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",
@@ -370,16 +354,8 @@ func Drama(w http.ResponseWriter, r *http.Request) {
 }
 
 func Romantic(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("romantic")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",
@@ -402,16 +378,8 @@ func Romantic(w http.ResponseWriter, r *http.Request) {
 }
 
 func SF(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("sf")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",
@@ -452,16 +420,8 @@ func Thriller(w http.ResponseWriter, r *http.Request) {
 }
 
 func Western(w http.ResponseWriter, r *http.Request) {
-	var postArray = database_sqlite.GetPost()
-	var arrayPosts database_sqlite.PostsArray
-	for _, v := range postArray {
-		for _, val := range v.MovieGender {
-			if val == "comedy" {
-				arrayPosts = append(arrayPosts, v)
-				fmt.Println(v)
-			}
-		}
-	}
+	arrayPosts := CommentArray("western")
+	fmt.Println(arrayPosts)
 
 	login := logIndex{
 		Username: "/",

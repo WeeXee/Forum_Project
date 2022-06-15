@@ -75,34 +75,34 @@
                 </p>
             </div>
             <div>
-                {{range .PostComment}}
-                <div class="Comment_Other_List">
-                    <div>
-                        <input type="checkbox" class="read-more-state" id="post-2"/>
-                        <ul class="read-more-wrap">
-                            <div class="read-more-target">
-                                <div class="Post_User_Name"><br>
-                                    <label><h3>{{.}}{{.IdUser}}</h3></label>
-                                    <p>{{.}}{{.Comment}}</p>
-                                    <hr size="2">
-                                    <div class="Post_User_NumLike">
-                                        <label style="float: right;">
-                                            <button>&#128077; 10</button>
-                                            <button>&#x1F44E; 10</button>
-                                        </label>
-                                    </div>
+
+                <div >
+                    <ul >
+                        {{range .CommentArray}}
+                        <div >
+                            <div ><br>
+                                <label><h3>{{.IdUser}}</h3></label>
+                                <p>{{.Comment}}</p>
+                                <div class="Post_User_NumLike">
+                                    <label style="float: right;">
+                                        <button>&#128077; 10</button>
+                                        <button>&#x1F44E; 10</button>
+                                    </label>
                                 </div>
                             </div>
-                        </ul>
-                    </div>
+                        </div>
+                        {{end}}
+                    </ul>
                 </div>
-                {{end}}
+
             </div>
         </div>
+
         <form action="/comedy" method="GET">
             <label for="textcomment">
-                <p>Add commentary : </label><br><br>
-            <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment" class="post form-submit-textarea_commentary"><br>
+                <p>Add commentary :</label><br><br>
+            <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                   class="post form-submit-textarea_commentary"><br>
             <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost">
         </form>
         {{end}}
