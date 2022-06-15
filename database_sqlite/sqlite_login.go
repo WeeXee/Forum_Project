@@ -48,7 +48,17 @@ func DatabaseLogin(log Login) bool {
 	return false
 }
 
-func GetLogin(db *sql.DB, log Login) Login {
+func GetLogin(mail string) Login {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db) // Defer Closing the database
 	rows, err := db.Query("select * from login")
 	if err != nil {
 		fmt.Println(err)
@@ -59,7 +69,7 @@ func GetLogin(db *sql.DB, log Login) Login {
 		if err2 != nil {
 			fmt.Println(err2)
 		}
-		if tempLogin.Mail == log.Mail && tempLogin.Password == log.Password {
+		if tempLogin.Mail == mail {
 			return tempLogin
 		}
 	}
@@ -108,6 +118,16 @@ func CreateTableLogin(db *sql.DB) {
 
 // AddLogin We are passing db reference connection from main to our method with other parameters
 func AddLogin(db *sql.DB, login Login) {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
 	log.Println("Inserting login record ...")
 	insertLoginSQL := `INSERT INTO login( Mail, Name, Password) VALUES (?,?, ?)`
 	statement, err := db.Prepare(insertLoginSQL) // Prepare statement.

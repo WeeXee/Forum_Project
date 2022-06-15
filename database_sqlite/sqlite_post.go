@@ -46,13 +46,13 @@ func CreateTablePost(db *sql.DB) {
 		"Dislike"     INTEGER		
 	  );` // SQL Statement for Create Table
 
-	log.Println("Create admin acess...")
+	log.Println("Create admin acess to Post...")
 	statement, err := db.Prepare(createPostTableSQL) // Prepare SQL Statement
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	_, _ = statement.Exec() // Execute SQL Statements
-	log.Println("Admin table created")
+	log.Println("Post table created")
 }
 
 func AddPost(post Post) {
@@ -67,8 +67,6 @@ func AddPost(post Post) {
 			fmt.Println(err3)
 		}
 	}(db)
-	CreateTablePost(db)
-
 	insertLoginSQL := `INSERT INTO Post( IdUser, MovieGender, PostTitle, PostContent, PostComment, Like, Dislike) VALUES (?,?,?,?,?,?,?)`
 	statement, err := db.Prepare(insertLoginSQL)
 	if err != nil {

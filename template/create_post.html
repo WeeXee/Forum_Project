@@ -2,41 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/biobic.css"/>
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 </head>
 <body>
-<form action="/post" method="Post">
+<section style="margin-top: 5rem;">
+    <div style="margin: auto; width: 50%; text-align: center; padding: 1rem">
+        <form action="/post" method="Post">
+            <label style="font-weight: bolder" for="user_Post1">Title:</label><br>
+            <input type="text" id="user_Post1" name="title" value=""><br>
 
-    <label for="user_Post1">Title:</label><br>
-    <input type="text" id="user_Post1" name="title" value="Jane"><br>
-    <div>
-        <label for="Action"><br>Action</label>
-        <input type="checkbox"  id="action" class ="tickets" value ="action">
+            <label for="Action">Action</label>
+            <input type="checkbox" id="action" name="action" class="tickets" value="action">
 
-        <label for="biopic"><br>Biopic</label>
-        <input type="checkbox"  id="biopic" class ="tickets" value ="biopic">
+            <label for="biopic">Biopic</label>
+            <input type="checkbox" id="biopic" name="biopic"  class="tickets" value="biopic">
 
-        <label for="comedy"><br>Comedy</label>
-        <input type="checkbox"  id="comedy" class ="tickets" value ="comedy">
+            <label for="comedy">Comedy</label>
+            <input type="checkbox" id="comedy" name="comedy" class="tickets" value="comedy">
 
-        <label for="drama"><br>Drama</label>
-        <input type="checkbox"  id="drama" class ="tickets" value ="drama">
+            <label for="drama">Drama</label>
+            <input type="checkbox" id="drama" name="drama" class="tickets" value="drama">
 
-        <label for="fantasy"><br>Fantasy</label>
-        <input type="checkbox"  id="fantasy" class ="tickets" value ="fantasy">
+            <label for="fantasy">Fantasy</label>
+            <input type="checkbox" id="fantasy" name="fantasy" class="tickets" value="fantasy">
 
-        <label for="horror"><br>Horror</label>
-        <input type="checkbox"  id="horror" class ="tickets" value ="horror">
+            <label for="horror"><br>Horror</label>
+            <input type="checkbox" id="horror" name="horror" class="tickets" value="horror">
 
-        <label for="romantic"><br>Romantic</label>
-        <input type="checkbox"  id="romantic" class ="tickets" value ="romantic">
+            <label for="romantic"><br>Romantic</label>
+            <input type="checkbox" id="romantic" class="tickets" value="romantic">
+            <label for="user_Post3">Type your post :</label><br>
+            <input type="text" id="user_Post3" name="content" value="" style="width: 50vmax; height: 10vmax"><br>
+
+            <input type="submit" value="Submit">
+
+        </form>
     </div>
+</section>
 
 
-    <label for="user_Post3">Type your post :</label><br>
-    <input type="text" id="user_Post3" name="content" value="Leon"><br>
-
-    <input type="submit" value="Submit">
-</form>
 </body>
 </html>

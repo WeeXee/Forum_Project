@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/dgrijalva/jwt-go"
+	"strings"
 	"unicode"
 
 	"Forum/database_sqlite"
@@ -123,11 +124,28 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostLogged(w http.ResponseWriter, r *http.Request) {
+	var loginData database_sqlite.Login
+	login := logIndex{
+		Username: "/",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+	loginData = database_sqlite.GetLogin(login.Username)
+
 	var post database_sqlite.Post
 	post.PostTitle = r.FormValue("title")
 	post.PostContent = r.FormValue("content")
+	post.IdUser = loginData.Id
+	post.PostComment = ""
+	post.Like = 0
+	post.Dislike = 0
+	movieGender := []string{
+		r.FormValue("comedy"), r.FormValue("action"), r.FormValue("drama"), r.FormValue("fantasy"), r.FormValue("horror")}
+	post.MovieGender = strings.Join(movieGender, "/")
 
-	fmt.Println(post.PostTitle + " " + post.PostContent)
+	if post.IdUser != 0 {
+		database_sqlite.AddPost(post)
+	}
 
 	t, _ := template.ParseFiles("template/create_post.html")
 	err1 := t.Execute(w, nil)
@@ -431,7 +449,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 	expirationTime := time.Now().Add(60 * time.Minute)
 	claims := &Claims{
-		Username: creds.Username,
+		Username: creds.Mail,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
