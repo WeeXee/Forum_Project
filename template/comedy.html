@@ -51,8 +51,8 @@
 <section class="post_conv">
     <script src="https://use.fontawesome.com/fe459689b4.js"></script>
     <!-- Subject -->
-    {{range .PostArray}}
     <div class="Post_User_box">
+        {{range .PostArray}}
         <div class="Post_USer">
             <div class="Title_Post_User"><label><h1>{{.PostTitle}}</h1></button></label></div>
             <div class="Post_User_Name_Reply_area">
@@ -79,7 +79,6 @@
                     <input type="checkbox" class="read-more-state" id="post-2"/>
                     <ul class="read-more-wrap">
                         <div class="read-more-target">
-
                             {{range .PostComment}}
                             <div class="Post_User_Name"><br>
                                 <label><h3>{{.IdUser}}</h3></label>
@@ -108,11 +107,13 @@
                     class="form-submit-button" type="reset"/>
             </form>
         </div>
+        {{end}}
+
     </div>
-    {{end}}
 
 </section>
 </body>
 <footer>
 </footer>
 </html>
+
