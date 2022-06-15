@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
     <link rel="stylesheet" href="../static/css/style.css"/>
     <link rel="stylesheet" href="../static/css/comedy.css"/>
-    <link rel="stylesheet" href="../static/css/action.css"/>
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 
 
@@ -29,8 +28,9 @@
             <h1>Cineroom</h1>
             <h2>Let's Talk about Comedy</h2>
             <br><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus enim esse</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Laugh till you cry or cry from laughing. <br>Here the emotions take you out of the gloom. Don't wait any
+                longer, come and breathe happiness!
+                <br>Write your opinion on your favorite comedy movie !</p>
         </div>
     </div>
     <div class="right">
@@ -89,23 +89,17 @@
                     </div>
                 </div>
 
-                <form action="/comedy" method="GET" id="form" name="{{.login.Username}}">
-                    <label for="textcomment">
-                        <p>Add commentary :</label><br><br>
-                    <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
-                           class="post form-submit-textarea_commentary"><br>
-                    <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost">
-                </form>
-            </div>
-            <script>
-                const myText = document.getElementById("form").textContent;
-                if (myText.name == "/"){
-
-                }
-
-            </script>
+            <form action="/comedy" method="GET">
+                <label for="textcomment">
+                    <p>Add commentary : </p></label><br><br>
+                <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                       class="post form-submit-textarea_commentary"><br>
+                <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost"><input
+                    class="form-submit-button" type="reset"/>
+            </form>
         </div>
         {{end}}
+    </div>
     </div>
 </section>
 </body>

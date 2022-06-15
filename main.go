@@ -254,7 +254,7 @@ func CommentArray(movieGender string) []arrayPosts {
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "/",
+		Username: "vous",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
@@ -495,7 +495,6 @@ func main() {
 var tpl *template.Template
 
 func log(w http.ResponseWriter, r *http.Request) {
-
 	tpl.ExecuteTemplate(w, "login.html", nil)
 }
 
