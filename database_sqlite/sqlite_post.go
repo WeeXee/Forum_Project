@@ -4,12 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 )
 
 type Post struct {
 	IdPost      int
 	MailUser    string
-	MovieGender string
+	MovieGender []string
 	PostTitle   string
 	PostContent string
 	PostComment string
@@ -73,7 +74,7 @@ func AddPost(post Post) {
 		log.Fatalln(err.Error())
 	}
 
-	_, err = statement.Exec(post.MailUser, post.MovieGender, post.PostTitle, post.PostContent, post.PostComment, post.Like, post.Dislike)
+	_, err = statement.Exec(post.MailUser, strings.Join(post.MovieGender, "/"), post.PostTitle, post.PostContent, post.PostComment, post.Like, post.Dislike)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -96,7 +97,9 @@ func GetPost() PostsArray {
 	postArray := PostsArray{}
 	for row.Next() { // Iterate and fetch the records from result cursor
 		post := Post{}
-		err := row.Scan(&post.IdPost, &post.MailUser, &post.MovieGender, &post.PostTitle, &post.PostContent, &post.PostComment, &post.Like, &post.Dislike)
+		var movieGender string
+		err := row.Scan(&post.IdPost, &post.MailUser, &movieGender, &post.PostTitle, &post.PostContent, &post.PostComment, &post.Like, &post.Dislike)
+		post.MovieGender = strings.Split(movieGender, "/")
 		if err != nil {
 			fmt.Println(err)
 		}

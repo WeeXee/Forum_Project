@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"strings"
 	"unicode"
 
 	"Forum/database_sqlite"
@@ -139,9 +138,8 @@ func PostLogged(w http.ResponseWriter, r *http.Request) {
 	post.PostComment = ""
 	post.Like = 0
 	post.Dislike = 0
-	movieGender := []string{
+	post.MovieGender = []string{
 		r.FormValue("comedy"), r.FormValue("action"), r.FormValue("drama"), r.FormValue("fantasy"), r.FormValue("horror")}
-	post.MovieGender = strings.Join(movieGender, "/")
 
 	fmt.Println(post.MailUser)
 
@@ -196,7 +194,22 @@ func Action(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+type GenderPage struct {
+	LogCookies logIndex
+	PostArray  database_sqlite.PostsArray
+}
+
 func Biobic(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "biopic" {
+				arrayPosts = append(arrayPosts, v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -210,14 +223,27 @@ func Biobic(w http.ResponseWriter, r *http.Request) {
 		NavBar(w, r)
 	}
 
+	genderPage := GenderPage{login, arrayPosts}
+
 	t, _ := template.ParseFiles("template/biopic.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -229,9 +255,9 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
-
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/comedy.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
