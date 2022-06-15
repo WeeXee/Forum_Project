@@ -39,11 +39,6 @@ type Sub struct {
 
 var jwtKey = []byte("my_secret_key")
 
-var users = map[string]string{
-	"user1": "password1",
-	"user2": "password2",
-}
-
 // Create a struct to read the username and password from the request body
 type Credentials struct {
 	Mail     string `json:"mail"`
@@ -93,12 +88,11 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 	})
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 	NavBar(w, r)
-
 	t, _ := template.ParseFiles("template/index.html")
 	err1 := t.Execute(w, login)
 	if err1 != nil {
@@ -107,24 +101,17 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func NavBarLogged(w http.ResponseWriter, r *http.Request) {
-	logout := r.FormValue("logout")
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
-	if logout == "1" {
-		fmt.Println("logout = 1")
-		Logout(w, r)
-		NavBar(w, r)
-	} else {
-		login = cookies(c, login)
-		t, _ := template.ParseFiles("template/navbar_logged.html")
-		err1 := t.Execute(w, nil)
-		if err1 != nil {
-			fmt.Print("error")
-		}
-	}
 
+	login = cookies(c, login)
+	t, _ := template.ParseFiles("template/navbar_logged.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("error")
+	}
 }
 
 func NavBar(w http.ResponseWriter, r *http.Request) {
@@ -135,14 +122,28 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func PostLogged(w http.ResponseWriter, r *http.Request) {
+	var post database_sqlite.Post
+	post.PostTitle = r.FormValue("title")
+	post.PostContent = r.FormValue("content")
+
+	fmt.Println(post.PostTitle + " " + post.PostContent)
+
+	t, _ := template.ParseFiles("template/create_post.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("error")
+	}
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -157,12 +158,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Action(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -177,13 +178,14 @@ func Action(w http.ResponseWriter, r *http.Request) {
 
 func Biobic(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
+		PostLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
@@ -197,12 +199,12 @@ func Biobic(w http.ResponseWriter, r *http.Request) {
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -217,12 +219,12 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 
 func Fantasy(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -237,12 +239,12 @@ func Fantasy(w http.ResponseWriter, r *http.Request) {
 
 func Horror(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -258,12 +260,12 @@ func Horror(w http.ResponseWriter, r *http.Request) {
 
 func Drama(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -278,12 +280,12 @@ func Drama(w http.ResponseWriter, r *http.Request) {
 
 func Romantic(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -298,12 +300,12 @@ func Romantic(w http.ResponseWriter, r *http.Request) {
 
 func SF(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -316,12 +318,12 @@ func SF(w http.ResponseWriter, r *http.Request) {
 }
 func Thriller(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -336,12 +338,12 @@ func Thriller(w http.ResponseWriter, r *http.Request) {
 
 func Western(w http.ResponseWriter, r *http.Request) {
 	login := logIndex{
-		Username: "vous",
+		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "vous" {
+	if login.Username != "/" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
@@ -350,7 +352,7 @@ func Western(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("template/western.html")
 	err1 := t.Execute(w, login)
 	if err1 != nil {
-		fmt.Print("error")
+		fmt.Print("/")
 	}
 }
 
@@ -373,6 +375,7 @@ func main() {
 	http.HandleFunc("/processget", processGetHandler)
 	http.HandleFunc("/postform", postFormHandler)
 	http.HandleFunc("/processpost", processPostHandler)
+	http.HandleFunc("/post", PostLogged)
 
 	http.HandleFunc("/login", log)
 	http.HandleFunc("/loginauth", Signin)
