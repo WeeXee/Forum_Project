@@ -7,20 +7,17 @@ import (
 )
 
 type Comment struct {
-	idComment int
-	idUser    int
-	idPost    int
-	comment   string
-	like      int
-	dislike   int
-	answer    string
+	IdComment int
+	IdUser    string
+	IdPost    int
+	Comment   string
 }
 
 type CommentArray = []Comment
 
-func DatabaseComment(comment Comment) {
+func AddComment(comment Comment) {
 	DoesFileExist("sqlite-database.db")
-	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -29,46 +26,19 @@ func DatabaseComment(comment Comment) {
 		if err3 != nil {
 			fmt.Println(err3)
 		}
-	}(sqliteDatabase) // Defer Closing the database
-	CreateTableComment(sqliteDatabase) // Create Database Tables*/
-	// INSERT RECORDS
-
-	AddComment(sqliteDatabase, comment)
-	// DISPLAY INSERTED RECORDS
-}
-
-func CreateTableComment(db *sql.DB) {
-	createCommentTableSQL := `CREATE TABLE IF NOT EXISTS Comments(
-    	idComment INTEGER PRIMARY KEY AUTOINCREMENT,
-    	"idPost" INTEGER,
-		"idUser"  INTEGER,
-		"comment" TEXT,
-		"like" INTEGER ,
-		"dislike"  INTEGER,
-        "Answer"  TEXT                      
-	  );` // SQL Statement for Create Table
-
-	log.Println("Create Comment table...")
-	statement, err := db.Prepare(createCommentTableSQL) // Prepare SQL Statement
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	_, _ = statement.Exec() // Execute SQL Statements
-	log.Println("Comment table created")
-}
-
-func AddComment(db *sql.DB, comment Comment) {
-	log.Println("Inserting comment record ...")
-	insertCommentSQL := `INSERT INTO Comments( idPost, idUser, Comment, like, dislike, answer) VALUES (?,?,?,?,?,?)`
+	}(db)
+	log.Println("Inserting Comment record ...")
+	insertCommentSQL := `INSERT INTO Comments( IdPost, IdUser, Comment) VALUES (?,?,?)`
 	statement, err := db.Prepare(insertCommentSQL) // Prepare statement.
 	// This is good to avoid SQL injections
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-
-	_, err = statement.Exec(comment.idPost, comment.idUser, comment.comment, comment.like, comment.dislike, comment.answer)
+	_, err = statement.Exec(comment.IdPost, comment.IdUser, comment.Comment)
 	if err != nil {
 		log.Fatalln(err.Error())
+	} else {
+		fmt.Println("Comment inserted !!")
 	}
 }
 
@@ -78,7 +48,7 @@ func GetComment() []Comment {
 		fmt.Println(err)
 	}
 
-	row, err := sqliteDatabase.Query("SELECT * FROM Comments ORDER BY idPost")
+	row, err := sqliteDatabase.Query("SELECT * FROM Comments ORDER BY IdPost")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -93,11 +63,10 @@ func GetComment() []Comment {
 	for row.Next() {
 		newComment := Comment{}
 		var idComment string // Iterate and fetch the records from result cursor
-		err := row.Scan(&idComment, &newComment.idPost, &newComment.idUser, &newComment.comment, &newComment.like, &newComment.dislike, &newComment.answer)
+		err := row.Scan(&idComment, &newComment.IdPost, &newComment.IdUser, &newComment.Comment)
 		if err != nil {
 			fmt.Println(err, "l'erreur est ici")
 		}
-		log.Println("idPost :", newComment.idPost, "idUser: ", newComment.idUser, "Comment :", newComment.comment, "like :", newComment.dislike)
 		commentArray = append(commentArray, newComment)
 	}
 	return commentArray
