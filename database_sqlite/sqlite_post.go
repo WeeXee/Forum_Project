@@ -2,6 +2,7 @@ package database_sqlite
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -13,7 +14,7 @@ type Post struct {
 	MovieGender []string
 	PostTitle   string
 	PostContent string
-	PostComment string
+	PostComment []Comment
 	Like        int
 	Dislike     int
 }
@@ -73,8 +74,13 @@ func AddPost(post Post) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
+	tb := []string{}
+	for _, v := range post.PostComment {
+		s, _ := json.Marshal(v)
+		tb = append(tb, string(s))
+	}
 
-	_, err = statement.Exec(post.MailUser, strings.Join(post.MovieGender, "/"), post.PostTitle, post.PostContent, post.PostComment, post.Like, post.Dislike)
+	_, err = statement.Exec(post.MailUser, strings.Join(post.MovieGender, "/"), post.PostTitle, post.PostContent, strings.Join(tb, "/"), post.Like, post.Dislike)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
@@ -98,8 +104,18 @@ func GetPost() PostsArray {
 	for row.Next() { // Iterate and fetch the records from result cursor
 		post := Post{}
 		var movieGender string
-		err := row.Scan(&post.IdPost, &post.MailUser, &movieGender, &post.PostTitle, &post.PostContent, &post.PostComment, &post.Like, &post.Dislike)
+		var postComment string
+		tb := []string{}
+
+		err := row.Scan(&post.IdPost, &post.MailUser, &movieGender, &post.PostTitle, &post.PostContent, &postComment, &post.Like, &post.Dislike)
 		post.MovieGender = strings.Split(movieGender, "/")
+		tb = strings.Split(postComment, "/")
+		for _, v := range tb {
+			m := Comment{}
+			n := []byte(v)
+			json.Unmarshal(n, &m)
+			post.PostComment = append(post.PostComment, m)
+		}
 		if err != nil {
 			fmt.Println(err)
 		}

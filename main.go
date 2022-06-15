@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/dgrijalva/jwt-go"
+	"strconv"
 	"unicode"
 
 	"Forum/database_sqlite"
@@ -19,22 +20,8 @@ import (
 	"net/http"
 )
 
-type StructPost struct {
-	MovieGender int
-	IDuser      int
-	post        string
-	title       string
-}
-
 type logIndex struct {
 	Username string
-}
-
-type Sub struct {
-	TitleTextPost_User string
-	Username           string
-	TextPost_User      string
-	TextComment_User   string
 }
 
 var jwtKey = []byte("my_secret_key")
@@ -130,12 +117,10 @@ func PostLogged(w http.ResponseWriter, r *http.Request) {
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
-
 	var post database_sqlite.Post
 	post.PostTitle = r.FormValue("title")
 	post.PostContent = r.FormValue("content")
-	post.MailUser = login.Username
-	post.PostComment = ""
+
 	post.Like = 0
 	post.Dislike = 0
 	post.MovieGender = []string{
@@ -223,16 +208,71 @@ func Biobic(w http.ResponseWriter, r *http.Request) {
 		NavBar(w, r)
 	}
 
-	genderPage := GenderPage{login, arrayPosts}
+	/*genderPage := GenderPage{login, arrayPosts}*/
 
 	t, _ := template.ParseFiles("template/biopic.html")
-	err1 := t.Execute(w, genderPage)
+	err1 := t.Execute(w, login)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
+	commentArray := database_sqlite.GetComment()
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+			}
+		}
+	}
+	for _, v := range commentArray {
+		for _, val := range arrayPosts {
+			if v.IdPost == val.IdPost {
+				val.PostComment = append(val.PostComment, v)
+			}
+		}
+
+		for _, val := range arrayPosts {
+			fmt.Println(val.IdPost)
+			fmt.Println(val.PostComment)
+		}
+	}
+
+	login := logIndex{
+		Username: "/",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
+
+	if login.Username != "/" {
+		NavBarLogged(w, r)
+	} else {
+		NavBar(w, r)
+	}
+
+	var s database_sqlite.Comment
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
+	s.Comment = r.FormValue("comment")
+	fmt.Println("s :" + s.IdUser + s.Comment)
+	fmt.Println(s.IdPost)
+
+	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
+		database_sqlite.AddComment(s)
+	}
+
+	genderPage := GenderPage{login, arrayPosts}
+	t, _ := template.ParseFiles("template/comedy.html")
+	err1 := t.Execute(w, genderPage)
+	if err1 != nil {
+		fmt.Print("error")
+	}
+}
+
+func Fantasy(w http.ResponseWriter, r *http.Request) {
 	var postArray = database_sqlite.GetPost()
 	var arrayPosts database_sqlite.PostsArray
 	for _, v := range postArray {
@@ -256,34 +296,25 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 		NavBar(w, r)
 	}
 	genderPage := GenderPage{login, arrayPosts}
-	t, _ := template.ParseFiles("template/comedy.html")
+	t, _ := template.ParseFiles("template/fantasy.html")
 	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
-func Fantasy(w http.ResponseWriter, r *http.Request) {
-	login := logIndex{
-		Username: "/",
-	}
-	c, _ := r.Cookie("token")
-	login = cookies(c, login)
-
-	if login.Username != "/" {
-		NavBarLogged(w, r)
-	} else {
-		NavBar(w, r)
-	}
-
-	t, _ := template.ParseFiles("template/fantasy.html")
-	err1 := t.Execute(w, login)
-	if err1 != nil {
-		fmt.Print("error")
-	}
-}
-
 func Horror(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -295,8 +326,9 @@ func Horror(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/horror.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
@@ -305,6 +337,17 @@ func Horror(w http.ResponseWriter, r *http.Request) {
 /**not done yet**/
 
 func Drama(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -316,15 +359,26 @@ func Drama(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
-
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/drama.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
 func Romantic(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -336,15 +390,27 @@ func Romantic(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
+	genderPage := GenderPage{login, arrayPosts}
 
 	t, _ := template.ParseFiles("template/romantic.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
 func SF(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -356,8 +422,9 @@ func SF(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/SF.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
@@ -383,6 +450,17 @@ func Thriller(w http.ResponseWriter, r *http.Request) {
 }
 
 func Western(w http.ResponseWriter, r *http.Request) {
+	var postArray = database_sqlite.GetPost()
+	var arrayPosts database_sqlite.PostsArray
+	for _, v := range postArray {
+		for _, val := range v.MovieGender {
+			if val == "comedy" {
+				arrayPosts = append(arrayPosts, v)
+				fmt.Println(v)
+			}
+		}
+	}
+
 	login := logIndex{
 		Username: "/",
 	}
@@ -394,15 +472,16 @@ func Western(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
-
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/western.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("/")
 	}
 }
 
 func main() {
+	database_sqlite.DatabaseCreateTable()
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/action", Action)
 	http.HandleFunc("/comedy", Comedy)
@@ -418,7 +497,7 @@ func main() {
 	/***************************************************/
 
 	http.HandleFunc("/getform", getFormHandler)
-	http.HandleFunc("/processget", processGetHandler)
+	/*http.HandleFunc("/processget", processGetHandler)*/
 	http.HandleFunc("/postform", postFormHandler)
 	http.HandleFunc("/processpost", processPostHandler)
 	http.HandleFunc("/post", PostLogged)
@@ -606,17 +685,23 @@ func getFormHandler(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "getform.html", nil)
 }
 
+/*
 func processGetHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("processGetHandler running")
+	login := logIndex{
+		Username: "/",
+	}
+	c, _ := r.Cookie("token")
+	login = cookies(c, login)
 
-	var s Sub
-	s.TitleTextPost_User = r.FormValue("titletexttost_User")
-	s.Username = r.FormValue("username")
-	s.TextPost_User = r.FormValue("textproject")
-	s.TextComment_User = r.FormValue("textcomment")
+	var s database_sqlite.Comment
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("IdPost"))
+	s.Comment = r.FormValue("textcomment")
+	database_sqlite.AddComment(s)
 
 	tpl.ExecuteTemplate(w, "action.html", s)
-}
+}*/
 
 func postFormHandler(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "postform.html", nil)
@@ -633,5 +718,5 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	tpl.ExecuteTemplate(w, "action.html", postArray)
+	tpl.ExecuteTemplate(w, "comedy.html", postArray)
 }

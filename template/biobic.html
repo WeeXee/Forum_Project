@@ -54,79 +54,22 @@
         </div>
     </div>
 </section>
-
-<br><br>
-<section class="post_conv">
-    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-    <!-- Subject -->
-    <div class="Post_User_box">
-        <div class="Post_USer">
-            <div class="Title_Post_User"><label><h1>Rock surcote ?</h1></button></label></div>
-            <div class="Post_User_Name_Reply_area">
-                <div class="Post_User_Name"><label><h3>Username_GeradBouchard</h3></label></div>
+<section>
+    <div class="container">
+        {{range .PostArray}}
+        <div class="box">
+            <div class="content">
+                <h2 class="glitch">{{.PostTitle}}
+                </h2>
+                <h3 class="glitch">{{.MailUser}}
+                </h3>
+                <p class="glitch">{{.PostContent}}
+                </p>
             </div>
-
-            <div class="Post_User_Commentary"><label><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium culpa dolorem, esse nam nobis odit voluptate voluptatem. Ad assumenda ea ex harum hic
-                maiores molestiae officia optio recusandae! Illo, iure?
-                <p></p><br></label>
-            </div>
-            <div class="Post_User_Comment_Like">
-                <div class="Post_User_NumComment"><label>
-                    <button><label for="post-2" class="read-more-trigger" >Comment</label>
-                        &#128172; 3</button>
-                </label></div>
-                <div class="Post_User_NumLike">
-                    <label style="float: right;">
-                        <button>&#128077; 4</button>
-                        <button>&#x1F44E; 3</button>
-                    </label>
-                </div>
-            </div>
-            <!-- Comment -->
-            <div class="Comment_Other_List">
-                <div>
-                    <input type="checkbox" class="read-more-state" id="post-2"/>
-                    <ul class="read-more-wrap">
-                        <div class="read-more-target">
-                            <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
-                                <hr size="2">
-                                <div class="Post_User_NumLike">
-                                    <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="Post_User_Name"><br>
-                                <label><h3>Username_GeradBouchard</h3></label>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laudantium quas
-                                    quibusdam reprehenderit ut voluptate.</p>
-                                <hr size="2">
-                                <div class="Post_User_NumLike">
-                                    <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-            <!-- Leaves commentary -->
-            <form method="POST" action="/">
-                <div class="Post_User_Reply"><label>
-                    <label><p>Add commentary : <br><br></p><textarea maxlength="500" minlength="2" class="post form-submit-textarea_commentary" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
-                    <input class="form-submit-button" style="float:right;" type="submit"/><input style="float:right;" class="form-submit-button" type="reset"/>
-                </label></div>
-            </form>
         </div>
+        {{end}}
     </div>
-</section>
+
 </body>
 <footer>
 </footer>

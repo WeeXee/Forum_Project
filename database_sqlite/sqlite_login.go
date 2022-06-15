@@ -36,7 +36,7 @@ func DatabaseLogin(log Login) bool {
 			fmt.Println(err3)
 		}
 	}(sqliteDatabase) // Defer Closing the database
-	CreateTableLogin(sqliteDatabase) // Create Database Tables*/
+	// Create Database Tables*/
 
 	// INSERT RECORDS
 	boolean := checkIfLoginExist(sqliteDatabase, log)
@@ -102,7 +102,17 @@ func OsCreateFile() {
 	log.Println("sqlite-database.db created")
 }
 
-func CreateTableLogin(db *sql.DB) {
+func CreateTableLogin() {
+	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
 	createLoginTableSQL := `CREATE TABLE IF NOT EXISTS login(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
     	"Mail" TEXT,
