@@ -85,7 +85,7 @@ p, a, button {
 
 .section1button button{
     padding: 1% 5%;
-    margin: -15% -10% 0 20%;
+    margin: 0 -10% 0 20%;
     background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
     border-radius: 50px;
     color: var(--color4);
