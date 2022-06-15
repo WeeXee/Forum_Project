@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <form action="/comedy" method="GET">
+                <form action="/comedy" method="GET" id="form" name="{{.login.Username}}">
                     <label for="textcomment">
                         <p>Add commentary :</label><br><br>
                     <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
@@ -97,6 +97,13 @@
                     <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost">
                 </form>
             </div>
+            <script>
+                const myText = document.getElementById("form").textContent;
+                if (myText.name == "/"){
+
+                }
+
+            </script>
         </div>
         {{end}}
     </div>
