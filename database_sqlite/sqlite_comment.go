@@ -15,44 +15,6 @@ type Comment struct {
 
 type CommentArray = []Comment
 
-func DatabaseComment() {
-	DoesFileExist("sqlite-database.db")
-	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer func(sqliteDatabase *sql.DB) {
-		err3 := sqliteDatabase.Close()
-		if err3 != nil {
-			fmt.Println(err3)
-		}
-	}(sqliteDatabase) // Defer Closing the database
-	CreateTableComment(sqliteDatabase) // Create Database Tables*/
-}
-
-func CreateTableComment(db *sql.DB) {
-	defer func(sqliteDatabase *sql.DB) {
-		err3 := sqliteDatabase.Close()
-		if err3 != nil {
-			fmt.Println(err3)
-		}
-	}(db)
-	createCommentTableSQL := `CREATE TABLE IF NOT EXISTS Comments(
-    	IdComment INTEGER PRIMARY KEY AUTOINCREMENT,
-    	"IdPost" INTEGER,
-		"IdUser"  TEXT,
-		"Comment" TEXT,                   
-	  );` // SQL Statement for Create Table
-
-	log.Println("Create Comment table...")
-	statement, err := db.Prepare(createCommentTableSQL) // Prepare SQL Statement
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	_, _ = statement.Exec() // Execute SQL Statements
-	log.Println("Comment table created")
-}
-
 func AddComment(comment Comment) {
 	DoesFileExist("sqlite-database.db")
 	db, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
@@ -72,7 +34,6 @@ func AddComment(comment Comment) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-
 	_, err = statement.Exec(comment.IdPost, comment.IdUser, comment.Comment)
 	if err != nil {
 		log.Fatalln(err.Error())
@@ -106,7 +67,6 @@ func GetComment() []Comment {
 		if err != nil {
 			fmt.Println(err, "l'erreur est ici")
 		}
-		log.Println("IdPost :", newComment.IdPost, "IdUser: ", newComment.IdUser, "Comment :", newComment.Comment)
 		commentArray = append(commentArray, newComment)
 	}
 	return commentArray

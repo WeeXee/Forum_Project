@@ -221,6 +221,7 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	commentArray := database_sqlite.GetComment()
 	var postArray = database_sqlite.GetPost()
 	var arrayPosts database_sqlite.PostsArray
+
 	for _, v := range postArray {
 		for _, val := range v.MovieGender {
 			if val == "comedy" {
@@ -228,17 +229,20 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+
 	for _, v := range commentArray {
 		for _, val := range arrayPosts {
-			if v.IdPost == val.IdPost {
+			if v.IdPost == val.IdPost && v.Comment != "" {
+				fmt.Println("v.IdPost = " + string(v.IdPost))
+				fmt.Println("val.IdPost = " + string(val.IdPost))
 				val.PostComment = append(val.PostComment, v)
+				fmt.Println(val.PostComment)
 			}
 		}
-
-		for _, val := range arrayPosts {
-			fmt.Println(val.IdPost)
-			fmt.Println(val.PostComment)
-		}
+	}
+	for _, val := range arrayPosts {
+		fmt.Println(val.IdPost)
+		fmt.Println(val.PostComment)
 	}
 
 	login := logIndex{
@@ -257,8 +261,6 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	s.IdUser = login.Username
 	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
 	s.Comment = r.FormValue("comment")
-	fmt.Println("s :" + s.IdUser + s.Comment)
-	fmt.Println(s.IdPost)
 
 	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
 		database_sqlite.AddComment(s)
