@@ -726,9 +726,50 @@ input[type=reset]:active {
     border-radius: 25px;
 }
 
+
+/* -----------localisation-----------------*/
+
+.localisation {
+    position: absolute;
+    font-size: 5vmin;
+    margin-left: 8vmax;
+}
+
+h3 {
+    font-family: 'Italiana', serif;
+    color: #000000;
+    font-size: 5vmax;
+    margin-left: 2vmax;
+}
+
+h2 {
+    font-weight: bolder;
+    font-size: 3vmin;
+    color: var(--color3);
+}
+
+.localisation h2 {
+    width: 36vmax;
+    font-size: 2vmax;
+    font-weight: bolder;
+    transition: color 500ms ease, text-shadow 500ms ease;
+    color: var(--color1);
+    text-shadow: 0 0 10px var(--color1);
+    background-color: var(--color3);
+    text-align: center;
+}
+
+iframe {
+    margin-left: 2vmax;
+    margin-top: -1vmax;
+}
+
+
+/* -----------Footer-----------------*/
+
 div.mainfooter {
     width: 100vmax;
-    height: 10vmax;
+    height: 5vmax;
     font-family: 'Italiana', serif;
 }
 
@@ -748,15 +789,18 @@ p.welcome {
 .adress {
     font-family: 'Italiana', serif;
     text-align: right;
+    position: relative;
+    left: 38vmax;
 }
 
-div.col1 {
-    display: flex;
+.tls {
     font-family: 'Italiana', serif;
-    right: -1;
+    text-align: right;
+    position: relative;
+    left: 38vmax;
 }
 
-a {
+a.text-white {
     font-family: 'Italiana', serif;
 }
 
@@ -768,10 +812,54 @@ footer.text-center {
     position: center;
     text-align: center;
     size: 5vmax;
+    font-family: 'Italiana', serif;
 }
 
 .copy {
     position: center;
     text-align: center;
-    size: 5vmax;
+    size: 8vmax;
+    font-family: 'Italiana', serif, bolder;
+}
+
+.fb {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
+}
+
+.git {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
+}
+
+.linkedin {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
+}
+
+.insta {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
+}
+
+.goo {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
+}
+
+.tw {
+    position: center;
+    font-size: 2vmax;
+    text-align: center;
+    bottom: 2vmax;
 }
