@@ -8,7 +8,7 @@ import (
 
 type Post struct {
 	IdPost      int
-	IdUser      int
+	MailUser    string
 	MovieGender string
 	PostTitle   string
 	PostContent string
@@ -37,7 +37,7 @@ func DatabasePost() {
 func CreateTablePost(db *sql.DB) {
 	createPostTableSQL := `CREATE TABLE IF NOT EXISTS Post(
     	idLogin INTEGER PRIMARY KEY AUTOINCREMENT,
-		"IdUser"  INTEGER,
+		"IdUser"  TEXT,
 		"MovieGender" TEXT,
 		"PostTitle"   TEXT,
 		"PostContent" TEXT,
@@ -73,13 +73,13 @@ func AddPost(post Post) {
 		log.Fatalln(err.Error())
 	}
 
-	_, err = statement.Exec(post.IdUser, post.MovieGender, post.PostTitle, post.PostContent, post.PostComment, post.Like, post.Dislike)
+	_, err = statement.Exec(post.MailUser, post.MovieGender, post.PostTitle, post.PostContent, post.PostComment, post.Like, post.Dislike)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 }
 
-func GetPost() []Post {
+func GetPost() PostsArray {
 	DoesFileExist("sqlite-database.db")
 	sqliteDatabase, err := sql.Open("sqlite3", "./sqlite-database.db") // Open the created SQLite File
 
@@ -96,7 +96,7 @@ func GetPost() []Post {
 	postArray := PostsArray{}
 	for row.Next() { // Iterate and fetch the records from result cursor
 		post := Post{}
-		err := row.Scan(&post.IdPost, &post.IdUser, &post.MovieGender, &post.PostTitle, &post.PostContent, &post.PostComment, &post.Like, &post.Dislike)
+		err := row.Scan(&post.IdPost, &post.MailUser, &post.MovieGender, &post.PostTitle, &post.PostContent, &post.PostComment, &post.Like, &post.Dislike)
 		if err != nil {
 			fmt.Println(err)
 		}

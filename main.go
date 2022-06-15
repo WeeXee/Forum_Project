@@ -51,6 +51,7 @@ type Credentials struct {
 // We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
 type Claims struct {
 	Username string `json:"username"`
+	Mail     string `json:"mail"`
 	jwt.StandardClaims
 }
 
@@ -124,18 +125,17 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostLogged(w http.ResponseWriter, r *http.Request) {
-	var loginData database_sqlite.Login
+
 	login := logIndex{
 		Username: "/",
 	}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
-	loginData = database_sqlite.GetLogin(login.Username)
 
 	var post database_sqlite.Post
 	post.PostTitle = r.FormValue("title")
 	post.PostContent = r.FormValue("content")
-	post.IdUser = loginData.Id
+	post.MailUser = login.Username
 	post.PostComment = ""
 	post.Like = 0
 	post.Dislike = 0
@@ -143,10 +143,12 @@ func PostLogged(w http.ResponseWriter, r *http.Request) {
 		r.FormValue("comedy"), r.FormValue("action"), r.FormValue("drama"), r.FormValue("fantasy"), r.FormValue("horror")}
 	post.MovieGender = strings.Join(movieGender, "/")
 
-	if post.IdUser != 0 {
+	fmt.Println(post.MailUser)
+
+	if post.MailUser != "" && post.PostTitle != "" && post.PostTitle != "" {
 		database_sqlite.AddPost(post)
 	}
-
+	NavBarLogged(w, r)
 	t, _ := template.ParseFiles("template/create_post.html")
 	err1 := t.Execute(w, nil)
 	if err1 != nil {
@@ -449,7 +451,8 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 	expirationTime := time.Now().Add(60 * time.Minute)
 	claims := &Claims{
-		Username: creds.Mail,
+		Username: creds.Username,
+		Mail:     creds.Mail,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -540,6 +543,7 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 			expirationTime := time.Now().Add(60 * time.Minute)
 			claims := &Claims{
 				Username: creds.Username,
+				Mail:     creds.Mail,
 				StandardClaims: jwt.StandardClaims{
 					ExpiresAt: expirationTime.Unix(),
 				},
@@ -594,12 +598,7 @@ func postFormHandler(w http.ResponseWriter, r *http.Request) {
 
 func processPostHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("processPostHandler running")
-
-	var s Sub
-	s.TitleTextPost_User = r.FormValue("titletexttost_User")
-	s.Username = r.FormValue("username")
-	s.TextPost_User = r.FormValue("textproject")
-	s.TextComment_User = r.FormValue("textcomment")
+	var postArray = database_sqlite.GetPost()
 
 	var err error
 	if err != nil {
@@ -608,5 +607,5 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	tpl.ExecuteTemplate(w, "action.html", s)
+	tpl.ExecuteTemplate(w, "action.html", postArray)
 }

@@ -53,12 +53,7 @@ func GetLogin(mail string) Login {
 	if err != nil {
 		fmt.Println(err)
 	}
-	defer func(sqliteDatabase *sql.DB) {
-		err3 := sqliteDatabase.Close()
-		if err3 != nil {
-			fmt.Println(err3)
-		}
-	}(db) // Defer Closing the database
+	// Defer Closing the database
 	rows, err := db.Query("select * from login")
 	if err != nil {
 		fmt.Println(err)
@@ -73,6 +68,14 @@ func GetLogin(mail string) Login {
 			return tempLogin
 		}
 	}
+
+	func(sqliteDatabase *sql.DB) {
+		err3 := sqliteDatabase.Close()
+		if err3 != nil {
+			fmt.Println(err3)
+		}
+	}(db)
+
 	return Login{}
 }
 
@@ -146,7 +149,7 @@ func checkIfLoginExist(db *sql.DB, login Login) bool {
 	loginFree := true
 	row, _ := db.Query("SELECT * FROM login ORDER BY Mail")
 	defer func(row *sql.Rows) {
-		err := row.Close()
+		err := db.Close()
 		if err != nil {
 			fmt.Println(err)
 		}
