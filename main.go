@@ -213,7 +213,8 @@ func Biobic(w http.ResponseWriter, r *http.Request) {
 
 type arrayPosts struct {
 	database_sqlite.Post
-	CommentArray database_sqlite.CommentArray
+	CommentArray  database_sqlite.CommentArray
+	NumberComment int
 }
 type GenderPage struct {
 	LogCookies logIndex
@@ -242,6 +243,7 @@ func CommentArray(movieGender string) []arrayPosts {
 			if v.IdPost == val.IdPost && v.Comment != "" && v.IdUser != "" {
 				a.CommentArray = append(a.CommentArray, v)
 			}
+			a.NumberComment = len(a.CommentArray)
 		}
 		tb = append(tb, a)
 	}
