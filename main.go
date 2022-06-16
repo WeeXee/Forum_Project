@@ -44,9 +44,7 @@ type Claims struct {
 func cookies(c *http.Cookie, login logIndex) logIndex {
 	if c != nil {
 		tknStr := c.Value
-
 		claims := &Claims{}
-
 		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
@@ -75,9 +73,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		MaxAge:   -1,
 		HttpOnly: true,
 	})
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 	NavBar(w, r)
@@ -93,9 +89,7 @@ func NavBarLogged(w http.ResponseWriter, r *http.Request) {
 		Username: "/",
 	}
 	c, _ := r.Cookie("token")
-
 	login = cookies(c, login)
-
 	t, _ := template.ParseFiles("template/navbar_logged.html")
 	err1 := t.Execute(w, nil)
 	if err1 != nil {
@@ -155,7 +149,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
-
 	t, _ := template.ParseFiles("template/index.html")
 	err1 := t.Execute(w, login)
 	if err1 != nil {
@@ -240,7 +233,6 @@ func CommentArray(movieGender string) []arrayPosts {
 			}
 		}
 	}
-
 	for _, val := range arrayPost {
 		a := arrayPosts{}
 		a.Post = val
@@ -252,27 +244,20 @@ func CommentArray(movieGender string) []arrayPosts {
 		}
 		tb = append(tb, a)
 	}
-
-	fmt.Println(tb)
 	return tb
 }
 
 func Comedy(w http.ResponseWriter, r *http.Request) {
-	login := logIndex{
-		Username: "vous",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "/" {
+	if login.Username != "" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
-
 	arrayPosts := CommentArray("comedy")
-	fmt.Println(arrayPosts)
-
 	var s database_sqlite.Comment
 	s.IdUser = login.Username
 	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
@@ -280,7 +265,6 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
 		database_sqlite.AddComment(s)
 	}
-
 	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/comedy.html")
 	err1 := t.Execute(w, genderPage)
@@ -510,10 +494,8 @@ func log(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-
 	fmt.Println("*****loginHandler running*****")
 	var creds database_sqlite.Login
-
 	creds.Mail = r.FormValue("mail")
 	creds.Password = r.FormValue("password")
 	creds.Username = r.FormValue("username")
@@ -555,7 +537,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		Expires: expirationTime,
 	})
 	t, _ := template.ParseFiles("template/login.html")
-	err1 := t.Execute(w, nil)
+	err1 := t.Execute(w, "you logged!")
 	if err1 != nil {
 		fmt.Print("/")
 	}

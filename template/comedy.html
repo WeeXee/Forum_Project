@@ -19,10 +19,43 @@
     <script src="../static/popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            let user = getCookie("token");
+            if (user == "" || user == null) {
+                const v =document.getElementsByClassName("commenter");
+                for ( var i = 0; i < v.length; i++) {
+                    v[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </head>
 
-
-<body>
+<body onload="checkCookie()">
 <section id="section1">
     <div class="left">
         <div class="section1content">
@@ -43,7 +76,7 @@
         </div>
     </div>
 </section>
-<section class="post_conv" >
+<section class="post_conv">
     <div class="container">
         {{range .PostArray}}
         <div class="Post_User_box">
@@ -56,7 +89,7 @@
                 </div>
                 <div class="Post_User_Comment_Like">
                     <div class="Post_User_NumComment"><label>
-                            &#128172; {{.NumberComment}}
+                        &#128172; {{.NumberComment}}
                         </button>
                     </label></div>
                     <div class="Post_User_NumLike">
@@ -89,19 +122,22 @@
                         </div>
                     </div>
                 </div>
+                <div class ="commenter" id ="div1">
+                    <form action="/comedy" method="GET">
+                        <label for="textcomment">
+                            <p>Add commentary : </p></label><br><br>
+                        <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                               class="post form-submit-textarea_commentary"><br>
+                        <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost"
+                               id="idPost"><input
+                            class="form-submit-button" type="reset"/>
+                    </form>
+                </div>
 
-            <form action="/comedy" method="GET">
-                <label for="textcomment">
-                    <p>Add commentary : </p></label><br><br>
-                <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
-                       class="post form-submit-textarea_commentary"><br>
-                <input class="form-submit-button" type="submit" value="{{.IdPost}}" name="idPost" id="idPost"><input
-                    class="form-submit-button" type="reset"/>
-            </form>
-        </div>
+            </div>
             <br><br>
-        {{end}}
-    </div>
+            {{end}}
+        </div>
     </div>
 </section>
 </body>
