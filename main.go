@@ -223,9 +223,7 @@ func CommentArray(movieGender string) []arrayPosts {
 	commentArray := database_sqlite.GetComment()
 	var postArray = database_sqlite.GetPost()
 	var arrayPost database_sqlite.PostsArray
-
 	var tb = []arrayPosts{}
-
 	for _, v := range postArray {
 		for _, val := range v.MovieGender {
 			if val == movieGender {
@@ -265,6 +263,11 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
 		database_sqlite.AddComment(s)
 	}
+	for _, i := range arrayPosts {
+		fmt.Println("array size")
+		fmt.Println(len(i.CommentArray))
+	}
+
 	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/comedy.html")
 	err1 := t.Execute(w, genderPage)
