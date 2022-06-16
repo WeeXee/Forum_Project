@@ -213,6 +213,7 @@ p, a, button{
     grid-area: Post_User_Name_Reply_area;
 }
 
+
 .Post_User_Name { grid-area: Post_User_Name; }
 
 .Post_User_Reply button{
@@ -224,6 +225,7 @@ p, a, button{
     box-shadow: var(--box-shadow);
     border: 1px outset var(--color3);
 }
+
 
 .Post_User_Commentary { grid-area: Post_User_Commentary; }
 
