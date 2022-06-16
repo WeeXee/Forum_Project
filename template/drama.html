@@ -23,6 +23,21 @@
     <script src="https://use.fontawesome.com/fe459689b4.js"></script>
     <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
     <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+    <section>
+        <div class="container">
+            {{range .PostArray}}
+            <div class="box">
+                <div class="content">
+                    <h2 class="glitch">{{.PostTitle}}
+                    </h2>
+                    <h3 class="glitch">{{.MailUser}}
+                    </h3>
+                    <p class="glitch">{{.PostContent}}
+                    </p>
+                </div>
+            </div>
+            {{end}}
+        </div>
 
 
 

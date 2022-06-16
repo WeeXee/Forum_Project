@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
-    <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="../static/css/navbar.css" />
 
 
     <script src="../static/button.js"></script>
@@ -21,13 +21,10 @@
 <header class="header">
     <div class="navbar">
         <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
-        <!--
-        <li><a href="#ex1" rel="modal:open">Login</a></li>-->
 
         <li><a href="/aboutus">Aboutus</a></li>
-        <li>
-            <div class="dropdown">
-                <button class="dropbtn" onclick="myFunction()">Categorie
+        <li><div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Categorie
                 <i class="fa fa-caret-down"></i>
             </button>
                 <div class="dropdown-content" id="myDropdown">
@@ -42,9 +39,9 @@
                     <a href="/western">Western</a>
                 </div>
             </div>
-        </li>
+        </div></li>
         <li><a href="/">Home</a></li>
-        <li><a id="logout" href="/logout">log out</a></li>
+        <li><a href="/post" style="  float:right; font-weight: bolder;">&#9997; <span style="border-radius: 25px; padding: 0 10px; background-color: var(--color2); height: 100%; color:var(--color4); font-weight: 900;">Create Post</span></a></li>
     </div>
 </header>
 <script>
@@ -61,9 +58,7 @@
         }
     }
 </script>
-
 <body>
 
 </body>
-
 </html>

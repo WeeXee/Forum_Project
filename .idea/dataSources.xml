@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sqlite-database" uuid="f738c523-022a-43b0-8e1d-a9e68a979064">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\vanessa\Desktop\Forum\sqlite-database.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="sqlite-database [2]" uuid="ec453606-644d-4bf8-85d2-991cd82df002">
+    <data-source source="LOCAL" name="sqlite-database" uuid="3238e5e6-e3d1-407f-b804-c10d77f5601e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\justi\OneDrive\Documents\YNOV\YTRACK\Forum\sqlite-database.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="sqlite-database [2]" uuid="a076652b-c3f2-458e-b5c1-db2e14ebcf75">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\vanessa\Desktop\Forum\sqlite-database.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

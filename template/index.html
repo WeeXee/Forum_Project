@@ -12,33 +12,17 @@
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
     <link rel="stylesheet" href="../static/css/index.css" />
 
-
     <script src="../static/button.js"></script>
     <script src="../static/popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
-<script>
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
-        if (!e.target.matches('.dropbtn')) {
-            var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
-            }
-        }
-    }
-</script>
-
 <body>
     <section id="section1">
         <div class="left">
             <div class="section1content">
-                <h1>Cinemum</h1>
+                <h1>Cineroom</h1>
                 <h2>Let's Talk about movies</h2>
                 <br><br>
                 <p>Cinema has been at the heart of our lives since 1895. The seventh art now carries us with its millions of films.</p>
@@ -47,7 +31,7 @@
                 </p>
             </div>
             <div class="section1button">
-                <button><a> &#128214; See last subject </a></button>
+                <button><a href="/register"> &#128214; Create new account </a></button>
                 <button><a href="#section3"> &#9997; Create a post </a></button>
             </div>
         </div>
@@ -129,7 +113,6 @@
                         </a>
                     </div>
                 </li>
-
                 <li class="hex">
                     <div class="hexIn">
                         <a class="hexLink" href="/thriller">
@@ -180,49 +163,6 @@
             </ul>
         </div>
     </section>
-    <!--
-    <section id="ex1" class="modal">
-    <section id="section4">
-        <div class="left4">
-            <h1>Cinenum</h1>
-            <h2>Account Registration</h2>
-            <br>
-            <form action="/registerauth" method="POST">
-                <br>
-                <label for="username">Username:</label><br>
-                <div class="form__field">
-                    <input type="text" id="username" name="username" class="form__input" pattern=".{4,20}" required>
-                    <span class="icon"></span>
-                </div><br>
-                <label for="password">Password:</label><br>
-                <div class="form__field">
-                    <input type="password" id="password" name="password" class="form__input" pattern=".{6,30}" required>
-                    <span class="icon"></span>
-                </div>
-                <br>
-                <input class="form-submit-button" type="submit" value="Sign Up">
-                <input class="form-submit-button" type="submit" value="Sign In">
-
-            </form>
-        </div>
-        <div class="right4">
-            <div class="right_forhover4"><p> &#9757; hover the picture for see the requirement for sign in</p></div>
-            <div class="texthover4">
-                <h2>For Sign In</h2>
-                <p>Username :</p>
-                <li>must be longer than 4 characters but shorter than 20</li>
-                <li>must contain only letters or numbers</li>
-
-                <p>Password :</p>
-                <li>must be greater than 6 characters but less than 30</li>
-                <li>must contain an uppercase letter, lowercase letter, number, and special character</li>
-                <br>
-            </div>
-        </div>
-    </section>
-    </section>
--->
-
 </body>
 <!-- Footer -->
 
