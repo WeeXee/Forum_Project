@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="../static/css/drama.css" />
+    <script src="../static/button.js"></script>
+</head>
+<header>
+    <form method="POST" action="/">
+        <label>Enter your name<input type="text" name="Title"/></label>
+        <label>Enter your post<input type="text" name="Containt"/></label>
+        <input type="submit">
+
+    </form>
+    <h2>This is your post</h2>
+</header>
+
+<body>
+    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+    <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+    <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+    <section>
+        <div class="container">
+            {{range .PostArray}}
+            <div class="box">
+                <div class="content">
+                    <h2 class="glitch">{{.PostTitle}}
+                    </h2>
+                    <h3 class="glitch">{{.MailUser}}
+                    </h3>
+                    <p class="glitch">{{.PostContent}}
+                    </p>
+                </div>
+            </div>
+            {{end}}
+        </div>
+
+
+
+
+</body>
+<!-- Footer -->
+
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <h3>Cine<span style=" font-family: 'Italiana', serif">Room</span></h3>
+        <p class="footer-links">
+            <a href="/" class="link-1">Home</a>
+            <a href="/#section3" class="text-white">Category</a>
+            <a href="/aboutus" class="text-white">About</a>
+            <a href="/aboutus#ex1" class="text-white">Contact us</a>
+            <a href="https://www.ynov.com">Blog</a>
+        </p>
+        <p class="footer-company-name">Ynov © 2022</p>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span style="font-size:20px">2 place de l'europe</span> 31000 Toulouse, France</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>05 82 95 10 48</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:contact-toulouse@ynov.com">contact-toulouse@ynov.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the latest technologies, innovative tools and a golden rule: succeed together!
+        </p>
+        <div class="footer-icons">
+            <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/"><i class="fa fa-facebook"></i></a>
+            <a target="_blank" href="https://twitter.com/ynovtoulouse"><i class="fa fa-twitter"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum"><i class="fa fa-github"></i></a>
+            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+</html>

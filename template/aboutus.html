@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="../static/css/aboutus.css" />
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="../static/button.js"></script>
+    <script src="../static/popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- header -->
+
+<header class="header">
+    <div class="navbar">
+        <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
+        <li><a href="/register">Login</a></li>
+        <li><a href="/aboutus">Aboutus</a></li>
+        <li>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">Categorie
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="/action">Action</a>
+                    <a href="/biobic">Biobic</a>
+                    <a href="/comedy">Comedy</a>
+                    <a href="/fantasy">Fantasy</a>
+                    <a href="/horror">Horror</a>
+                    <a href="/romantic">Romantic</a>
+                    <a href="/SF">Sci-Fi</a>
+                    <a href="/thriller">Thriller</a>
+                    <a href="/western">Western</a>
+                </div>
+            </div>
+        </li>
+        <li><a href="/">Home</a></li>
+    </div>
+</header>
+
+<!-- script -->
+
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+<!-- body -->
+
+<body>
+    <section id="section1">
+        <div class="left">
+            <div class="section1content">
+                <h1>Cineroom</h1>
+                <h2>Let's Talk About Us</h2>
+                <br><br>
+                <p>Here you can find all the informations about our project and us. This forum is dedicated to the exchange of opinions between our users. </p>
+                <p>By going to each of the sections they will be able to exchange on various themes of the cinema. Our goal is to create a space of thoughts in the benevolence and the freedom of expression. If you want to ask us something you can write us
+                    a message !</p>
+            </div>
+            <div class="section1button">
+                <button><a href="#ex1" rel="modal:open"> &#9997; Send us a message </a></button>
+            </div>
+            <div>
+                <div id="ex1" class="modal">
+                    <form method="POST" action="/">
+                        <h1>Contact Us</h1><br>
+                        <label><p>Title :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
+                        <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
+                        <label><p>Enter your message : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
+                        <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="imagefond1">
+                <img class="left_emoji" src="../static/404/point.png">
+                <img class="human_smiley" src="../static/index/perso8.png">
+                <img class="right_emoji" src="../static/404/point.png">
+                <div class="octa gon"></div>
+            </div>
+        </div>
+    </section>
+    <section id="section2">
+        <div class="section_text">
+            <h1>On our website</h1>
+            <h2>We used:</h2>
+            <br>
+        </div>
+        <div class="section2_column">
+            <div class="column">
+                <h1>1</h1>
+                <h3>Front</h3>
+                <p> JS/ HTML / CSS</p>
+            </div>
+            <div class="column">
+                <h1>2</h1>
+                <h3>BackEnd</h3>
+                <p>Golang / MySql</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="localisation">
+                <h3>Where are we?</h3>
+                <h2>You can find us in toulouse ! In the center of the city</h2>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.8136479684113!2d1.4296971512812255!3d43.61042156311121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebdbb42d83293%3A0x6e448c24640106bd!2sToulouse%20Ynov%20Campus!5e0!3m2!1sfr!2sfr!4v1655282183239!5m2!1sfr!2sfr"
+                    width="100%" height="80%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="works">
+                <h3>How it works ?</h3>
+                <h2> Our team is composed by us, three developers in our first year</h2><br>
+                <div class="us">
+                    <li><a target="_blank" href="https://git.ytrack.learn.ynov.com/JSEGUINLEBOULANGER">Justine Seguin Le Boulanger</a></li>
+                    <li><a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER">Vanessa Tessier</a></li>
+                    <li><a target="_blank" href="https://git.ytrack.learn.ynov.com/PCABEE">Pauline Cabee</a></li>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<!-- Footer -->
+
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <h3>Cine<span style=" font-family: 'Italiana', serif">Room</span></h3>
+        <p class="footer-links">
+            <a href="/" class="link-1">Home</a>
+            <a href="/#section3" class="text-white">Category</a>
+            <a href="/aboutus" class="text-white">About</a>
+            <a href="/aboutus#ex1" class="text-white">Contact us</a>
+            <a href="https://www.ynov.com">Blog</a>
+        </p>
+        <p class="footer-company-name">Ynov © 2022</p>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span style="font-size:20px">2 place de l'europe</span> 31000 Toulouse, France</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>05 82 95 10 48</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:contact-toulouse@ynov.com">contact-toulouse@ynov.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the latest technologies, innovative tools and a golden rule: succeed together!
+        </p>
+        <div class="footer-icons">
+            <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/"><i class="fa fa-facebook"></i></a>
+            <a target="_blank" href="https://twitter.com/ynovtoulouse"><i class="fa fa-twitter"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum"><i class="fa fa-github"></i></a>
+            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+</html>

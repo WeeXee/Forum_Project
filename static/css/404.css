@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&family=Press+Start+2P&display=swap');
+* {
+    margin: 0;
+    color: var(--color4);
+    text-shadow: none;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+body {
+    background-image: url("/static/404/404.png");
+    background-size: cover;
+    background-width: 100%;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-size: 15vmax;
+    font-weight: bold;
+    top: 15vmax;
+    left: 3vmax;
+    right: auto;
+    position: relative;
+    margin-top: 0%;
+    text-align: center;
+    letter-spacing: 50px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.error {
+    font-weight: bold;
+    font-size: 2vmax;
+    top: 13vmax;
+    position: relative;
+    color: var(--color3);
+    display: relative;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    text-indent: 32vmax;
+    font-family: 'Press Start 2P', cursive;
+}
+
+a {
+    font-weight: bold;
+    font-size: 0.8vmax;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.return {
+    position: relative;
+    display: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: 15vmax;
+    left: 30vmax;
+    right: 5vmax;
+    text-indent: 32vmax;
+}
+
+.perso {
+    width: 30vmax;
+    left: 4vmax;
+    text-align: center;
+    position: relative;
+    top: -10vmax;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    display: block;
+}
+
+.bulle {
+    width: 20vmax;
+    position: relative;
+    display: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: -50vmax;
+    left: 60vmax;
+    right: 5vmax;
+    text-indent: 32vmax;
+}
+
+.lost {
+    position: relative;
+    display: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: -12vmax;
+    left: 31vmax;
+    right: 5vmax;
+    text-indent: 32vmax;
+}
+
+.oops {
+    position: relative;
+    display: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: -13vmax;
+    left: 36vmax;
+    right: 5vmax;
+    text-indent: 32vmax;
+}
+
+p {
+    font-weight: bold;
+    font-size: 0.8vmax;
+    font-family: 'Press Start 2P', cursive;
+}

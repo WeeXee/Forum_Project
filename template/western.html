@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/western.css" />
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+
+    <script src="../static/button.js"></script>
+    <script src="../static/popup.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <section id="section1">
+        <div class="left">
+            <div class="section1content">
+                <h1 style="font-size: 6vmax;">Cineroom</h1>
+                <h2>Let's Talk about Western</h2>
+                <br><br>
+                <p>The western, the music, the killer looks, the pistol shots coming out of a bar... This timeless style. You are one of those who will always vibrate in front of the breeze from the Far West.</p>
+                <p> You are on the right place...</p>
+            </div>
+            <div class="section1button">
+                <button><a> &#128214; See last subject </a></button>
+                <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
+            </div>
+            <div>
+                <div id="ex1" class="modal">
+                    <form method="POST" action="/">
+                        <h1>Western</h1><br>
+                        <label><p>Chose your Subject :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
+                        <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
+                        <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
+                        <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="imagefond1">
+                <img class="left_emoji" src="../static/western/left_img.png">
+                <img class="human_smiley" src="../static/western/perso.png">
+                <img class="right_emoji" src="../static/western/right_img.png">
+                <div class="octa gon"></div>
+            </div>
+        </div>
+    </section>
+</body>
+<!-- Footer -->
+
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <h3>Cine<span style=" font-family: 'Italiana', serif">Room</span></h3>
+        <p class="footer-links">
+            <a href="/" class="link-1">Home</a>
+            <a href="/#section3" class="text-white">Category</a>
+            <a href="/aboutus" class="text-white">About</a>
+            <a href="/aboutus#ex1" class="text-white">Contact us</a>
+            <a href="https://www.ynov.com">Blog</a>
+        </p>
+        <p class="footer-company-name">Ynov © 2022</p>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span style="font-size:20px">2 place de l'europe</span> 31000 Toulouse, France</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>05 82 95 10 48</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:contact-toulouse@ynov.com">contact-toulouse@ynov.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the latest technologies, innovative tools and a golden rule: succeed together!
+        </p>
+        <div class="footer-icons">
+            <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/"><i class="fa fa-facebook"></i></a>
+            <a target="_blank" href="https://twitter.com/ynovtoulouse"><i class="fa fa-twitter"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum"><i class="fa fa-github"></i></a>
+            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+</html>

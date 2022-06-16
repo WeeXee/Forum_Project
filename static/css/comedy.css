@@ -1,0 +1,215 @@
+
+* {
+    margin: 0;
+    color: var(--color4);
+    text-shadow: none;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+body {
+    --color1: #F5F4F1;
+    --color2: #FFF4C3;
+    --color3: #EADB1E;
+    --color4: #000000;
+    --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
+    --box-shadow: 2px 2px 2px dimgrey;
+    min-height: 80vh;
+    background-image: url("/static/comedy/index.png");
+    background-size: cover;
+    background-width: 100%;
+    background-repeat: no-repeat;
+}
+
+
+h1{
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 4vmax;
+}
+
+h2{
+    font-weight: bolder;
+    font-size: 1.5vmax;
+    color: var(--color3);
+}
+
+h3{
+    font-weight: bolder;
+    font-size: 1vmax;
+    color: var(--color2);
+}
+
+p, a, button{
+    font-weight: bolder;
+    font-size: 1.2vmax;
+}
+
+/*SECTION 1*/
+
+#section1{
+    margin-top: 4%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left{
+    flex: 45%;
+}
+
+.section1content{
+    padding: 5% 20%;
+}
+
+.section1content h1{
+    font-size: 9vmax;
+}
+.section1content h2{
+    width: 36vmax;
+    font-size: 2vmax;
+    font-weight: bolder;
+    transition: color 500ms ease, text-shadow 500ms ease;
+    color: var(--color1);
+    text-shadow: 0 0 10px var(--color1);
+    background-color: var(--color3);
+    text-align: center;
+}
+
+/*Section1button Left*/
+
+.section1button button{
+    padding: 1% 5%;
+    margin: 0 -10% 0 20%;
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+}
+
+.section1button button:hover {
+    background-color: var(--color2);
+    box-shadow:1px 1px 1px var(--color1) inset;
+}
+
+.right{
+    flex: 55%;
+}
+
+.imagefond1 img{
+    position: absolute;
+    display: inline-flex;
+}
+
+.human_smiley{
+    margin-top: -6vmax;
+    margin-left: 6vmax;
+    width: 34vmax;
+    z-index: 2;
+}
+.left_emoji{
+    margin-left: 8vmax;
+    width: 14vmax;
+
+    z-index: 3;
+    animation-name: float_left;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+.right_emoji {
+    margin-left: 30vmax;
+    margin-top: 2vmax;
+
+    width: 14vmax;
+    z-index: 1;
+    animation-name: float_right;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes float_right {
+    0%   {margin-top: 1vmax;}
+    50%  {margin-top: 2vmax;}
+    100% {margin-top: 1vmax;}
+}
+
+@keyframes float_left {
+    0%   {margin-top: 18vmax;}
+    50%  {margin-top: 17vmax;}
+    100% {margin-top: 18vmax;}
+}
+
+.gon {
+    margin-left: 9vmax;
+    margin-top: 13vmax;
+    width: 28vmax;
+    height: 26vmax;
+    background-color: var(--color1);
+    opacity: 70%;
+}
+
+.octa {
+    -webkit-clip-path: polygon(
+            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
+    );
+    -moz-clip-path: polygon(
+            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
+    );
+    -ms-clip-path: polygon(
+            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
+    );
+    clip-path: polygon(
+            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
+    );
+}
+
+/*COPY PAST BELOW FOR OTHER PAGE*/
+
+
+
+.Part_Post{
+    margin: 5% 10%;
+    padding: 5%;
+    border-radius: 25px;
+    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+
+}
+
+.Part_Post_User h1{
+    padding: 3% 0;
+}
+
+.Part_Post_User h3{
+    padding: 1% 3%;
+    color: var(--color4);
+    background-color: var(--color3);
+    border-radius: 25px;
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    margin-bottom: 3%;
+    font-size: 1vmax;
+    text-align: right;
+
+}
+
+.Part_Post_Comment h3{
+    width: 50%;
+    padding: 0 5%;
+    color: var(--color4);
+    background-color: var(--color2);
+    border-radius: 25px;
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    margin-top: 5%;
+}
+
+.Part_Post_Comment p{
+    margin: 2% 0;
+    font-size: 0.8vmax;
+}
+
+.form_for_comment h1{
+    font-size: 1vmax;
+}

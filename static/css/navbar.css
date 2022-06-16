@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Poppins:wght@100&display=swap');
+
+.navbar {
+    min-height: 25px;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    list-style: none;
+    position: fixed;
+    background-color: white;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    width: 100%;
+    z-index: 5;
+}
+
+.navbar a {
+    float: right;
+    color: var(--color4);
+    text-align: center;
+    padding: 20px 20px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: var(--color4);
+    padding: 20px 20px;
+    background-color: white;
+    font-family: inherit;
+    margin: 0;
+    font-weight: bolder;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: var(--color1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 4;
+}
+
+.dropdown-content a {
+    font-size: 0.8vmax;
+    float: none;
+    color: var(--color4);
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background-color: white;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--color1);
+}
+
+.show {
+    display: block;
+}
+

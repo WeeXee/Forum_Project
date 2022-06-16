@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Creepster&family=Cutive+Mono&family=Fleur+De+Leah&family=Fredericka+the+Great&family=Italiana&family=Ms+Madi&family=Poppins:wght@100&family=Rye&family=VT323&display=swap');
+
+
+/*the import content all font who is required for the forum
+
+Require for all the chat
+
+font-family: 'Poppins', sans-serif;
+-----------------------------------------
+
+H1 only
+
+Require for Index / 404 / Login:
+font-family: 'Italiana', serif;
+-----------------------------------------
+Require for Action page:
+font-family: 'Bodoni Moda', serif;
+-----------------------------------------
+Require for horror:
+font-family: 'Creepster', cursive;
+-----------------------------------------
+Require for thriller and Biobic:
+font-family: 'Cutive Mono', monospace;
+-----------------------------------------
+Require for Romantic:
+font-family: 'Fleur De Leah', cursive;
+-----------------------------------------
+Require for Comedie:
+font-family: 'Fredericka the Great', cursive;
+-----------------------------------------
+Require for Fantastique:
+font-family: 'Ms Madi', cursive;
+-----------------------------------------
+Require for Western:
+font-family: 'Rye', cursive;
+-----------------------------------------
+Require for Sci-fi:
+font-family: 'VT323', monospace;*/
+
+/*formulaire*/
+.modal a.close-modal[class*="icon-"] {
+    width: 20px;
+    height: 20px;
+    color: var(--background);
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.modal input.name, .modal input.subject {
+    padding: 1% 5%;
+    outline: 0;
+}
+
+input[type=text]:active, input[type=text]:active,.form-submit-textarea:active, .form-submit-textarea_commentary:active {
+    outline: 0;
+    box-shadow:1px 1px 1px var(--color4) inset;
+    border: 2px outset var(--color2);
+}
+
+
+.modal input{
+    margin-bottom: 1vmax;
+}
+
+.modal .post {
+    outline: 0;
+    padding: 3%;
+    min-width: 25vmax;
+    min-height: 10vmax;
+    border-radius: 15px;
+}
+
+.modal{
+    margin-left: auto;
+    margin-bottom: auto;
+    background: linear-gradient(0deg, rgba(245,244,241,0.85) 0%, var(--color1) 100%);
+}
+
+.modal p{
+    font-size: 0.8vmax;
+    margin-bottom: 2px;
+}
+
+.form-submit, .form-submit-textarea{
+    font-size: 0.8vmax;
+    font-weight: bolder;
+    margin-bottom: 1%;
+    padding: 3% 5%;
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.6) 100%);
+    box-shadow: var(--box-shadow);
+    border-radius: 50px;
+    border: 1px outset var(--color1);
+    backdrop-filter: blur(10px);
+}
+
+/*bouton*/
+.form-submit-button {
+    font-size: 0.8vmax;
+    padding: 1% 5%;
+    margin: 3% 3.7% 3% 0%;
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.2) 100%);
+    border-radius: 50px;
+    color: var(--color4);
+    box-shadow: var(--box-shadow);
+    border: 1px outset var(--color1);
+    font-weight: bolder;
+}
+
+
+input[type=submit]:active, input[type=reset]:active {
+    background-color: var(--color2);
+    box-shadow:1px 1px 1px var(--color4) inset;
+}
+
+.form-submit-textarea_commentary{
+    width: 90%;
+    font-size: 0.8vmax;
+    font-weight: bolder;
+    margin-bottom: 1%;
+    padding: 3% 5%;
+    background: linear-gradient(0deg, rgba(245,244,241,0) 0%, rgba(245,244,241,0.6) 100%);
+    box-shadow: var(--box-shadow);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    outline: 1px outset var(--color3);
+}
+
+textarea {
+    resize: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+
