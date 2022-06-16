@@ -13,7 +13,6 @@ body {
     --color4: #000000;
     --background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 0.6) 100%);
     --box-shadow: 2px 2px 2px dimgrey;
-
     min-height: 80vh;
     background-image: url("/static/western/index.png");
     background-size: cover;
@@ -38,7 +37,9 @@ h3 {
     color: var(--color2);
 }
 
-p, a, button {
+p,
+a,
+button {
     font-weight: bolder;
     font-size: 1.2vmax;
 }
@@ -51,7 +52,7 @@ p, a, button {
     list-style: none;
     position: fixed;
     background-color: white;
-    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
     width: 100%;
     z-index: 5;
 }
@@ -81,7 +82,9 @@ p, a, button {
     font-weight: bolder;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+.navbar a:hover,
+.dropdown:hover .dropbtn,
+.dropbtn:focus {
     background-color: var(--color1);
 }
 
@@ -90,7 +93,7 @@ p, a, button {
     position: absolute;
     background-color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 4;
 }
 
@@ -113,26 +116,28 @@ p, a, button {
     display: block;
 }
 
+
 /*SECTION 1*/
 
-#section1{
+#section1 {
     margin-top: 5%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.left{
+.left {
     flex: 45%;
 }
 
-.section1content{
+.section1content {
     padding: 15% 20%;
 }
 
-.section1content h1{
+.section1content h1 {
     font-size: 9vmax;
 }
-.section1content h2{
+
+.section1content h2 {
     width: 36vmax;
     font-size: 2vmax;
     font-weight: bolder;
@@ -143,12 +148,13 @@ p, a, button {
     text-align: center;
 }
 
+
 /*Section1button Left*/
 
-.section1button button{
+.section1button button {
     padding: 1% 5%;
     margin: 0 -10% 0 20%;
-    background: linear-gradient(0deg, rgba(245,244,241,0.2) 0%, rgba(245,244,241,1) 100%);
+    background: linear-gradient(0deg, rgba(245, 244, 241, 0.2) 0%, rgba(245, 244, 241, 1) 100%);
     border-radius: 50px;
     color: var(--color4);
     box-shadow: var(--box-shadow);
@@ -157,37 +163,37 @@ p, a, button {
 
 .section1button button:hover {
     background-color: var(--color2);
-    box-shadow:1px 1px 1px var(--color1) inset;
+    box-shadow: 1px 1px 1px var(--color1) inset;
 }
 
-.right{
+.right {
     flex: 55%;
 }
 
-.imagefond1 img{
+.imagefond1 img {
     position: absolute;
     display: inline-flex;
 }
 
-.human_smiley{
+.human_smiley {
     margin-top: -4vmax;
     margin-left: 8vmax;
     width: 35vmax;
     z-index: 2;
 }
-.left_emoji{
+
+.left_emoji {
     margin-left: 13vmax;
     width: 12vmax;
-
     z-index: 3;
     animation-name: float2;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
+
 .right_emoji {
     margin-left: 30vmax;
     margin-top: 2vmax;
-
     width: 14vmax;
     z-index: 1;
     animation-name: float_right;
@@ -196,14 +202,27 @@ p, a, button {
 }
 
 @keyframes float_right {
-    0%   {margin-top: 2vmax;}
-    50%  {margin-top: 3vmax;}
-    100% {margin-top: 2vmax;}
+    0% {
+        margin-top: 2vmax;
+    }
+    50% {
+        margin-top: 3vmax;
+    }
+    100% {
+        margin-top: 2vmax;
+    }
 }
+
 @keyframes float2 {
-    0%   {margin-top: 14vmax;}
-    50%  {margin-top: 13vmax;}
-    100% {margin-top: 14vmax;}
+    0% {
+        margin-top: 14vmax;
+    }
+    50% {
+        margin-top: 13vmax;
+    }
+    100% {
+        margin-top: 14vmax;
+    }
 }
 
 .gon {
@@ -216,16 +235,194 @@ p, a, button {
 }
 
 .octa {
-    -webkit-clip-path: polygon(
-            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
-    );
-    -moz-clip-path: polygon(
-            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
-    );
-    -ms-clip-path: polygon(
-            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
-    );
-    clip-path: polygon(
-            29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%
-    );
+    -webkit-clip-path: polygon( 29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%);
+    -moz-clip-path: polygon( 29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%);
+    -ms-clip-path: polygon( 29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%);
+    clip-path: polygon( 29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%);
+}
+
+
+/*-------------footer----------*/
+
+.footer-distributed {
+    background: rgb(131, 131, 131);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font: bold 16px sans-serif;
+    padding: 55px 50px;
+    margin-top: 40%;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+    width: 40%;
+}
+
+
+/* The company logo */
+
+.footer-distributed h3 {
+    color: #ffffff;
+    font: normal 20px, cursive;
+    margin: 0;
+}
+
+.footer-distributed h3 span {
+    color: rgb(0, 0, 0);
+}
+
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+    color: #ffffff;
+    margin: 20px 0 12px;
+    padding: 0;
+}
+
+.footer-distributed .footer-links a {
+    display: inline-block;
+    line-height: 1.8;
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+    color: #222;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+    width: 35%;
+}
+
+.footer-distributed .footer-center i {
+    background-color: #33383b;
+    color: #ffffff;
+    font-size: 25px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 42px;
+    margin: 10px 15px;
+    vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+    font-size: 17px;
+    line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+    display: inline-block;
+    color: #ffffff;
+    font-weight: 400;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.footer-distributed .footer-links a:before {
+    content: "|";
+    font-weight: 300;
+    font-size: 20px;
+    left: 0;
+    color: #fff;
+    display: inline-block;
+    padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+    content: none;
+}
+
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+    width: 20%;
+}
+
+.footer-distributed .footer-company-about {
+    line-height: 20px;
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+    margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-color: #676868;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 880px) {
+    .footer-distributed {
+        font: bold 14px sans-serif;
+    }
+    .footer-distributed .footer-left,
+    .footer-distributed .footer-center,
+    .footer-distributed .footer-right {
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .footer-distributed .footer-center i {
+        margin-left: 0;
+    }
 }

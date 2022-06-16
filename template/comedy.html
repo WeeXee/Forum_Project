@@ -19,47 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<header class="header">
-    <div class="navbar">
-        <li style="float: left"><a href="/" class="logo">Cineroom</a></li>
-        <li><a href="/register">Login</a></li>
-        <li><a href="/aboutus">Aboutus</a></li>
-        <li>
-            <div class="dropdown">
-                <button class="dropbtn" onclick="myFunction()">Categorie
-                <i class="fa fa-caret-down"></i>
-            </button>
-                <div class="dropdown-content" id="myDropdown">
-                    <a href="/action">Action</a>
-                    <a href="/biobic">Biobic</a>
-                    <a href="/comedy">Comedy</a>
-                    <a href="/fantasy">Fantasy</a>
-                    <a href="/horror">Horror</a>
-                    <a href="/romantic">Romantic</a>
-                    <a href="/SF">Sci-Fi</a>
-                    <a href="/thriller">Thriller</a>
-                    <a href="/western">Western</a>
-                </div>
-            </div>
-        </li>
-        <li><a href="/">Home</a></li>
-    </div>
-</header>
 
-<script>
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
-        if (!e.target.matches('.dropbtn')) {
-            var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
-            }
-        }
-    }
-</script>
+
 
 <body>
     <section id="section1">
@@ -97,7 +58,46 @@
         </div>
     </section>
 </body>
-<footer>
+<!-- Footer -->
+
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <h3>Cine<span style=" font-family: 'Italiana', serif">Room</span></h3>
+        <p class="footer-links">
+            <a href="/" class="link-1">Home</a>
+            <a href="/#section3" class="text-white">Category</a>
+            <a href="/aboutus" class="text-white">About</a>
+            <a href="/aboutus#ex1" class="text-white">Contact us</a>
+            <a href="https://www.ynov.com">Blog</a>
+        </p>
+        <p class="footer-company-name">Ynov © 2022</p>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span style="font-size:20px">2 place de l'europe</span> 31000 Toulouse, France</p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>05 82 95 10 48</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:contact-toulouse@ynov.com">contact-toulouse@ynov.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the latest technologies, innovative tools and a golden rule: succeed together!
+        </p>
+        <div class="footer-icons">
+            <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/"><i class="fa fa-facebook"></i></a>
+            <a target="_blank" href="https://twitter.com/ynovtoulouse"><i class="fa fa-twitter"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum"><i class="fa fa-github"></i></a>
+            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
 </footer>
 
 </html>
