@@ -269,10 +269,7 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	} else {
 		NavBar(w, r)
 	}
-
 	arrayPosts := CommentArray("comedy")
-	fmt.Println(arrayPosts)
-
 	var s database_sqlite.Comment
 	s.IdUser = login.Username
 	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
@@ -280,7 +277,6 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
 		database_sqlite.AddComment(s)
 	}
-
 	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/comedy.html")
 	err1 := t.Execute(w, genderPage)
