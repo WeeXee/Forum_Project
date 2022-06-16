@@ -112,12 +112,13 @@ func PostLogged(w http.ResponseWriter, r *http.Request) {
 	var post database_sqlite.Post
 	post.PostTitle = r.FormValue("title")
 	post.PostContent = r.FormValue("content")
+	post.MailUser = login.Username
 	post.Like = 0
 	post.Dislike = 0
 	post.MovieGender = []string{
 		r.FormValue("comedy"), r.FormValue("action"), r.FormValue("drama"), r.FormValue("fantasy"), r.FormValue("horror")}
 
-	if post.MailUser != "" && post.PostTitle != "" && post.PostTitle != "" {
+	if post.MailUser != "" && post.PostContent != "" && post.PostTitle != "" {
 		database_sqlite.AddPost(post)
 	}
 	NavBarLogged(w, r)
@@ -257,10 +258,13 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 	}
 	arrayPosts := CommentArray("comedy")
 	var s database_sqlite.Comment
+
 	s.IdUser = login.Username
 	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
 	s.Comment = r.FormValue("comment")
-	if s.IdUser != "/" && s.IdPost != 0 && s.Comment != "" {
+	fmt.Println(s)
+	if s.IdUser != "" && s.IdPost != 0 && s.Comment != "" {
+		fmt.Println("ok")
 		database_sqlite.AddComment(s)
 	}
 	for _, i := range arrayPosts {
@@ -461,17 +465,7 @@ func main() {
 	http.HandleFunc("/western", Western)
 	http.HandleFunc("/aboutus", Aboutus)
 
-	/*formulaire Vanessa*/
-	/***************************************************/
-	/*
-		http.HandleFunc("/getform", getFormHandler)
-		/*http.HandleFunc("/processget", processGetHandler)
-		http.HandleFunc("/postform", postFormHandler)
-		http.HandleFunc("/processpost", processPostHandler)
-
-	*/
 	http.HandleFunc("/post", PostLogged)
-
 	http.HandleFunc("/login", log)
 	http.HandleFunc("/loginauth", Signin)
 

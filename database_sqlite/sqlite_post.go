@@ -66,7 +66,7 @@ func AddPost(post Post) {
 			fmt.Println(err3)
 		}
 	}(db)
-	insertLoginSQL := `INSERT INTO Post( IdUser, MovieGender, PostTitle, PostContent, Like, Dislike) VALUES (?,?,?,?,?,?,?)`
+	insertLoginSQL := `INSERT INTO Post( IdUser, MovieGender, PostTitle, PostContent, Like, Dislike) VALUES (?,?,?,?,?,?)`
 	statement, err := db.Prepare(insertLoginSQL)
 	if err != nil {
 		log.Fatalln(err.Error())
@@ -96,9 +96,7 @@ func GetPost() PostsArray {
 	for row.Next() { // Iterate and fetch the records from result cursor
 		post := Post{}
 		var movieGender string
-		var postComment string
-
-		err := row.Scan(&post.IdPost, &post.MailUser, &movieGender, &post.PostTitle, &post.PostContent, &postComment, &post.Like, &post.Dislike)
+		err := row.Scan(&post.IdPost, &post.MailUser, &movieGender, &post.PostTitle, &post.PostContent, &post.Like, &post.Dislike)
 		post.MovieGender = strings.Split(movieGender, "/")
 
 		if err != nil {

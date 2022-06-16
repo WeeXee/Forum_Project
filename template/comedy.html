@@ -51,6 +51,13 @@
                 }
             }
         }
+
+        function showComment() {
+            const v =document.getElementsByClassName("Part_Post_Comment");
+            for ( var i = 0; i < v.length; i++) {
+                v[i].style.display = "block";
+            }
+        }
     </script>
 </head>
 
@@ -92,14 +99,14 @@
                     <label for="textcomment"><h1>Add commentary : </h1></label><br>
                     <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
                            class="post form-submit-textarea_commentary"><br>
-                    <input class="form-submit-button" type="Submit" value="Submit" name="idPost"
+                    <input class="form-submit-button" type="Submit" value="{{.IdPost}}" name="idPost"
                            id="idPost"/><input
                         class="form-submit-button" type="Reset"/>
                 </form>
             </div>
         </div>
-        <div class="Part_Post_Comment">
-
+        <button onclick ="showComment()" >Comments</button>
+        <div style="display: none " class="Part_Post_Comment">
             <ul class="read-more-wrap">
                 {{range .CommentArray}}
                 <div class="read-more-target">

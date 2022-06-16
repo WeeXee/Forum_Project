@@ -54,7 +54,6 @@ func DatabaseCreateTable() {
 		"MovieGender" TEXT,
 		"PostTitle"   TEXT,
 		"PostContent" TEXT,
-		"PostComment" TEXT,
 		"Like"        INTEGER,
 		"Dislike"     INTEGER		
 	  );` // SQL Statement for Create Table
