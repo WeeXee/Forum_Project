@@ -281,20 +281,31 @@ func Comedy(w http.ResponseWriter, r *http.Request) {
 }
 
 func Fantasy(w http.ResponseWriter, r *http.Request) {
-	arrayPosts := CommentArray("fantasy")
-	fmt.Println(arrayPosts)
-
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "/" {
+	if login.Username != "" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
+	arrayPosts := CommentArray("fantasy")
+	var s database_sqlite.Comment
+
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
+	s.Comment = r.FormValue("comment")
+	fmt.Println(s)
+	if s.IdUser != "" && s.IdPost != 0 && s.Comment != "" {
+		fmt.Println("ok")
+		database_sqlite.AddComment(s)
+	}
+	for _, i := range arrayPosts {
+		fmt.Println("array size")
+		fmt.Println(len(i.CommentArray))
+	}
+
 	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/fantasy.html")
 	err1 := t.Execute(w, genderPage)
@@ -352,22 +363,32 @@ func Drama(w http.ResponseWriter, r *http.Request) {
 }
 
 func Romantic(w http.ResponseWriter, r *http.Request) {
-	arrayPosts := CommentArray("romantic")
-	fmt.Println(arrayPosts)
-
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "/" {
+	if login.Username != "" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
-	genderPage := GenderPage{login, arrayPosts}
+	arrayPosts := CommentArray("romantic")
+	var s database_sqlite.Comment
 
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
+	s.Comment = r.FormValue("comment")
+	fmt.Println(s)
+	if s.IdUser != "" && s.IdPost != 0 && s.Comment != "" {
+		fmt.Println("ok")
+		database_sqlite.AddComment(s)
+	}
+	for _, i := range arrayPosts {
+		fmt.Println("array size")
+		fmt.Println(len(i.CommentArray))
+	}
+
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/romantic.html")
 	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
@@ -398,45 +419,70 @@ func SF(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func Thriller(w http.ResponseWriter, r *http.Request) {
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "/" {
+	if login.Username != "" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
+	arrayPosts := CommentArray("thriller")
+	var s database_sqlite.Comment
 
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
+	s.Comment = r.FormValue("comment")
+	fmt.Println(s)
+	if s.IdUser != "" && s.IdPost != 0 && s.Comment != "" {
+		fmt.Println("ok")
+		database_sqlite.AddComment(s)
+	}
+	for _, i := range arrayPosts {
+		fmt.Println("array size")
+		fmt.Println(len(i.CommentArray))
+	}
+
+	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/thriller.html")
-	err1 := t.Execute(w, login)
+	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
 		fmt.Print("error")
 	}
 }
 
 func Western(w http.ResponseWriter, r *http.Request) {
-	arrayPosts := CommentArray("western")
-	fmt.Println(arrayPosts)
-
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 
-	if login.Username != "/" {
+	if login.Username != "" {
 		NavBarLogged(w, r)
 	} else {
 		NavBar(w, r)
 	}
+	arrayPosts := CommentArray("western")
+	var s database_sqlite.Comment
+
+	s.IdUser = login.Username
+	s.IdPost, _ = strconv.Atoi(r.FormValue("idPost"))
+	s.Comment = r.FormValue("comment")
+	fmt.Println(s)
+	if s.IdUser != "" && s.IdPost != 0 && s.Comment != "" {
+		fmt.Println("ok")
+		database_sqlite.AddComment(s)
+	}
+	for _, i := range arrayPosts {
+		fmt.Println("array size")
+		fmt.Println(len(i.CommentArray))
+	}
+
 	genderPage := GenderPage{login, arrayPosts}
 	t, _ := template.ParseFiles("template/western.html")
 	err1 := t.Execute(w, genderPage)
 	if err1 != nil {
-		fmt.Print("/")
+		fmt.Print("error")
 	}
 }
 

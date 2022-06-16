@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/style.css" />
     <link rel="stylesheet" href="../static/css/thriller.css" />
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+    <link rel="stylesheet" href="../static/css/footer.css"/>
 
 
     <script src="../static/button.js"></script>
@@ -54,6 +55,47 @@
             </div>
         </div>
     </section>
+    <section>
+        <div class="Part_Post">
+            {{range .PostArray}}
+            <div class="Part_Post_User">
+                <h1>{{.PostTitle}}</h1>
+                <h3>{{.MailUser}}</h3>
+                <p>{{.PostContent}}</p>
+            </div>
+            <div class ="commenter" id ="div1">
+                <div>
+                    <form class="form_for_comment" action="/comedy" method="GET">
+                        <br><br>
+                        <label for="textcomment"><h1>Add commentary : </h1></label><br>
+                        <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                               class="post form-submit-textarea_commentary"><br>
+                        <input class="form-submit-button" type="Submit" value="{{.IdPost}}" name="idPost"
+                               id="idPost"/><input
+                            class="form-submit-button" type="Reset"/>
+                    </form>
+                </div>
+            </div>
+            <button onclick ="showComment()" >Comments</button>
+            <div style="display: none " class="Part_Post_Comment">
+                <ul class="read-more-wrap">
+                    {{range .CommentArray}}
+                    <div class="read-more-target">
+                        <div class="Post_User_Name"><br>
+                            <label><h3>{{.IdUser}}</h3></label>
+                            <p>{{.Comment}}</p>
+                            <br>
+                            <hr size="2">
+                        </div>
+                    </div>
+                    {{end}}
+                </ul>
+            </div>
+            {{end}}
+        </div>
+
+    </section>
+</body>
 </body>
 <!-- Footer -->
 

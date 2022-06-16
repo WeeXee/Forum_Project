@@ -5,14 +5,15 @@
     <title>Forum</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keywords" content="" />
+    <meta name="keywords" content=""/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    <link rel="stylesheet" href="../static/css/style.css" />
-    <link rel="stylesheet" href="../static/css/action.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+    <link rel="stylesheet" href="../static/css/style.css"/>
+    <link rel="stylesheet" href="../static/css/action.css"/>
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
     <script src="../static/button.js"></script>
+    <link rel="stylesheet" href="../static/css/footer.css"/>
     <script src="../static/popup.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -23,7 +24,7 @@
     }
 
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
+    window.onclick = function (e) {
         if (!e.target.matches('.dropbtn')) {
             var myDropdown = document.getElementById("myDropdown");
             if (myDropdown.classList.contains('show')) {
@@ -31,134 +32,133 @@
             }
         }
     }
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookie() {
+        let user = getCookie("token");
+        if (user == "" || user == null) {
+            const v = document.getElementsByClassName("commenter");
+            for (var i = 0; i < v.length; i++) {
+                v[i].style.display = "none";
+            }
+        }
+    }
+
+    function showComment() {
+        const v = document.getElementsByClassName("Part_Post_Comment");
+        for (var i = 0; i < v.length; i++) {
+            v[i].style.display = "block";
+        }
+    }
 </script>
 
 <body>
-    <section id="section1">
-        <div class="left">
-            <div class="section1content">
-                <h1>Cineroom</h1>
-                <h2>Let's Talk about Action</h2>
-                <br><br>
-                <p>Get into the action genre. Special effects on point! Make yourself comfortable and enjoy explosive reviews</p>
-                <p>Write your opinion on your favorite action movie !</p>
+<section id="section1">
+    <div class="left">
+        <div class="section1content">
+            <h1>Cineroom</h1>
+            <h2>Let's Talk about Action</h2>
+            <br><br>
+            <p>Get into the action genre. Special effects on point! Make yourself comfortable and enjoy explosive
+                reviews</p>
+            <p>Write your opinion on your favorite action movie !</p>
+        </div>
+        <div class="section1button">
+            <button onclick="window.history.go(-1)"><a> &#128214; Return Back </a></button>
+            <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
+        </div>
+        <div>
+            <div id="ex1" class="modal">
+                <form method="GET" action="/processget">
+                    <h1>Action</h1><br>
+                    <label><p>Chose your Subject : </p>
+                        <input class="subject form-submit" type="text" id="user_Post1"
+                               name="titletexttost_User"/><br></label>
+                    <label><p>Enter your name : </p>
+                        <input class="name form-submit" type="text" id="user_Post2" name="username"
+                               name="Name"/><br></label>
+                    <label><p>Enter your post : </p>
+                        <textarea type="text" style="width: 50%;" id="user_Post3" class="post form-submit-textarea"
+                                  id="text" name="textproject" rows="4" cols="50"></textarea><br></label>
+                    <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/>
+                </form>
             </div>
-            <div class="section1button">
-                <button onclick="window.history.go(-1)"><a > &#128214; Return Back </a></button>
-                <button><a href="#ex1" rel="modal:open"> &#9997; Create a post </a></button>
-            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="imagefond1">
+            <img class="left_emoji" src="../static/action/left_img.png">
+            <img class="human_smiley" src="../static/action/perso.png">
+            <img class="right_emoji" src="../static/action/right_img.png">
+            <div class="octa gon"></div>
+        </div>
+    </div>
+</section>
+<br><br>
+<section>
+    <div class="Part_Post">
+        {{range .PostArray}}
+        <div class="Part_Post_User">
+            <h1>{{.PostTitle}}</h1>
+            <h3>{{.MailUser}}</h3>
+            <p>{{.PostContent}}</p>
+        </div>
+        <div class="commenter" id="div1">
             <div>
-                <div id="ex1" class="modal">
-                    <form method="GET" action="/processget">
-                        <h1>Action</h1><br>
-                        <label><p>Chose your Subject : </p>
-                        <input class="subject form-submit" type="text" id="user_Post1" name="titletexttost_User"/><br></label>
-                        <label><p>Enter your name : </p>
-                        <input class="name form-submit" type="text" id="user_Post2" name="username" name="Name"/><br></label>
-                        <label><p>Enter your post : </p>
-                        <textarea type="text" style="width: 50%;" id="user_Post3" class="post form-submit-textarea" id="text" name="textproject" rows="4" cols="50"></textarea><br></label>
-                        <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
-                    </form>
-                </div>
+                <form class="form_for_comment" action="/comedy" method="GET">
+                    <br><br>
+                    <label for="textcomment"><h1>Add commentary : </h1></label><br>
+                    <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                           class="post form-submit-textarea_commentary"><br>
+                    <input class="form-submit-button" type="Submit" value="{{.IdPost}}" name="idPost"
+                           id="idPost"/><input
+                        class="form-submit-button" type="Reset"/>
+                </form>
             </div>
         </div>
-        <div class="right">
-            <div class="imagefond1">
-                <img class="left_emoji" src="../static/action/left_img.png">
-                <img class="human_smiley" src="../static/action/perso.png">
-                <img class="right_emoji" src="../static/action/right_img.png">
-                <div class="octa gon"></div>
-            </div>
-        </div>
-    </section>
-    <br><br>
-    <section class="post_conv">
-        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-        <!-- Subject -->
-        <div class="Post_User_box">
-            <div class="Post_USer">
-                <div class="Title_Post_User"><label><h1>{{.TitleTextPost_User}}</h1></button></label></div>
-                <div class="Post_User_Name_Reply_area">
-                    <div class="Post_User_Name"><label><h3>{{.Username}}</h3></label></div>
-                </div>
-                <<<<<<< HEAD <div>
-                    <div id="ex1" class="modal">
-                        <form method="POST" action="/">
-                            <h1>Action</h1><br>
-                            <label><p>Chose your Subject :  </p><input class= "subject form-submit" type="text" name="Subject"/><br></label>
-                            <label><p>Enter your name : </p><input class= "name form-submit" type="text" name="Name"/><br></label>
-                            <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text" name="aire texte" rows="4" cols="50"></textarea><br></label>
-                            <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
-                        </form>
-                        =======
-                        <div class="Post_User_Commentary"><label><p>{{.TextPost_User}}</p><br></label>
-                        </div>
-                        <div class="Post_User_Comment_Like">
-                            <div class="Post_User_NumComment"><label>
-                    <button><label for="post-2" class="read-more-trigger" >Comment</label> &#128172; 3</button>
-                                </label>
-                            </div>
-                            <div class="Post_User_NumLike">
-                                <label style="float: right;">
-                        <button>&#128077; 4</button>
-                        <button>&#x1F44E; 3</button>
-                    </label> >>>>>>> origin/dev
-                            </div>
-                        </div>
-                        <!-- Comment -->
-                        <div class="Comment_Other_List">
-                            <div>
-                                <input type="checkbox" class="read-more-state" id="post-2" />
-                                <ul class="read-more-wrap">
-                                    <div class="read-more-target">
-                                        <div class="Post_User_Name"><br>
-                                            <label><h3>{{.Username}}</h3></label>
-                                            <p>{{.TextComment_User}}</p>
-                                            <hr size="2">
-                                            <div class="Post_User_NumLike">
-                                                <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                            </div>
-                                        </div>
-                                        <div class="Post_User_Name"><br>
-                                            <label><h3>{{.Username}}</h3></label>
-                                            <p>{{.TextComment_User}}</p>
-                                            <hr size="2">
-                                            <div class="Post_User_NumLike">
-                                                <label style="float: right;">
-                                        <button>&#128077; 4</button>
-                                        <button>&#x1F44E; 3</button>
-                                    </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Leaves commentary -->
-                        <!--            <label><p>Enter your name : </p><input class="name form-submit" type="text"
-                                                   name="Name"/><br></label>
-            <label><p>Enter your post : </p><textarea class="post form-submit-textarea" id="text"
-                                                      name="aire texte" rows="4"
-                                                      cols="50"></textarea><br></label>
-            <input class="form-submit-button" type="submit"/><input class="form-submit-button" type="reset"/> -->
-
-                        <form method="GET" action="/processget">
-                            <div class="Post_User_Reply"><label>
-                    <label for="textcomment"><p>Add commentary : <br><br></p><textarea maxlength="500" minlength="2" class="post form-submit-textarea_commentary" type="text" id="textcomment" name="aire texte textcomment"
-                                                                     rows="4" cols="50"></textarea><br></label>
-                                <input class="form-submit-button" type="submit" /><input class="form-submit-button" type="reset" />
-                                </label>
-                            </div>
-                        </form>
+        <button onclick="showComment()">Comments</button>
+        <div style="display: none " class="Part_Post_Comment">
+            <ul class="read-more-wrap">
+                {{range .CommentArray}}
+                <div class="read-more-target">
+                    <div class="Post_User_Name"><br>
+                        <label><h3>{{.IdUser}}</h3></label>
+                        <p>{{.Comment}}</p>
+                        <br>
+                        <hr size="2">
                     </div>
-            </div>
-    </section>
+                </div>
+                {{end}}
+            </ul>
+        </div>
+        {{end}}
+    </div>
+
+</section>
 </body>
 <!-- Footer -->
-
 <footer class="footer-distributed">
     <div class="footer-left">
         <h3>Cine<span style=" font-family: 'Italiana', serif">Room</span></h3>
@@ -187,16 +187,18 @@
     </div>
     <div class="footer-right">
         <p class="footer-company-about">
-            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the latest technologies, innovative tools and a golden rule: succeed together!
+            <span>About Us</span> Choosing Ynov Informatique means choosing to discover the IT professions through the
+            latest technologies, innovative tools and a golden rule: succeed together!
         </p>
         <div class="footer-icons">
             <a target="_blank" href="https://fr-fr.facebook.com/YnovToulouse/"><i class="fa fa-facebook"></i></a>
             <a target="_blank" href="https://twitter.com/ynovtoulouse"><i class="fa fa-twitter"></i></a>
-            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i class="fa fa-linkedin"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/school/toulouse-ynov-campus/"><i
+                    class="fa fa-linkedin"></i></a>
             <a target="_blank" href="https://git.ytrack.learn.ynov.com/VTESSIER/Forum"><i class="fa fa-github"></i></a>
-            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i class="fa fa-instagram"></i></a>
+            <a target="_blank" href="https://www.instagram.com/toulouse_ynovcampus/?hl=fr"><i
+                    class="fa fa-instagram"></i></a>
         </div>
     </div>
 </footer>
-
 </html>

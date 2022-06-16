@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="stylesheet" href="../static/css/style.css" />
     <link rel="stylesheet" href="../static/css/fantasy.css" />
+    <link rel="stylesheet" href="../static/css/footer.css"/>
     <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
 
 
@@ -31,6 +32,46 @@
             if (myDropdown.classList.contains('show')) {
                 myDropdown.classList.remove('show');
             }
+        }
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function checkCookie() {
+        let user = getCookie("token");
+        if (user == "" || user == null) {
+            const v =document.getElementsByClassName("commenter");
+            for ( var i = 0; i < v.length; i++) {
+                v[i].style.display = "none";
+            }
+        }
+    }
+
+    function showComment() {
+        const v =document.getElementsByClassName("Part_Post_Comment");
+        for ( var i = 0; i < v.length; i++) {
+            v[i].style.display = "block";
         }
     }
 </script>
@@ -72,21 +113,45 @@
     </section>
 
     <section>
-        <div class="container">
+        <div class="Part_Post">
             {{range .PostArray}}
-            <div class="box">
-                <div class="content">
-                    <h2 class="glitch">{{.PostTitle}}
-                    </h2>
-                    <h3 class="glitch">{{.MailUser}}
-                    </h3>
-                    <p class="glitch">{{.PostContent}}
-                    </p>
+            <div class="Part_Post_User">
+                <h1>{{.PostTitle}}</h1>
+                <h3>{{.MailUser}}</h3>
+                <p>{{.PostContent}}</p>
+            </div>
+            <div class ="commenter" id ="div1">
+                <div>
+                    <form class="form_for_comment" action="/comedy" method="GET">
+                        <br><br>
+                        <label for="textcomment"><h1>Add commentary : </h1></label><br>
+                        <input type="text" class="post form-submit-textarea_commentary" id="textcomment" name="comment"
+                               class="post form-submit-textarea_commentary"><br>
+                        <input class="form-submit-button" type="Submit" value="{{.IdPost}}" name="idPost"
+                               id="idPost"/><input
+                            class="form-submit-button" type="Reset"/>
+                    </form>
                 </div>
+            </div>
+            <button onclick ="showComment()" >Comments</button>
+            <div style="display: none " class="Part_Post_Comment">
+                <ul class="read-more-wrap">
+                    {{range .CommentArray}}
+                    <div class="read-more-target">
+                        <div class="Post_User_Name"><br>
+                            <label><h3>{{.IdUser}}</h3></label>
+                            <p>{{.Comment}}</p>
+                            <br>
+                            <hr size="2">
+                        </div>
+                    </div>
+                    {{end}}
+                </ul>
             </div>
             {{end}}
         </div>
 
+    </section>
 </body>
 <!-- Footer -->
 
