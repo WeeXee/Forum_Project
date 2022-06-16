@@ -95,6 +95,7 @@ func NavBarLogged(w http.ResponseWriter, r *http.Request) {
 	c, _ := r.Cookie("token")
 
 	login = cookies(c, login)
+
 	t, _ := template.ParseFiles("template/navbar_logged.html")
 	err1 := t.Execute(w, nil)
 	if err1 != nil {
@@ -111,31 +112,35 @@ func NavBar(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostLogged(w http.ResponseWriter, r *http.Request) {
-	login := logIndex{
-		Username: "/",
-	}
+	login := logIndex{}
 	c, _ := r.Cookie("token")
 	login = cookies(c, login)
 	var post database_sqlite.Post
 	post.PostTitle = r.FormValue("title")
 	post.PostContent = r.FormValue("content")
-
 	post.Like = 0
 	post.Dislike = 0
 	post.MovieGender = []string{
 		r.FormValue("comedy"), r.FormValue("action"), r.FormValue("drama"), r.FormValue("fantasy"), r.FormValue("horror")}
 
-	fmt.Println(post.MailUser)
-
 	if post.MailUser != "" && post.PostTitle != "" && post.PostTitle != "" {
 		database_sqlite.AddPost(post)
 	}
 	NavBarLogged(w, r)
-	t, _ := template.ParseFiles("template/create_post.html")
-	err1 := t.Execute(w, nil)
-	if err1 != nil {
-		fmt.Print("error")
+	if login.Username != "" {
+		t, _ := template.ParseFiles("template/create_post.html")
+		err1 := t.Execute(w, nil)
+		if err1 != nil {
+			fmt.Print("error")
+		}
+	} else {
+		t, _ := template.ParseFiles("template/login.html")
+		err1 := t.Execute(w, nil)
+		if err1 != nil {
+			fmt.Print("error")
+		}
 	}
+
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -459,11 +464,13 @@ func main() {
 
 	/*formulaire Vanessa*/
 	/***************************************************/
+	/*
+		http.HandleFunc("/getform", getFormHandler)
+		/*http.HandleFunc("/processget", processGetHandler)
+		http.HandleFunc("/postform", postFormHandler)
+		http.HandleFunc("/processpost", processPostHandler)
 
-	http.HandleFunc("/getform", getFormHandler)
-	/*http.HandleFunc("/processget", processGetHandler)*/
-	http.HandleFunc("/postform", postFormHandler)
-	http.HandleFunc("/processpost", processPostHandler)
+	*/
 	http.HandleFunc("/post", PostLogged)
 
 	http.HandleFunc("/login", log)
@@ -495,7 +502,11 @@ func main() {
 var tpl *template.Template
 
 func log(w http.ResponseWriter, r *http.Request) {
-	tpl.ExecuteTemplate(w, "login.html", nil)
+	t, _ := template.ParseFiles("template/login.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("/")
+	}
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
@@ -543,23 +554,28 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: expirationTime,
 	})
-
-	tpl.ExecuteTemplate(w, "login.html", nil)
+	t, _ := template.ParseFiles("template/login.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("/")
+	}
 }
 
 // registerHandler serves form for registring new users
 func registerHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("*****registerHandler running*****")
-	tpl.ExecuteTemplate(w, "register.html", nil)
+	t, _ := template.ParseFiles("template/register.html")
+	err1 := t.Execute(w, nil)
+	if err1 != nil {
+		fmt.Print("/")
+	}
 }
 
 // creates new user
 func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
-
 	fmt.Println("*****registerAuthHandler running*****")
 	r.ParseForm()
-
 	var user database_sqlite.Login
 	//Create Username
 	user.Mail = r.FormValue("mail")
@@ -607,7 +623,6 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 			creds.Mail = r.FormValue("mail")
 			creds.Password = r.FormValue("password")
 			creds.Username = r.FormValue("username")
-
 			expirationTime := time.Now().Add(60 * time.Minute)
 			claims := &Claims{
 				Username: creds.Username,
@@ -616,55 +631,39 @@ func registerAuthHandler(w http.ResponseWriter, r *http.Request) {
 					ExpiresAt: expirationTime.Unix(),
 				},
 			}
-
 			token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-			// Create the JWT string
 			tokenString, err := token.SignedString(jwtKey)
 			if err != nil {
 				fmt.Println("error 3")
-				// If there is an error in creating the JWT return an internal server error
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
-
-			// Finally, we set the client cookie for "token" as the JWT we just generated
-			// we also set an expiry time which is the same as the token itself
 			http.SetCookie(w, &http.Cookie{
 				Name:    "token",
 				Value:   tokenString,
 				Expires: expirationTime,
 			})
-
-			tpl.ExecuteTemplate(w, "register.html", "congrats, your account has been successfully created")
+			t, _ := template.ParseFiles("template/register.html")
+			err1 := t.Execute(w, "congrats, your account has been successfully created")
+			if err1 != nil {
+				fmt.Print("/")
+			}
 		} else {
-			tpl.ExecuteTemplate(w, "register.html", "we meet a problem, retry please")
+			t, _ := template.ParseFiles("template/register.html")
+			err1 := t.Execute(w, "Mail adress already used, log in or change mail adress")
+			if err1 != nil {
+				fmt.Print("/")
+			}
 		}
 	}
 }
 
 /******************formulaire**********************/
-
+/*
 func getFormHandler(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "getform.html", nil)
 }
 
-/*
-func processGetHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("processGetHandler running")
-	login := logIndex{
-		Username: "/",
-	}
-	c, _ := r.Cookie("token")
-	login = cookies(c, login)
-
-	var s database_sqlite.Comment
-	s.IdUser = login.Username
-	s.IdPost, _ = strconv.Atoi(r.FormValue("IdPost"))
-	s.Comment = r.FormValue("textcomment")
-	database_sqlite.AddComment(s)
-
-	tpl.ExecuteTemplate(w, "action.html", s)
-}*/
 
 func postFormHandler(w http.ResponseWriter, r *http.Request) {
 	tpl.ExecuteTemplate(w, "postform.html", nil)
@@ -683,3 +682,6 @@ func processPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl.ExecuteTemplate(w, "comedy.html", postArray)
 }
+
+
+*/
