@@ -32,6 +32,7 @@ h2 {
     font-weight: bolder;
     font-size: 3vmin;
     color: var(--color3);
+    margin-left: -10%;
 }
 
 h3 {
@@ -40,6 +41,8 @@ h3 {
     color: var(--color2);
     background-color: var(--color3);
     width: 300px;
+    box-shadow: var(--box-shadow);
+
 }
 
 p, a, button {
